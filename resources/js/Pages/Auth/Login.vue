@@ -33,9 +33,9 @@ const submit = () => {
     <Head title="Log in" />
 
     <AuthenticationCard>
-        <template #logo>
+        <!-- <template #logo>
             <AuthenticationCardLogo />
-        </template>
+        </template> -->
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -56,7 +56,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Heslo" />
                 <TextInput
                     id="password"
                     v-model="form.password"
@@ -68,20 +68,20 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
+            <!-- <div class="block mt-4">
                 <label class="flex items-center">
                     <Checkbox v-model:checked="form.remember" name="remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
-            </div>
+            </div> -->
 
             <div class="flex items-center justify-end mt-4">
                 <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
+                    Zabudli ste heslo?
                 </Link>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                    Prihlásiť sa
                 </PrimaryButton>
             </div>
         </form>

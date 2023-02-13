@@ -3,6 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ReportController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +20,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Auth/Login');
 });
 
 Route::middleware([
@@ -32,4 +31,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/dashboard-nakup', [PurchaseController::class, 'getUsers'])->name('dashboard-purchase');
+
+    Route::get('/dashboard-vykaz', CalendarController::class)->name('dashboard-report');
+
+    Route::resource('report', ReportController::class);
 });
