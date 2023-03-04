@@ -12,7 +12,6 @@ export default {
 
 <style>
 .report-left-section-button-container {
-    text-align-last: center;
     padding: 5px;
 }
 

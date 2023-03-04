@@ -18,25 +18,23 @@
                     </div>
                     <div class="bg-white px-4 pt-4 pb-4 sm:p-6 sm:pb-4 overflow-y-scroll">
                         <div>
-                            <!-- <div class="col-span-6 sm:col-span-3 mb-3">
-                                <label for="task"
-                                    class="block text-gray-700 text-sm font-bold mb-2">Úloha<span class="text-red-500">*</span></label>
-                                <select id="task"
+                            <div class="col-span-6 sm:col-span-3 mb-3">
+                                <label for="task_id"
+                                    class="block text-gray-700 text-sm font-bold mb-2">Úloha <span class="text-red-500">*</span></label>
+                                <select id="task_id" v-model="form.task_id" 
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option value="900">15 minutos</option>
-                                    <option value="1800">30 minutos</option>
-                                    <option value="3600">1 hora</option>
+                                    <option v-for="(task, index) in modalTasks" :key="index" :value="task.id">{{ task.task_title }}</option>
                                 </select>
-                            </div> -->
+                            </div>
                             <div class="mb-3">
-                                <label for="title"
+                                <label for="report_title"
                                     class="block text-gray-700 text-sm font-bold mb-2">Popis <span class="text-red-500">*</span></label>
-                                <input v-model="form.title" type="text"
+                                <input v-model="form.report_title" type="text"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="title" placeholder="Názov"
+                                    id="report_title" placeholder="Názov"
                                     autocomplete="off" required/>
-                                <div v-if="$page.props.errors.title" class="text-red-500">
-                                    {{ $page.props.errors.title }}
+                                <div v-if="$page.props.errors.report_title" class="text-red-500">
+                                    {{ $page.props.errors.report_title }}
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -89,7 +87,7 @@
 <script>
 
 export default {
-    name: "Modal",
+    name: "CalendarModal",
     props: {
         form: {
             type: Object,
@@ -98,7 +96,11 @@ export default {
         updateReportFlag: {
             type: Boolean,
             default: false,
-        }
+        },
+        modalTasks:{
+            type: Object,
+            default: () => { }
+        }, 
     },
     methods: {
         closeModal() {

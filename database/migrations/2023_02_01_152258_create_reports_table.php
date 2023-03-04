@@ -16,11 +16,11 @@ return new class extends Migration
         if(!Schema::hasTable('reports')){
             Schema::create('reports', function (Blueprint $table) {
                 $table->id();
-                $table->string('title');
+                $table->string('report_title');
                 $table->text('description')->nullable();
                 $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users');
-                $table->unsignedBigInteger('task_id')->nullable(); //zatial
+                $table->unsignedBigInteger('task_id');
                 $table->foreign('task_id')->references('id')->on('tasks');
                 $table->char('color',10)->default('#4ca548');
                 $table->char('textColor',10)->default('#000000');

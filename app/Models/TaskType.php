@@ -10,7 +10,7 @@ class TaskType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'task_type_title',
         'level',
     ];
 }

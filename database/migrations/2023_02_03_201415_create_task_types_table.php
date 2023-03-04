@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('task_types', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('task_type_title');
             $table->integer('level');
             $table->timestamps();
         });

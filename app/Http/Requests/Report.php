@@ -24,13 +24,13 @@ class Report extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'
+            'report_title' => 'required'
         ];
     }
 
     public function messages(){
         return [
-            'title.required' => 'je to povinne!'
+            'report_title.required' => 'je to povinne!'
         ];
     }
 }

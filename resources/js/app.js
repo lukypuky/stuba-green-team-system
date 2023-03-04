@@ -6,12 +6,15 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-import mitt from 'mitt'; //pridane
+//pridane//////////////////////////////////////////////////////////////
+// import mitt from 'mitt'; 
+// window.eventBus = mitt() 
+
+// import Icon from '@/Components/Icon.vue';
+
+///////////////////////////////////////////////////////////////////////
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-
-window.eventBus = mitt() //pridane
-
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -19,6 +22,7 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         return createApp({ render: () => h(app, props) })
             .use(plugin)
+            // .component('icon', Icon)
             .use(ZiggyVue, Ziggy)
             .mount(el);
     },

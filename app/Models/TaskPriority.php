@@ -10,7 +10,7 @@ class TaskPriority extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'task_priority_title',
         'level',
     ];
 }

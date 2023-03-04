@@ -40,16 +40,15 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         Report::create([
-            'title' => $request->get('title'),
-            'description' => $request->get('description'),
-            'user_id' => $request->get('user_id'),
-            // 'task_id' => $request->get('task_id'),
-            'start_time'=> $request->get('start_time'),
-            'end_time' => $request->get('end_time'),
-            // 'booked_by' => (Auth::user()->is_admin ? $request->get('user_id') : $request->get('user_id')),
+            'report_title' => $request->report_title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'task_id' => $request->task_id,
+            'start_time'=> $request->start_time,
+            'end_time' => $request->end_time,
         ]);
 
-        return redirect()->back()->with('success_report_save', 'uspesne pridanie');
+        return redirect()->route('dashboard-report')->with('success_report_save', 'uspesne report pridanie');
     }
 
     /**
@@ -83,14 +82,15 @@ class ReportController extends Controller
     public function update(Request $request)
     {
         Report::where('id', $request->get('id'))->update([
-            'title' => $request->get('title'),
-            'description' => $request->get('description'),
-            'user_id' => $request->get('user_id'),
-            'start_time'=> $request->get('start_time'),
-            'end_time' => $request->get('end_time'),
+            'report_title' => $request->report_title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'task_id' => $request->task_id,
+            'start_time'=> $request->start_time,
+            'end_time' => $request->end_time,
         ]);
 
-        return redirect()->back()->with('success_report_update_save', 'uspesny update');
+        return redirect()->route('dashboard-report')->with('success_report_update_save', 'uspesny report update');
     }
 
     /**

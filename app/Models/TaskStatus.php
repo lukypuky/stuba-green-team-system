@@ -10,7 +10,7 @@ class TaskStatus extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'task_status_title',
         'level',
     ];
 }

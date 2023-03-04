@@ -10,6 +10,7 @@ class Division extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'division_title',
+        'shortcut',
     ];
 }

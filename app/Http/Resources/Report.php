@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 
 class Report extends JsonResource
 {
@@ -17,10 +17,10 @@ class Report extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
+            'title' => $this->report_title,
             'description' =>$this->description,
             'user_id' => $this->user_id,
-            // 'task_id' => $this->task_id,
+            'task_id' => $this->task_id,
             'start' => $this->start_time,
             'end' => $this->end_time,
             'color' => $this->color,
