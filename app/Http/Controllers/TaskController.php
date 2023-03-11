@@ -12,13 +12,7 @@ use App\Models\TaskStatus;
 use App\Models\Area;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Task as TaskResource;
-use App\Http\Resources\TaskType as TaskTypeResource;
-use App\Http\Resources\TaskPriority as TaskPriorityResource;
-use App\Http\Resources\TaskStatus as TaskStatusResource;
-use App\Http\Resources\Division as DivisionResource;
-use App\Http\Resources\Area as AreaResource;
-
+use App\Http\Requests\Task as TaskRequest;
 
 class TaskController extends Controller
 {
@@ -30,22 +24,22 @@ class TaskController extends Controller
         $areas = Area::all();
 
         return Inertia::render('DashboardTasks', [
-            'tasks' =>  response()->json(TaskResource::collection($tasks)),
-            'taskTypes' =>  response()->json(TaskTypeResource::collection($taskTypes)),
-            'taskPriorities' =>  response()->json(TaskPriorityResource::collection($taskPriorities)),
-            'divisions' =>  response()->json(DivisionResource::collection($divisions)),
-            'areas' =>  response()->json(AreaResource::collection($areas)),
+            'tasks' =>  $tasks,
+            'taskTypes' =>  $taskTypes,
+            'taskPriorities' =>  $taskPriorities,
+            'divisions' =>  $divisions,
+            'areas' =>  $areas,
         ]);
     }
 
-    public function saveNewTask(Request $request){
+    public function storeNewTask(TaskRequest $request){
         Task::create([
             'task_title' => $request->task_title,
             'description' => $request->description,
             'user_id_created' => Auth::user()->id,
             'user_id_assigned' => Auth::user()->id,
             'type_id' => $request->type_id,
-            'priority_id' => $request->priority_id,
+            'task_priority_id' => $request->task_priority_id,
             'division_id' => $request->division_id,
             'area_id' => $request->area_id,
             'deadline' => $request->deadline,
@@ -66,21 +60,21 @@ class TaskController extends Controller
         
         return Inertia::render('DashboardTaskDetail', [
             'users' => $users,
-            'task' =>  response()->json(TaskResource::collection($task)),
-            'taskTypes' =>  response()->json(TaskTypeResource::collection($taskTypes)),
-            'taskPriorities' =>  response()->json(TaskPriorityResource::collection($taskPriorities)),
-            'taskStatuses' =>  response()->json(TaskStatusResource::collection($taskStatuses)),
-            'divisions' =>  response()->json(DivisionResource::collection($divisions)),
-            'areas' =>  response()->json(AreaResource::collection($areas)),
+            'task' =>  $task,
+            'taskTypes' =>  $taskTypes,
+            'taskPriorities' =>  $taskPriorities,
+            'taskStatuses' =>  $taskStatuses,
+            'divisions' =>  $divisions,
+            'areas' =>  $areas,
         ]);
     }
 
-    public function updateTask(Request $request){
+    public function updateTask(TaskRequest $request){
         Task::where('id', $request->id)->update([
             'description' => $request->description,
             'user_id_assigned' => $request->user_id_assigned,
             'type_id' => $request->type_id,
-            'priority_id' => $request->priority_id,
+            'task_priority_id' => $request->task_priority_id,
             'division_id' => $request->division_id,
             'status_id' => $request->status_id,
             'area_id' => $request->area_id,
@@ -111,5 +105,11 @@ class TaskController extends Controller
         ->paginate(5);
 
         return $searchedTasks;
+    }
+
+    public function deleteTask(Request $request){
+        Task::where('id', $request->id)->delete();
+
+        return redirect()->route('dashboard-tasks')->with('success_task_delete', 'uspesny task delete');
     }
 }

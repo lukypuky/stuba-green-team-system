@@ -16,7 +16,7 @@ class Task extends Model
         'user_id_assigned',
         'type_id',
         'status_id',
-        'priority_id',
+        'task_priority_id',
         'division_id',
         'area_id',
         'deadline',

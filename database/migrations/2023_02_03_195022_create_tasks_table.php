@@ -25,8 +25,8 @@ return new class extends Migration
             $table->foreign('type_id')->references('id')->on('task_types');
             $table->unsignedBigInteger('status_id')->default(1); 
             $table->foreign('status_id')->references('id')->on('task_statuses');
-            $table->unsignedBigInteger('priority_id'); 
-            $table->foreign('priority_id')->references('id')->on('task_priorities');
+            $table->unsignedBigInteger('task_priority_id'); 
+            $table->foreign('task_priority_id')->references('id')->on('task_priorities');
             $table->unsignedBigInteger('division_id'); 
             $table->foreign('division_id')->references('id')->on('divisions');
             $table->unsignedBigInteger('area_id'); 

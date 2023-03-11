@@ -59,6 +59,12 @@ body {
     padding: 1rem;
 }
 
+/* .grid-cards{
+    margin: 0 10px;
+    display: grid;
+    grid-gap: 1rem;
+} */
+
 .cards {
     max-width: 1200px;
     margin: 0 10px;
@@ -67,13 +73,19 @@ body {
 }
 
 /* Screen larger than 600px? 2 column */
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
     .cards { grid-template-columns: repeat(2, 1fr); }
-}
+} */
 
 /* Screen larger than 900px? 3 columns */
 @media (min-width: 900px) {
     .cards { grid-template-columns: repeat(3, 1fr); }
+    /* .grid-cards { grid-template-columns: repeat(2, 1fr); } */
+}
+
+.modal-height {
+    overflow: auto; 
+    max-height: 670px;
 }
 
 

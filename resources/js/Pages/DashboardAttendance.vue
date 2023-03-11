@@ -1,11 +1,59 @@
 <template>
     <AppLayout>
         <div class="container page-container">
-            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert"
-                v-if="showAlert">
-                <p class="text-sm">{{ $page.props.flash.success_attendance_save }}</p>
+            <div class="mx-auto grid grid-cols-12 gap-4 p-1">
+                <div class="col-span-12 sm:col-span-2">
+                    <ReportMenu/>
+                </div>
+                <div class="col-span-12 sm:col-span-10">
+                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
+                        <p class="text-sm">{{ $page.props.flash.success_attendance_save }}</p>
+                    </div>
+
+                    <div class="page-heading">
+                        <h1>Dochádzka členov</h1>
+                    </div>
+                    <div style="display: flex;">
+                        <div>
+                            <AttendanceSelect :meetingTypes="this.meetingTypes" :divisions="this.divisions" @getMeetingTypeAttendance="getMeetingTypeAttendance"
+                            @showAddAttendanceButton="showAddAttendanceButton"/>
+                        </div>
+                        <div class="text-right">
+                            <button @click="openModal" v-if="this.showButton">Pridať dochádzku</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-md">
+                        <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                            <thead class="bg-gray-300">
+                                <tr>
+                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Meno</th>
+                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">{{ meetingDate.meeting_date }}</th>
+                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Body</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                                <tr class="hover:bg-gray-50" v-for="(attendance, index) in this.newAttendances" :key="index">
+                                    <td class="p-3 border-b-2 border-gray-300">
+                                        {{ attendance.username }}
+                                    </td>
+                                    <td class="p-3 border-b-2 border-gray-300" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">
+                                        <AttendanceIcons :type="attendance[meetingDate.meeting_date]"/>
+                                    </td>
+                                    <td class="p-3 border-b-2 border-gray-300" >
+                                        {{ attendance.body }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="row">
+
+            
+            <!-- <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_attendance_save }}</p>
+            </div> -->
+            <!-- <div class="row">
                 <div class="col-2 report-left-section">
                     <ReportMenu/>
                 </div>
@@ -47,7 +95,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <AttendanceModal v-if="showModal" :meetingType="this.meetingType" :users="this.newUsers" :attendanceStatuses="this.attendanceStatuses" @closeModal="closeModal" @storeAttendance="storeAttendance"/>
     </AppLayout>

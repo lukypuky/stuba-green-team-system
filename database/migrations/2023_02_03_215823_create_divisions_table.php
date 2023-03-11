@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('divisions', function (Blueprint $table) {
             $table->id();
             $table->string('division_title');
-            $table->string('shortcut');
+            $table->integer('division_level');
+            $table->string('shortcut')->nullable();
             $table->timestamps();
         });
     }

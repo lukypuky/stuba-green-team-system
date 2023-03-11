@@ -1,7 +1,42 @@
 <template>
     <AppLayout>
         <div class="container page-container">
-            <div class="row">
+            <div class="mx-auto grid grid-cols-12 gap-4 p-1">
+                <div class="col-span-12 sm:col-span-2">
+                    <ReportMenu/>
+                </div>
+                <div class="col-span-12 sm:col-span-10">
+                    <div style="display: flex;">
+                        <div>
+                            <input type="text" class="form-control objectBorder roundedCorners" v-model="this.findTask.findTaskString"
+                            placeholder="Vyhľadať úlohu">
+                        </div>
+                        <div>
+                            <button class="buttons" id="searchJobsButton" @click="searchTask">Hľadať</button>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="min-w-full border-collapse block md:table">
+                            <thead class="block md:table-header-group">
+                                <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
+                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Názov</th>
+                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Priradené</th>
+                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Status</th>
+                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Dátum vytvorenia</th>
+                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="block md:table-row-group">
+                                <AllTasksTableRow :tasks="this.newTasks"/>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <Pagination :links="this.newTasks.links"/>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
                 <div class="col-2 report-left-section">
                     <ReportMenu/>
                 </div>
@@ -35,7 +70,7 @@
                         <Pagination :links="this.newTasks.links"/>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </AppLayout>
 </template>

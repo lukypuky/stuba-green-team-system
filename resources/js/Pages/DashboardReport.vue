@@ -1,31 +1,25 @@
 <template>
     <AppLayout>
         <div class="container page-container">
-            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert"
-                v-if="showAlert">
-                <p class="text-sm">{{ $page.props.flash.success_report_save }}</p>
-                <p class="text-sm">{{ $page.props.flash.success_report_update_save }}</p>
-                <p class="text-sm">{{ $page.props.flash.success_report_delete }}</p>
-            </div>
-            <div class="row">
-                <div class="col-2 report-left-section">
+            <div class="mx-auto grid grid-cols-12 gap-4 p-1">
+                <div class="col-span-12 sm:col-span-2">
                     <ReportMenu/>
                 </div>
-                <div class="col-10 report-right-section">
+                <div class="col-span-12 sm:col-span-10">
+                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
+                        <p class="text-sm">{{ $page.props.flash.success_report_save }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_report_update_save }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_report_delete }}</p>
+                    </div>
+                    <div class="page-heading">
+                        <h1>Výkazy</h1>
+                    </div>
+
                     <Calendar @dateClick="dateClick" @reportClick="reportClick" :reports="this.newReports"/>
                 </div>
             </div>
-
-            <div class="mx-auto grid grid-cols-12 gap-4 bg-zinc-50 p-1">
-                <div class="col-span-12 rounded-lg border border-gray-500 bg-gray-200 p-32 sm:col-span-1">
-                    <!-- Main Content -->
-                </div>
-                <div class="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-10">
-                    <!-- Sidebar -->
-                </div>
-            </div>
         </div>
-        <CalendarModal v-if="showModal" :form="newReport" :modalTasks="modalTasks.original" :updateReportFlag="updateReportFlag" @closeModal="closeModal" @saveReport="saveReport" @deleteReport="deleteReport" />
+        <CalendarModal v-if="showModal" :form="this.newReport" :modalTasks="this.modalTasks" :updateReportFlag="this.updateReportFlag" @closeModal="closeModal" @saveReport="saveReport" @deleteReport="deleteReport"/>
     </AppLayout>
 </template>
 
@@ -46,7 +40,7 @@
             ReportButton,
             Calendar,
             CalendarModal,
-            ReportMenu
+            ReportMenu,
         },
         props: {
             reportInfo: {
@@ -103,7 +97,7 @@
             };
         },
         beforeMount() {
-            this.newReports = this.reports.original;
+            this.newReports = this.reports;
         },
         methods: {
             dateClick(repotInfo) {
@@ -117,7 +111,13 @@
                 this.setUpdateReportModal(repotInfo);
             },
             closeModal() {
+                this.$page.props.errors.task_id = null;
+                this.$page.props.errors.report_title = null;
+                this.$page.props.errors.start_time = null;
+                this.$page.props.errors.end_time = null;
+
                 this.showModal = false;
+                this.resetModal();
             },
             resetModal() {
                 this.newReport = {
@@ -149,78 +149,70 @@
                 return;
             },
             saveReport(param) {
-                if (param.report_title == '') {
-                    alert('Názov je povinný');
-                }
-
                 var dataReport = this.setReportDuration(param);
 
                 if (this.updateReportFlag) {
-                    Inertia.put(route("report.update", dataReport), dataReport, {
+                    Inertia.post(route("dashboard-update-report"), dataReport, {
                         onSuccess: page => {
                             if (Object.entries(page.props.errors).length === 0) {
-                                console.log(page);
-                                console.log('aaaaaaaa');
-                                console.log(this.newReports);
-                                this.newReports = page.props.reports.original;
-                                console.log('cccccc');
-                                console.log(this.newReports);
+                                this.newReports = page.props.reports;
                                 this.closeModal();
                                 this.resetModal();
-
-                                // window.eventBus.emit('refreshCalendar',);
                             }
                         }
                     });
                 }
                 else {
-                    Inertia.post(route("report.store"), dataReport, {
+                    Inertia.post(route("dashboard-store-report"), dataReport, {
                         onSuccess: page => {
                             if (Object.entries(page.props.errors).length === 0) {
-                                console.log(page);
-                                console.log('aaaaaaaa');
-                                console.log(this.newReports);
-                                this.newReports = page.props.reports.original;
-                                console.log('cccccc');
-                                console.log(this.newReports);
+                                this.newReports = page.props.reports;
                                 this.closeModal();
                                 this.resetModal();
-
-                                // window.eventBus.emit('refreshCalendar',);
                             }
                         }
                     });
                 }
 
-                Inertia.on("error", event => {
-                    event.preventDefault();
-                    console.log('error pri saveReport ', event.message);
-                });
+                // Inertia.on("error", event => {
+                //     event.preventDefault();
+                //     console.log('error pri saveReport ', event.message);
+                // });
             },
             deleteReport(param){
-                Inertia.delete(route("report.destroy", param), param.id, {
-                    onSuccess: page => {
-                        if (Object.entries(page.props.errors).length === 0) {
-                            console.log(page);
-                            console.log('aaaaaaaa');
-                                console.log(this.newReports);
-                                this.newReports = page.props.reports.original;
-                                console.log('cccccc');
-                                console.log(this.newReports);
-                            this.closeModal();
-                            this.resetModal();
-                        }
-                    }
-                });
-
-                Inertia.on("error", event => {
-                    event.preventDefault();
-                    console.log('error pri deleteReport ', event.message);
-                });
+                this.newReports = param;
             },
+            // deleteObject(param){
+            //     var request = {id: param.id};
+
+            //     Inertia.post(route("dashboard-delete-report"), request, {
+            //         onSuccess: page => {
+            //             console.log(page.props.errors);
+            //             if (Object.entries(page.props.errors).length === 0) {
+            //                 this.newReports = page.props.reports;
+            //                 this.closeDeleteModal()
+            //                 this.closeModal();
+            //                 this.resetModal();
+            //             }
+            //         }
+            //     });
+
+            //     Inertia.on("error", event => {
+            //         event.preventDefault();
+            //         console.log('error pri deleteReport ', event.message);
+            //     });
+            // },
             setReportDuration(form) {
                 var start_date = form.date + " " + form.start_time;
-                var end_date = form.date + " " + form.end_time + ":00";
+                var end_date;
+
+                if(form.end_time == ''){
+                    end_date = null;
+                }
+                else{
+                    end_date = form.date + " " + form.end_time + ":00";
+                    end_date = moment(end_date).format('YYYY-MM-DD HH:mm:ss');
+                }
 
                 return {
                     id: form.id,
@@ -229,7 +221,7 @@
                     user_id: this.$page.props.user.id,
                     task_id: form.task_id,
                     start_time: moment(start_date).format('YYYY-MM-DD HH:mm:ss'),
-                    end_time: moment(end_date).format('YYYY-MM-DD HH:mm:ss'),
+                    end_time: end_date,
                 }
             },
         },

@@ -11,6 +11,6 @@ class TaskPriority extends Model
 
     protected $fillable = [
         'task_priority_title',
-        'level',
+        'task_priority_level',
     ];
 }

@@ -31,7 +31,13 @@ class AppServiceProvider extends ServiceProvider
                 'success_report_update_save' => Session::get('success_report_update_save'),
                 'success_report_delete' => Session::get('success_report_delete'),
                 'success_task_save' => Session::get('success_task_save'),
+                'success_task_update_save' => Session::get('success_task_update_save'),
+                'success_task_delete' => Session::get('success_task_delete'),
                 'success_attendance_save' => Session::get('success_attendance_save'),
+                'success_order_save' => Session::get('success_order_save'),
+                'success_order_update_save' => Session::get('success_order_update_save'),
+                'success_order_delete' => Session::get('success_order_delete'),
+                ''
             ];
         });
 

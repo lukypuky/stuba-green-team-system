@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('formula_part_specifies', function (Blueprint $table) {
             $table->id();
-            $table->string('area_title');
-            $table->integer('area_level');
+            $table->string('formula_part_specify_title');
+            $table->integer('formula_part_specify_level');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('formula_part_specifies');
     }
 };

@@ -12,6 +12,7 @@ use App\Models\Division;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\Meeting as MeetingRequest;
 
 class AttendanceController extends Controller
 {
@@ -150,7 +151,7 @@ class AttendanceController extends Controller
         return $data;
     }
 
-    public function storeAttendance(Request $request){
+    public function storeAttendance(MeetingRequest $request){
         $meeting = new Meeting();
         $meeting->meeting_date = $request->meeting_date;
         $meeting->meeting_type_id = $request->meeting_type_id;

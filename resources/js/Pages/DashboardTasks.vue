@@ -1,17 +1,18 @@
 <template>
     <AppLayout>
         <div class="container page-container">
-            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert"
-                v-if="showAlert">
-                <p class="text-sm">{{ $page.props.flash.success_task_save }}</p>
-            </div>
-            <div class="row">
-                <div class="col-2 report-left-section">
+            <div class="mx-auto grid grid-cols-12 gap-4 p-1">
+                <div class="col-span-12 sm:col-span-2">
                     <ReportMenu/>
                 </div>
-                <div class="col-10 report-right-section">
-                    <TaskOverview :tasks="tasks.original" :taskTypes="taskTypes.original" :taskPriorities="taskPriorities.original" :divisions="divisions.original" 
-                    :areas="areas.original"/>
+                <div class="col-span-12 sm:col-span-10">
+                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
+                        <p class="text-sm">{{ $page.props.flash.success_task_save }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_task_delete }}</p>
+                    </div>
+
+                    <TaskOverview :tasks="tasks" :taskTypes="taskTypes" :taskPriorities="taskPriorities" :divisions="divisions" 
+                    :areas="areas"/>
                 </div>
             </div>
         </div>
@@ -58,6 +59,12 @@ import ReportMenu from '@/Components/ReportMenu.vue';
                 if (this.$page.props.flash.success_task_save !== null) {
                     setTimeout(() => {
                         this.$page.props.flash.success_task_save = null
+                    }, 3000);
+                    return true;
+                }
+                else if(this.$page.props.flash.success_task_delete !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.success_task_delete = null
                     }, 3000);
                     return true;
                 }

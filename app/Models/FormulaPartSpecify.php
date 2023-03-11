@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class FormulaPartSpecify extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'area_title',
-        'area_level',
+        'formula_part_specify_title',
+        'formula_part_specify_level',
     ];
 }

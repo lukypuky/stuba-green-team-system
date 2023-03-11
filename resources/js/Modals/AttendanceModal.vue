@@ -5,18 +5,16 @@
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <!-- This element is to trick the browser into centering the modal contents. -->
-            <!-- <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​ -->
             <div class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full mt-0"
                 role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <form>
                     <!-- <input type="hidden" name="id" /> -->
-                    <div class="flex justify-between border-b border-gray-100 px-4 pt-4">
+                    <div class="flex justify-between border-b border-gray-100 px-4 pt-4 font-bold">
                         <div>
-                            <i class="fas fa-exclamation-circle text-blue-500"></i>
-                            <span class="font-bold text-gray-700 text-lg">Pridať dochádzku</span>
+                            <span class="text-gray-700">Pridať dochádzku</span>
                         </div>
                     </div>
-                    <div class="bg-white px-4 pt-4 pb-4 sm:p-6 sm:pb-4 overflow-y-scroll">
+                    <div class="bg-white px-4 pt-4 pb-4 sm:p-6 sm:pb-4">
                         <div>
                             <div class="mb-3">
                                 <label for="meeting_date"
@@ -32,11 +30,11 @@
                                 <div class="font-bold mb-2">
                                     Dochádzka členov
                                 </div>
-                                <div class="mb-3 text-red-400" v-if="this.showError">
+                                <div class="mb-3 text-red-500 text-base" v-if="this.showError">
                                     Je potrebné zvoliť účasť pre každého člena
                                 </div>
                             </div>
-                            <div class="overflow-y-auto rounded-lg border border-gray-200 shadow-md max-h-70">
+                            <div class="overflow-y-auto rounded-lg border border-gray-200 shadow-md max-h-96">
                                 <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                                     <thead class="bg-gray-300">
                                         <tr>
@@ -47,17 +45,11 @@
                                     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
                                         <tr class="hover:bg-gray-50" v-for="(user, index) in this.users" :key="index">
                                             <td class="p-2 border-b-2 border-gray-300">
-                                                <!-- <div class='flex flex-row'> -->
                                                 <div class='px-2'>
                                                     {{ user.name }}
-                                                    <!-- <input type="checkbox" :id="user.id" :value="user.id" v-model="attendanceUsers" class='text-red-400 appearance-none h-6 w-6 bg-gray-400 rounded-full 
-                                                        checked:bg-red-300 checked:scale-75 transition-all duration-200 peer'/>
-                                                    <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-red-300 peer-checked:border-2'></div>
-                                                    <label :for="user.id" class='flex flex-col justify-center px-2 peer-checked:text-red-400 select-none'>{{ user.name }}</label> -->
                                                 </div>
                                             </td>
                                             <td class="p-2 border-b-2 border-gray-300">
-                                                <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"> -->
                                                 <select :id="user.id" @change="setAttendance"
                                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
                                                     <option value="0">Zvoľte účasť</option>
@@ -68,31 +60,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <div class="mb-3 h-60 overflow-y-auto">
-                                <div class="mb-2">
-                                    <div class='flex flex-row'>
-                                        <input type="checkbox" id="cb1" value="cb1" class='text-red-400 appearance-none h-6 w-6 bg-gray-400 rounded-full 
-                                            checked:bg-red-300 checked:scale-75 transition-all duration-200 peer'/>
-                                        <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-red-300 peer-checked:border-2'></div>
-                                        <label for='cb1' class='flex flex-col justify-center px-2 peer-checked:text-red-400 select-none'>Checkbox 1</label>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class='flex flex-row'>
-                                        <input type="checkbox" id="cb1" value="cb1" class='text-red-400 appearance-none h-6 w-6 bg-gray-400 rounded-full 
-                                            checked:bg-red-300 checked:scale-75 transition-all duration-200 peer'/>
-                                        <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-red-300 peer-checked:border-2'></div>
-                                        <label for='cb1' class='flex flex-col justify-center px-2 peer-checked:text-red-400 select-none'>Checkbox 1</label>
-                                    </div>
-                                </div>                                <div class="mb-2">
-                                    <div class='flex flex-row'>
-                                        <input type="checkbox" id="cb1" value="cb1" class='text-red-400 appearance-none h-6 w-6 bg-gray-400 rounded-full 
-                                            checked:bg-red-300 checked:scale-75 transition-all duration-200 peer'/>
-                                        <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-red-300 peer-checked:border-2'></div>
-                                        <label for='cb1' class='flex flex-col justify-center px-2 peer-checked:text-red-400 select-none'>Checkbox 1</label>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

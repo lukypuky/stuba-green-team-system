@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('order_priorities', function (Blueprint $table) {
             $table->id();
-            $table->string('area_title');
-            $table->integer('area_level');
+            $table->string('order_priority_title');
+            $table->integer('order_priority_level');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('order_priorities');
     }
 };

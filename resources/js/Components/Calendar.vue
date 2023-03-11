@@ -53,6 +53,8 @@
             }
         },
         beforeMount() {
+            // console.log('aaaaaaaaaaaa');
+            // console.log(this.reports);
             // this.calendarOptions.events = this.reports;
             // console.log('xxxxx');
             // console.log(this.reports);

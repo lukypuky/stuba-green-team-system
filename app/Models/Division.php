@@ -11,6 +11,7 @@ class Division extends Model
 
     protected $fillable = [
         'division_title',
+        'division_level',
         'shortcut',
     ];
 }

@@ -5,13 +5,13 @@
                 <h1>Prehľad priradených úloh</h1>
             </div>
 
-            <div class="add-task-button">
+            <div class="m-2">
                 <button @click="openModal">Pridať úlohu</button>
             </div>
 
             <div>
-                <TaskModal v-if="showModal" @closeModal="closeModal" @saveTask="saveTask" :form="newTask" :taskTypes="taskTypes" :taskPriorities="taskPriorities" 
-                :divisions="divisions" :areas="areas"/>
+                <TaskModal v-if="showModal" @closeModal="closeModal" @saveTask="saveTask" :form="this.newTask" :taskTypes="taskTypes" :taskPriorities="taskPriorities" 
+                :divisions="this.divisions" :areas="this.areas"/>
             </div>
 
             <div class="cards">
@@ -20,7 +20,7 @@
                         Nezačaté
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
-                        <TaskOverviewTask v-if="task.status_id == 1" :title="task.task_title" :priority="task.priority_id" :taskId="task.id"/>
+                        <TaskOverviewTask v-if="task.status_id == 1" :title="task.task_title" :taskPriority="task.task_priority_id" :taskId="task.id"/>
                     </div>
                 </div>
                 <div class="card task-overview-card">
@@ -28,7 +28,7 @@
                         Rozpracované
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
-                        <TaskOverviewTask v-if="task.status_id == 2" :title="task.task_title" :priority="task.priority_id" :taskId="task.id"/>
+                        <TaskOverviewTask v-if="task.status_id == 2" :title="task.task_title" :taskPriority="task.task_priority_id" :taskId="task.id"/>
                     </div>
                 </div>
                 <div class="card task-overview-card">
@@ -36,7 +36,7 @@
                         Dokončené
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
-                        <TaskOverviewTask v-if="task.status_id == 3" :title="task.task_title" :priority="task.priority_id" :taskId="task.id"/>
+                        <TaskOverviewTask v-if="task.status_id == 3" :title="task.task_title" :taskPriority="task.task_priority_id" :taskId="task.id"/>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     task_title: '',
                     description: '',
                     // user_id_assigned: '',
-                    priority_id: '',
+                    task_priority_id: '',
                     division_id: '',
                     area_id: '',
                     deadline: '',
@@ -106,6 +106,7 @@
             },
             closeModal() {
                 this.showModal = false;
+                this.resetModal();
             },
             resetModal(){
                 this.newTask = {
@@ -114,20 +115,18 @@
                     task_title: '',
                     description: '',
                     // user_id_assigned: '',
-                    priority_id: '',
+                    task_priority_id: '',
                     division_id: '',
                     area_id: '',
                     deadline: '',
                 }
             },
             saveTask(param){
-                Inertia.post(route("dashboard-save-task", param), param, {
+                Inertia.post(route("dashboard-store-task", param), param, {
                     onSuccess: page => {
                         if (Object.entries(page.props.errors).length === 0) {
                             this.closeModal();
                             this.resetModal();
-
-                            // window.eventBus.emit('refreshCalendar',);
                         }
                     }
                 });
@@ -138,7 +137,7 @@
                 });
             },
         },
-        // beforeMount(){
+        // beforeMount() {
         //     axios.get(route('task.index'))
         //     .then((res) => {
         //         this.tasks = res.data
@@ -148,9 +147,6 @@
 </script>
 
 <style scoped>
-.add-task-button {
-    margin: 10px;
-}
 .task-container-heading {
     text-align: center;
     font-weight: bold;

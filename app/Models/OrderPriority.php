@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class OrderPriority extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'area_title',
-        'area_level',
+        'order_priority_title',
+        'order_priority_level',
     ];
 }

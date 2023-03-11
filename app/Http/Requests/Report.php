@@ -24,13 +24,20 @@ class Report extends FormRequest
     public function rules()
     {
         return [
-            'report_title' => 'required'
+            'task_id' => 'required',
+            'report_title' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required|after:start_time',
         ];
     }
 
     public function messages(){
         return [
-            'report_title.required' => 'je to povinne!'
+            'task_id.required' => 'Toto pole je povinné',
+            'report_title.required' => 'Toto pole je povinné',
+            'start_time.required' => 'Toto pole je povinné',
+            'end_time.required' => 'Toto pole je povinné!',
+            'end_time.after' => 'Zadaný čas musí byť po začiatočnom čase',
         ];
     }
 }

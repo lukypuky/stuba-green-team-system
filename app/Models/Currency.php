@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class Currency extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'area_title',
-        'area_level',
+        'currency_title',
+        'currency_symbol',
+        'shortcut',
     ];
 }
