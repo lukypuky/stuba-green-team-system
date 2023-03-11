@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->text('description')->nullable();
                 $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users');
-                $table->unsignedBigInteger('task_id');
+                $table->unsignedBigInteger('task_id')->nullable();
                 $table->foreign('task_id')->references('id')->on('tasks');
                 $table->char('color',10)->default('#4ca548');
                 $table->char('textColor',10)->default('#000000');

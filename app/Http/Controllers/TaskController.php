@@ -11,6 +11,7 @@ use App\Models\Division;
 use App\Models\TaskStatus;
 use App\Models\Area;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Task as TaskRequest;
 
@@ -57,6 +58,12 @@ class TaskController extends Controller
         $taskStatuses = TaskStatus::all();
         $divisions = Division::all();
         $areas = Area::all();
+
+        $comments = Comment::where('comments.task_id', $id)
+        ->join('users', 'comments.user_id', '=', 'users.id')
+        ->orderBy('comments.id', 'asc')
+        ->select(['comments.id', 'users.name', 'comments.comment_body', 'comments.created_at'])
+        ->get();
         
         return Inertia::render('DashboardTaskDetail', [
             'users' => $users,
@@ -66,6 +73,7 @@ class TaskController extends Controller
             'taskStatuses' =>  $taskStatuses,
             'divisions' =>  $divisions,
             'areas' =>  $areas,
+            'comments' => $comments,
         ]);
     }
 
@@ -108,8 +116,19 @@ class TaskController extends Controller
     }
 
     public function deleteTask(Request $request){
+        Comment::where('task_id', $request->id)->delete();
         Task::where('id', $request->id)->delete();
-
+        
         return redirect()->route('dashboard-tasks')->with('success_task_delete', 'uspesny task delete');
+    }
+
+    public function storeComment(Request $request){
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'task_id' => $request->task_id,
+            'comment_body' => $request->comment_body,
+        ]);
+
+        return redirect()->back();
     }
 }

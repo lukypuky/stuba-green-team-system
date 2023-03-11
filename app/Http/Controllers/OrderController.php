@@ -28,13 +28,40 @@ class OrderController extends Controller
             'orders.delivery_date', 'order_statuses.order_status_title', 'formula_part_specifies.formula_part_specify_title', 'orders.approval', 'orders.created_at', 'orders.updated_at',
             'orders.formula_part_specify_id', 'orders.currency_id', 'orders.order_priority_id', 'orders.order_status_id'])
         ->get();
+        
+        $currencies = Currency::all();
+        $orderPriorities = OrderPriority::all();
+        $orderStatuses = OrderStatus::all();
+        $formulaPartSpecifies = FormulaPartSpecify::all();
+
+        return Inertia::render('DashboardMyOrders', [
+            'orders' => $orders,
+            'currencies' => $currencies,
+            'orderPriorities' => $orderPriorities,
+            'orderStatuses' => $orderStatuses,
+            'formulaPartSpecifies' => $formulaPartSpecifies,
+        ]);
+    }
+
+    public function getAllOrders(){
+        $orders = Order::join('users', 'orders.created_by_user_id', '=', 'users.id')
+        ->join('order_priorities', 'orders.order_priority_id', '=', 'order_priorities.id')
+        ->join('order_statuses', 'orders.order_status_id', 'order_statuses.id')
+        ->join('currencies', 'orders.currency_id', 'currencies.id')
+        ->join('formula_part_specifies', 'orders.formula_part_specify_id', 'formula_part_specifies.id')
+        ->orderBy('orders.id', 'desc')
+        ->select(['orders.id', 'orders.order_number', 'orders.order_title', 'orders.description', 'orders.quantity', 'orders.price_per_piece', 'orders.price_total',
+            'currencies.currency_symbol', 'users.name', 'orders.shop', 'orders.link', 'order_priorities.order_priority_title', 'orders.order_comment', 
+            'orders.delivery_date', 'order_statuses.order_status_title', 'formula_part_specifies.formula_part_specify_title', 'orders.approval', 'orders.created_at', 'orders.updated_at',
+            'orders.formula_part_specify_id', 'orders.currency_id', 'orders.order_priority_id', 'orders.order_status_id'])
+        ->get();
 
         $currencies = Currency::all();
         $orderPriorities = OrderPriority::all();
         $orderStatuses = OrderStatus::all();
         $formulaPartSpecifies = FormulaPartSpecify::all();
 
-        return Inertia::render('DashboardOrders', [
+        return Inertia::render('DashboardAllOrders', [
             'orders' => $orders,
             'currencies' => $currencies,
             'orderPriorities' => $orderPriorities,

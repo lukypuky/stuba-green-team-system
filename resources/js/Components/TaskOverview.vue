@@ -94,12 +94,6 @@
                 },
             }
         },
-        // mounted() {
-        //     axios.get(route('task.index'))
-        //     .then((res) => {
-        //         this.tasks = res.data
-        //     })
-        // },
         methods: {
             openModal(){
                 this.showModal = true;
@@ -137,13 +131,7 @@
                 });
             },
         },
-        // beforeMount() {
-        //     axios.get(route('task.index'))
-        //     .then((res) => {
-        //         this.tasks = res.data
-        //     })
-        // }
-}
+    }
 </script>
 
 <style scoped>

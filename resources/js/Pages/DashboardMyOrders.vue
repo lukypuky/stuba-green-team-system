@@ -130,7 +130,7 @@
     import ApprovalIcon from '@/Components/AttendanceIcons.vue';
 
     export default {
-        name: 'DashboardOrders',
+        name: 'DashboardMyOrders',
         components: { 
             AppLayout,
             OrderMenu,

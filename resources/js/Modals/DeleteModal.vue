@@ -49,6 +49,7 @@
         props: {
             deletedObjectId: {
                 type: String,
+                default: () => ''
             },
             objectName: {
                 type: String,
@@ -59,7 +60,12 @@
                 this.$emit('closeDeleteModal');
             },
             deleteObject() {
-                this.$emit('deleteObject', this.deletedObjectId);
+                if(!this.deletedObjectId == ''){
+                    this.$emit('deleteObject', this.deletedObjectId);
+                }
+                else{
+                    this.$emit('deleteObject');
+                }
             }
         },
     };

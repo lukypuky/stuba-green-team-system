@@ -35,6 +35,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/dashboard-moje-objednavky', [OrderController::class, 'getMyOrders'])->name('dashboard-my-orders');
+    Route::get('/dashboard-vsetky-objednavky', [OrderController::class, 'getAllOrders'])->name('dashboard-all-orders');
     Route::post('/dashboard-objednavky-pridanie', [OrderController::class, 'storeOrder'])->name('dashboard-store-order');
     Route::post('/dashboard-objednavky-update', [OrderController::class, 'updateOrder'])->name('dashboard-update-order');
     Route::post('/dashboard-objednavky-delete', [OrderController::class, 'deleteOrder'])->name('dashboard-delete-order');
@@ -42,7 +43,7 @@ Route::middleware([
     Route::get('/dashboard-vykaz', [ReportController::class, 'getReports'])->name('dashboard-report');
     Route::post('/dashboard-vykaz-pridanie', [ReportController::class, 'storeReport'])->name('dashboard-store-report');
     Route::post('/dashboard-vykaz-update', [ReportController::class, 'updateReport'])->name('dashboard-update-report');
-    Route::post('/dashboard-vykaz-mazanie', [ReportController::class, 'deleteReport'])->name('dashboard-delete-report');
+    Route::post('/dashboard-vykaz-delete', [ReportController::class, 'deleteReport'])->name('dashboard-delete-report');
 
     Route::get('/dashboard-moje-ulohy', [TaskController::class, 'getModalTaskData'])->name('dashboard-tasks');
     Route::post('/dashboard-moje-ulohy', [TaskController::class, 'storeNewTask'])->name('dashboard-store-task');
@@ -51,8 +52,11 @@ Route::middleware([
     Route::post('/dashboard-uloha-delete', [TaskController::class, 'deleteTask'])->name('dashboard-delete-task');
     Route::get('/dashboard-vsetky-ulohy', [TaskController::class, 'getAllTasks'])->name('dashboard-all-tasks');
     Route::post('/dashboard-hladaj-ulohy', [TaskController::class, 'getSearchedTasks'])->name('dashboard-search-tasks');
+    Route::post('/dashboard-komentar-pridanie', [TaskController::class, 'storeComment'])->name('dashboard-store-comment');
     
     Route::get('/dashboard-dochadzka', [AttendanceController::class, 'getAttendance'])->name('dashboard-attendance');
     Route::post('/dashboard-dochadzka', [AttendanceController::class, 'changeMeetingType'])->name('dashboard-change-meeting-type');
-    Route::post('/dashboard-ulozit-dochadzku', [AttendanceController::class, 'storeAttendance'])->name('dashboard-store-attendance');
+    Route::post('/dashboard-dochadzka-pridanie', [AttendanceController::class, 'storeAttendance'])->name('dashboard-store-attendance');
+    Route::post('/dashboard-dochadzka-update', [AttendanceController::class, 'updateAttendance'])->name('dashboard-update-attendance');
+    Route::post('/dashboard-dochadzka-delete', [AttendanceController::class, 'deleteAttendance'])->name('dashboard-delete-attendance');
 });

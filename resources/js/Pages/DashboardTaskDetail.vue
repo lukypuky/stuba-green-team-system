@@ -47,7 +47,7 @@
                                 <div>
                                     <select id="type_id" v-model="this.task[0].type_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(taskType, index) in taskTypes" :key="index" :value="taskType.id">{{ taskType.task_type_title }}</option>
+                                        <option v-for="(taskType, index) in this.taskTypes" :key="index" :value="taskType.id">{{ taskType.task_type_title }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 <div>
                                     <select id="priority_id" v-model="this.task[0].task_priority_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(taskPriority, index) in taskPriorities" :key="index" :value="taskPriority.id">{{ taskPriority.task_priority_title }}</option>
+                                        <option v-for="(taskPriority, index) in this.taskPriorities" :key="index" :value="taskPriority.id">{{ taskPriority.task_priority_title }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                 <div>
                                     <select id="division_id" v-model="this.task[0].division_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(division, index) in divisions" :key="index" :value="division.id">{{ division.division_title }}</option>
+                                        <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div>
                                     <select id="area_id" v-model="this.task[0].area_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(area, index) in areas" :key="index" :value="area.id">{{ area.area_title }}</option>
+                                        <option v-for="(area, index) in this.areas" :key="index" :value="area.id">{{ area.area_title }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                 <div>
                                     <select id="status_id" v-model="this.task[0].status_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(status, index) in taskStatuses" :key="index" :value="status.id">{{ status.task_status_title }}</option>
+                                        <option v-for="(status, index) in this.taskStatuses" :key="index" :value="status.id">{{ status.task_status_title }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <div>
                                     <select id="user_id_assigned" v-model="this.task[0].user_id_assigned" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option v-for="(user, index) in users" :key="index" :value="user.id">{{ user.name }}</option>
+                                        <option v-for="(user, index) in this.users" :key="index" :value="user.id">{{ user.name }}</option>
                                      </select>
                                 </div>
                             </div>
@@ -145,8 +145,25 @@
                         <div class="card bg-gray-100">
                             <div class="card-row">
                                 <div>Komentáre: </div>
+                                <form action="">
+                                    <div>
+                                        <textarea v-model="this.newComment.comment_body" id="new-comment" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        </textarea>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="buttons" @click.prevent="addComment">Pridať komentár</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card bg-inherit" v-if="this.comments.length">
+                            <div class="card-row" v-for="(comment, index) in this.comments" :key="index">
+                                <div class="mb-1">
+                                    {{ comment.name }} <span class="text-gray-400 text-sm">{{ comment.created_at }}</span>
+                                </div>
                                 <div>
-                                    <button class="buttons">Pridať komentár</button>
+                                    <textarea v-model="comment.comment_body" class="shadow resize-none appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled="true">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -202,6 +219,10 @@ import moment from 'moment';
                 type: Object,
                 default: () => { }
             }, 
+            comments:{
+                type: Object,
+                default: () => { }
+            }, 
         },
         data() {
             return {
@@ -221,6 +242,10 @@ import moment from 'moment';
                 inputEnable: true,
                 showDeleteModal: false,
                 deletedObjectId: '',
+                newComment: {
+                    comment_body: '',
+                    task_id: '',
+                },
             }
         },
         methods: {
@@ -269,6 +294,23 @@ import moment from 'moment';
 
                 this.closeDeleteModal();
             },
+            addComment(){
+                if(this.newComment.comment_body.trim().length == 0){
+                    return;
+                }
+                else{
+                    this.newComment.task_id = this.task[0].id;
+
+                    Inertia.post(route("dashboard-store-comment"), this.newComment, {
+                        onSuccess: page => {
+                            if (Object.entries(page.props.errors).length === 0) {
+                                this.newComment.comment_body = '';
+                                this.newComment.task_id = '';
+                            }
+                        }
+                    });
+                }
+            }
         },
         computed: {
             showAlert() {
@@ -302,7 +344,7 @@ import moment from 'moment';
 }
 
 .card {
-    padding: 1rem;
+    padding: 0.5rem;
     border: none;
 }
 

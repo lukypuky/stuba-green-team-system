@@ -52,25 +52,6 @@
                 this.calendarOptions.events = newValue;
             }
         },
-        beforeMount() {
-            // console.log('aaaaaaaaaaaa');
-            // console.log(this.reports);
-            // this.calendarOptions.events = this.reports;
-            // console.log('xxxxx');
-            // console.log(this.reports);
-        },
-        // created(){
-        //     axios.get(route('report.index'))
-        //     .then((res) => {
-        //         // this.calendarOptions.events = res.data
-        //     })
-        // },
-        mounted() {
-            // window.eventBus.on('refreshCalendar', function () {
-            //     this.refreshCalendar();
-            // });
-
-        },
         methods: {
             handleDateClick(clickInfo) {
                 this.$emit('dateClick', clickInfo);
@@ -78,10 +59,6 @@
             updateEventClick(reportInfo){
                 this.$emit('reportClick', reportInfo);
             },
-            // refreshCalendar() {
-
-            // },
         },
-        
     }
 </script>

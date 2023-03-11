@@ -1,9 +1,9 @@
 <template>
     <div>
-        <Link :href="route('dashboard-report')">Moje objednávky</Link>
+        <Link :href="route('dashboard-my-orders')">Moje objednávky</Link>
     </div>
     <div>
-        <Link :href="route('dashboard-tasks')">Objednávky divízie</Link>
+        <Link :href="route('dashboard-all-orders')">Všetky objednávky</Link>
     </div>
 </template>
 

@@ -33,7 +33,7 @@ class AttendanceController extends Controller
         $attendances = MeetingUser::whereIn('meeting_id', $meetingIds)
             ->join('users', 'meeting_users.user_id', '=', 'users.id')
             ->join('meetings', 'meeting_users.meeting_id', '=', 'meetings.id')
-            ->select(['meeting_users.attendance_status_id', 'users.name', 'meetings.meeting_date'])
+            ->select(['meeting_users.attendance_status_id', 'users.name', 'users.id', 'meetings.meeting_date'])
             ->get();
 
         foreach($users as $user){
@@ -44,6 +44,7 @@ class AttendanceController extends Controller
                 if($user->name == $attendance->name){
                     if(!isset($row['username'])){
                         $row['username'] = $attendance->name;
+                        $row['userId'] = $attendance->id;
                     }
 
                     $row[$attendance->meeting_date] = $attendance->attendance_status_id;
@@ -110,7 +111,7 @@ class AttendanceController extends Controller
         $attendances = MeetingUser::whereIn('meeting_id', $meetingIds)
             ->join('users', 'meeting_users.user_id', '=', 'users.id')
             ->join('meetings', 'meeting_users.meeting_id', '=', 'meetings.id')
-            ->select(['meeting_users.attendance_status_id', 'users.name', 'meetings.meeting_date'])
+            ->select(['meeting_users.attendance_status_id', 'users.name', 'users.id', 'meetings.meeting_date'])
             ->get();
 
         foreach($users as $user){
@@ -121,6 +122,7 @@ class AttendanceController extends Controller
                 if($user->name == $attendance->name){
                     if(!isset($row['username'])){
                         $row['username'] = $attendance->name;
+                        $row['userId'] = $attendance->id;
                     }
 
                     $row[$attendance->meeting_date] = $attendance->attendance_status_id;
@@ -166,6 +168,23 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard-attendance')->with('success_attendance_save', 'uspesny task save');
+        return redirect()->back()->with('success_attendance_save', 'uspesna dochadzka save');
+    }
+
+    public function updateAttendance(Request $request){
+        foreach($request->attendance as $value){
+            MeetingUser::where('meeting_id', $request->meeting_id)->where('user_id', $value['user_id'])->update([
+                'attendance_status_id' => $value['attendance_status_id'],
+            ]);
+        }
+
+        return redirect()->back()->with('success_attendance_update_save', 'uspesny dochadzka update');
+    }
+
+    public function deleteAttendance(Request $request){
+        MeetingUser::where('meeting_id', $request->meeting_id)->delete();
+        Meeting::where('id', $request->meeting_id)->delete();
+        
+        redirect()->back()->with('success_attendance_delete', 'uspesny attendance update');
     }
 }

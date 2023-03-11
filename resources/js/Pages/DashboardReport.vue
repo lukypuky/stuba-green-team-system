@@ -173,35 +173,10 @@
                         }
                     });
                 }
-
-                // Inertia.on("error", event => {
-                //     event.preventDefault();
-                //     console.log('error pri saveReport ', event.message);
-                // });
             },
             deleteReport(param){
                 this.newReports = param;
             },
-            // deleteObject(param){
-            //     var request = {id: param.id};
-
-            //     Inertia.post(route("dashboard-delete-report"), request, {
-            //         onSuccess: page => {
-            //             console.log(page.props.errors);
-            //             if (Object.entries(page.props.errors).length === 0) {
-            //                 this.newReports = page.props.reports;
-            //                 this.closeDeleteModal()
-            //                 this.closeModal();
-            //                 this.resetModal();
-            //             }
-            //         }
-            //     });
-
-            //     Inertia.on("error", event => {
-            //         event.preventDefault();
-            //         console.log('error pri deleteReport ', event.message);
-            //     });
-            // },
             setReportDuration(form) {
                 var start_date = form.date + " " + form.start_time;
                 var end_date;
