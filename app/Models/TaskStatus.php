@@ -11,6 +11,5 @@ class TaskStatus extends Model
 
     protected $fillable = [
         'task_status_title',
-        'task_status_level',
     ];
 }

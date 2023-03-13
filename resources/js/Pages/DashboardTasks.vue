@@ -7,8 +7,8 @@
                 </div>
                 <div class="col-span-12 sm:col-span-10">
                     <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_task_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_task_delete }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
                     </div>
 
                     <TaskOverview :tasks="tasks" :taskTypes="taskTypes" :taskPriorities="taskPriorities" :divisions="divisions" 
@@ -56,15 +56,15 @@ import ReportMenu from '@/Components/ReportMenu.vue';
         },
         computed: {
             showAlert() {
-                if (this.$page.props.flash.success_task_save !== null) {
+                if (this.$page.props.flash.success_object_save !== null) {
                     setTimeout(() => {
-                        this.$page.props.flash.success_task_save = null
+                        this.$page.props.flash.success_object_save = null
                     }, 3000);
                     return true;
                 }
-                else if(this.$page.props.flash.success_task_delete !== null) {
+                else if(this.$page.props.flash.success_object_delete !== null) {
                     setTimeout(() => {
-                        this.$page.props.flash.success_task_delete = null
+                        this.$page.props.flash.success_object_delete = null
                     }, 3000);
                     return true;
                 }

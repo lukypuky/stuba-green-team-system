@@ -47,7 +47,7 @@ class TaskController extends Controller
             // 'attachment',
         ]);
 
-        return redirect()->back()->with('success_task_save', 'uspesny task save');
+        return redirect()->back()->with('success_object_save', 'uspesny task save');
     }
 
     public function getTaskDetail($id){
@@ -89,7 +89,7 @@ class TaskController extends Controller
             'deadline' => $request->deadline,
         ]);
 
-        return redirect()->back()->with('success_task_update_save', 'uspesny task update');
+        return redirect()->back()->with('success_object_update_save', 'uspesny task update');
     }
 
     public function getAllTasks(){
@@ -119,7 +119,7 @@ class TaskController extends Controller
         Comment::where('task_id', $request->id)->delete();
         Task::where('id', $request->id)->delete();
         
-        return redirect()->route('dashboard-tasks')->with('success_task_delete', 'uspesny task delete');
+        return redirect()->route('dashboard-tasks')->with('success_object_delete', 'uspesny task delete');
     }
 
     public function storeComment(Request $request){

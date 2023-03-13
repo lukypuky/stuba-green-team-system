@@ -11,6 +11,5 @@ class Area extends Model
 
     protected $fillable = [
         'area_title',
-        'area_level',
     ];
 }

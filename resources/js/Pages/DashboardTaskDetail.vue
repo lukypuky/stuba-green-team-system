@@ -8,7 +8,7 @@
                 <div class="col-span-12 sm:col-span-10">
                     <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert"
                         v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_task_update_save }}</p>
+                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
                     </div>
                     <div class="page-heading">
                         <div class="task-heading-container">
@@ -18,10 +18,10 @@
                             <div v-if="inputEnable" class="task-heading-right-margin">
                                 <div class="flex">
                                     <div class="pr-2">
-                                        <Icon name="update" width="20" @click="setInputs"/>
+                                        <Icon name="update" width="20" @click.prevent="setInputs"/>
                                     </div>
                                     <div class="pl-2">
-                                        <Icon name="delete" width="20" @click="deleteTaskModal(this.task[0].id)"/>
+                                        <Icon name="delete" width="20" @click.prevent="deleteTaskModal(this.task[0].id)"/>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <button @click="resetTask">Zrušiť</button>
                             </div>
 
-                            <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId" :objectName="'task'"/>
+                            <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId"/>
                         </div>
                     </div>
                     <div class="cards">
@@ -314,9 +314,9 @@ import moment from 'moment';
         },
         computed: {
             showAlert() {
-                if(this.$page.props.flash.success_task_update_save !== null) {
+                if(this.$page.props.flash.success_object_update_save !== null) {
                     setTimeout(() => {
-                        this.$page.props.flash.success_task_update_save = null
+                        this.$page.props.flash.success_object_update_save = null
                     }, 3000);
                     return true;
                 }
@@ -332,7 +332,7 @@ import moment from 'moment';
 .task-heading-container {
     display:flex; 
     align-items: center; 
-    padding-left: 1rem;
+    padding-left: 0.5rem;
 }
 
 .task-heading-right-margin {

@@ -47,9 +47,9 @@
                                 </textarea>
                             </div>
                             <div class="col-span-6 sm:col-span-3 mb-3">
-                                <label for="priority_id"
+                                <label for="task_priority_id"
                                     class="block text-gray-700 text-sm font-bold mb-2">Priorita <span class="text-red-500">*</span></label>
-                                <select id="priority_id" v-model="form.task_priority_id"
+                                <select id="task_priority_id" v-model="form.task_priority_id"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
                                     <option v-for="(taskPriority, index) in taskPriorities" :key="index" :value="taskPriority.id">{{ taskPriority.task_priority_title }}</option>
                                 </select>

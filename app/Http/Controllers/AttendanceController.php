@@ -168,7 +168,7 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_attendance_save', 'uspesna dochadzka save');
+        return redirect()->back()->with('success_object_save', 'uspesna dochadzka save');
     }
 
     public function updateAttendance(Request $request){
@@ -178,13 +178,13 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_attendance_update_save', 'uspesny dochadzka update');
+        return redirect()->back()->with('success_object_update_save', 'uspesny dochadzka update');
     }
 
     public function deleteAttendance(Request $request){
         MeetingUser::where('meeting_id', $request->meeting_id)->delete();
         Meeting::where('id', $request->meeting_id)->delete();
         
-        redirect()->back()->with('success_attendance_delete', 'uspesny attendance update');
+        redirect()->back()->with('success_object_delete', 'uspesny attendance update');
     }
 }

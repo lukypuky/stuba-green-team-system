@@ -11,6 +11,5 @@ class FormulaPartSpecify extends Model
 
     protected $fillable = [
         'formula_part_specify_title',
-        'formula_part_specify_level',
     ];
 }

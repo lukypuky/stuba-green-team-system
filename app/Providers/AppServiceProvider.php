@@ -27,19 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Inertia::share('flash', function(){
             return [
-                'success_report_save' => Session::get('success_report_save'),
-                'success_report_update_save' => Session::get('success_report_update_save'),
-                'success_report_delete' => Session::get('success_report_delete'),
-                'success_task_save' => Session::get('success_task_save'),
-                'success_task_update_save' => Session::get('success_task_update_save'),
-                'success_task_delete' => Session::get('success_task_delete'),
-                'success_attendance_save' => Session::get('success_attendance_save'),
-                'success_attendance_update_save' => Session::get('success_attendance_update_save'),
-                'success_attendance_delete' => Session::get('success_attendance_delete'),
-                'success_order_save' => Session::get('success_order_save'),
-                'success_order_update_save' => Session::get('success_order_update_save'),
-                'success_order_delete' => Session::get('success_order_delete'),
-                ''
+                'success_object_save' => Session::get('success_object_save'),
+                'success_object_update_save' => Session::get('success_object_update_save'),
+                'success_object_delete' => Session::get('success_object_delete'),
             ];
         });
 

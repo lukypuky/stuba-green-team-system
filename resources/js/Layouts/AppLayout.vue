@@ -43,6 +43,10 @@ const logout = () => {
                                     :active="route().current('dashboard-report')">
                                     Výkazy/úlohy
                                 </NavLink>
+                                <NavLink :href="route('dashboard-get-users')"
+                                    :active="route().current('dashboard-get-users')">
+                                    Admin panel
+                                </NavLink>
                             </div>
                         </div>
 

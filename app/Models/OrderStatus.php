@@ -11,6 +11,5 @@ class OrderStatus extends Model
 
     protected $fillable = [
         'order_status_title',
-        'order_status_level',
     ];
 }

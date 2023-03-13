@@ -29,6 +29,9 @@ class User extends Authenticatable
         'password',
         'is_admin',
         'active',
+        'first_login_pass_changed',
+        'role_id',
+        'division_id'
     ];
 
     /**

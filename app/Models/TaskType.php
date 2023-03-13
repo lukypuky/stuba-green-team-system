@@ -11,6 +11,5 @@ class TaskType extends Model
 
     protected $fillable = [
         'task_type_title',
-        'task_type_level',
     ];
 }

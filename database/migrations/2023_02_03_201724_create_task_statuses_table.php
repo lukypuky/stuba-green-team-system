@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('task_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('task_status_title');
-            $table->integer('task_status_level');
             $table->timestamps();
         });
     }

@@ -14,21 +14,9 @@
                     </div>
                     <div class="bg-white px-4 pt-4 pb-4 sm:p-6 sm:pb-4">
                         <div>
-                            <span class="text-gray-700" v-if="this.objectName == 'order'">
-                                Naozaj si želáte odstrániť túto objednávku ? <br/>
-                                Po stlačení tlačidla "Áno" sa objednávka natrvalo odstráni a nebude ju možné vrátiť späť.
-                            </span>
-                            <span class="text-gray-700" v-else-if="this.objectName == 'task'">
-                                Naozaj si želáte odstrániť túto úlohu ? <br/>
-                                Po stlačení tlačidla "Áno" sa úloha natrvalo odstráni a nebude ju možné vrátiť späť.
-                            </span>
-                            <span class="text-gray-700" v-else-if="this.objectName == 'report'">
-                                Naozaj si želáte odstrániť tento výkaz ? <br/>
-                                Po stlačení tlačidla "Áno" sa výkaz natrvalo odstráni a nebude ho možné vrátiť späť.
-                            </span>
-                            <span class="text-gray-700" v-else-if="this.objectName == 'attendance'">
-                                Naozaj si želáte odstrániť túto dochádzku ? <br/>
-                                Po stlačení tlačidla "Áno" sa dochádzka natrvalo odstráni a nebude ho možné vrátiť späť.
+                            <span class="text-gray-700">
+                                Naozaj si želáte odstrániť tento záznam ? <br/>
+                                Po stlačení tlačidla "Áno" sa záznam natrvalo odstráni a nebude ho možné vrátiť späť.
                             </span>
                         </div>
                     </div>
@@ -51,9 +39,6 @@
                 type: String,
                 default: () => ''
             },
-            objectName: {
-                type: String,
-            }
         },
         methods: {
             closeDeleteModal() {

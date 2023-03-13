@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('task_priorities', function (Blueprint $table) {
             $table->id();
             $table->string('task_priority_title');
-            $table->integer('task_priority_level');
             $table->timestamps();
         });
     }

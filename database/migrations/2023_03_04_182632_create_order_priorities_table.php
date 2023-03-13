@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('order_priorities', function (Blueprint $table) {
             $table->id();
             $table->string('order_priority_title');
-            $table->integer('order_priority_level');
             $table->timestamps();
         });
     }

@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :objectName="'attendance'"/>
+    <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject"/>
 </template>
 
 <script>

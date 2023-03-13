@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('formula_part_specifies', function (Blueprint $table) {
             $table->id();
             $table->string('formula_part_specify_title');
-            $table->integer('formula_part_specify_level');
             $table->timestamps();
         });
     }

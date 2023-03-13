@@ -26,7 +26,7 @@ class Task extends FormRequest
         return [
             'type_id' => 'required',
             'task_title' => 'required',
-            'priority_id' => 'required',
+            'task_priority_id' => 'required',
             'division_id' => 'required',
             'area_id' => 'required',
         ];
@@ -36,7 +36,7 @@ class Task extends FormRequest
         return [
             'type_id.required' => 'Toto pole je povinné',
             'task_title.required' => 'Toto pole je povinné',
-            'priority_id.required' => 'Toto pole je povinné',
+            'task_priority_id.required' => 'Toto pole je povinné',
             'division_id.required' => 'Toto pole je povinné!',
             'area_id.required' => 'Toto pole je povinné',
         ];

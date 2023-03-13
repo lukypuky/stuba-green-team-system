@@ -11,6 +11,5 @@ class OrderPriority extends Model
 
     protected $fillable = [
         'order_priority_title',
-        'order_priority_level',
     ];
 }

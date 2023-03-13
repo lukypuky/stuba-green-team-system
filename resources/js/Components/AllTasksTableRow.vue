@@ -7,7 +7,6 @@
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Dátum vytvorenia</span>{{ task.created_at }}</td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
             <span class="inline-block w-1/3 md:hidden font-bold">Akcie</span>
-            <!-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Detail</button> -->
             <Link :href="route('dashboard-task-detail', task.id)">Detail</Link>
         </td>
     </tr>	
