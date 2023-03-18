@@ -22,7 +22,7 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">Úloha <span class="text-red-500">*</span></label>
                                 <select id="task_id" v-model="form.task_id" 
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option v-for="(task, index) in modalTasks" :key="index" :value="task.id">{{ task.task_title }}</option>
+                                    <option v-for="(task, index) in this.modalTasks" :key="index" :value="task.id">{{ task.task_title }}</option>
                                 </select>
                                 <div v-if="$page.props.errors.task_id" class="text-red-500">
                                     {{ $page.props.errors.task_id }}

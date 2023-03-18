@@ -6,13 +6,15 @@
                     <AdminMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <!-- <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
+                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
                         <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
                         <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
-                    </div> -->
+                    </div>
                     <div class="page-heading">
                         <h1>Používatelia</h1>
+                    </div>
+                    <div class="m-2">
+                        <Link :href="route('dashboard-store-user-page')">Pridať používateľa</Link>
                     </div>
                     <div>
                         <table class="min-w-full border-collapse block md:table">
@@ -80,6 +82,7 @@
     import Icon from '@/Components/Icon.vue';
     import ActiveIcon from '@/Components/AttendanceIcons.vue';
     import Pagination from '@/Components/Pagination.vue';
+    import { Link } from '@inertiajs/inertia-vue3';
 
     export default {
         name: 'AdminUsers',
@@ -89,6 +92,7 @@
             Icon,
             ActiveIcon,
             Pagination,
+            Link,
         },
         props: {
             users:{
@@ -101,6 +105,24 @@
                 var request = {id: param};
                 Inertia.get(route("dashboard-get-user-detail", request));
             }
+        },
+        computed: {
+            showAlert() {
+                if (this.$page.props.flash.success_object_save !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.success_object_save = null
+                    }, 3000);
+                    return true;
+                }
+                else if(this.$page.props.flash.success_object_delete !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.success_object_delete = null
+                    }, 3000);
+                    return true;
+                }
+
+                return false;
+            },
         },
     }
 </script>

@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RegisterController;
 
 use App\Models\User;
 
@@ -22,8 +23,11 @@ use App\Models\User;
 |
 */
 
+//vendor/laravel/routes/routes.php
+
 Route::get('/', function () {
-    return Inertia::render('Auth/Login');
+    // return Inertia::render('Auth/Login');
+    return redirect('login');
 });
 
 Route::middleware([
@@ -38,7 +42,10 @@ Route::middleware([
     Route::get('/dashboard-admin-pouzivatelia', [AdminController::class, 'getUsers'])->name('dashboard-get-users');
     Route::get('/dashboard-admin-detail-pouzivatela/{id}', [AdminController::class, 'getUserDetail'])->name('dashboard-get-user-detail');
     Route::post('/dashboard-admin-detail-pouzivatel-update', [AdminController::class, 'updateUser'])->name('dashboard-update-user');
+    Route::get('/dashboard-admin-registracia', [RegisterController::class, 'getStoreUserPage'])->name('dashboard-store-user-page');
+    Route::post('/dashboard-admin-registracia', [RegisterController::class, 'storeUser'])->name('dashboard-store-user');
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::get('/dashboard-admin-typy-uloh', [AdminController::class, 'getTaskTypes'])->name('dashboard-get-task-types');
     Route::post('/dashboard-admin-typy-uloh', [AdminController::class, 'deleteTaskType'])->name('dashboard-delete-task-type');
     Route::get('/dashboard-admin-detail-typu-ulohy/{id}', [AdminController::class, 'getTaskTypeDetail'])->name('dashboard-task-type-detail');
@@ -108,8 +115,8 @@ Route::middleware([
     Route::post('/dashboard-admin-detail-oblast-update', [AdminController::class, 'updateArea'])->name('dashboard-update-area');
     Route::get('/dashboard-admin-oblast-pridanie', [AdminController::class, 'getAreaStorePage'])->name('dashboard-get-area-store-page');
     Route::post('/dashboard-admin-oblast-pridanie', [AdminController::class, 'storeArea'])->name('dashboard-store-area');
-    
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::get('/dashboard-moje-objednavky', [OrderController::class, 'getMyOrders'])->name('dashboard-my-orders');
     Route::get('/dashboard-vsetky-objednavky', [OrderController::class, 'getAllOrders'])->name('dashboard-all-orders');
     Route::post('/dashboard-objednavky-pridanie', [OrderController::class, 'storeOrder'])->name('dashboard-store-order');

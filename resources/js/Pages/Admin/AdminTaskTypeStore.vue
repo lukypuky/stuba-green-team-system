@@ -23,7 +23,7 @@
                     <div class="cards">
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Názov: </div>
+                                <div>Názov: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.tmpObject.task_type_title"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"

@@ -35,7 +35,7 @@
                         <input type="hidden" name="id" v-model="this.currency[0].id" />
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Názov: </div>
+                                <div>Názov: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.currency[0].currency_title" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Symbol: </div>
+                                <div>Symbol: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.currency[0].currency_symbol" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Skratka: </div>
+                                <div>Skratka: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.currency[0].shortcut" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"

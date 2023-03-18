@@ -184,3 +184,13 @@ const logout = () => {
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        beforeMount(){
+            if(this.$page.props.user.first_login_pass_changed == false){
+                alert('Zmeňte si heslo!');
+            }
+        }
+    }
+</script>

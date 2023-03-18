@@ -35,7 +35,7 @@
                         <input type="hidden" name="id" v-model="this.taskPriority[0].id" />
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Názov: </div>
+                                <div>Názov: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.taskPriority[0].task_priority_title" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"

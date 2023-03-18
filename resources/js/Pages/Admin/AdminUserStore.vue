@@ -9,7 +9,7 @@
                     <div class="page-heading">
                         <div class="heading-container">
                             <div class="heading-right-margin">
-                                <h1>Pridať záznam (Mena)</h1>
+                                <h1>Pridať záznam (Používateľ)</h1>
                             </div>
                         </div>
                     </div>
@@ -23,35 +23,48 @@
                     <div class="cards">
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Názov: <span class="text-red-500">*</span></div>
+                                <div>Meno: <span class="text-red-500">*</span></div>
                                 <div>
-                                    <input type="text" v-model="this.tmpObject.currency_title"
+                                    <input type="text" v-model="this.tmpObject.name"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="currency_title"/>
-                                    <div v-if="$page.props.errors.currency_title" class="text-red-500">
-                                        {{ $page.props.errors.currency_title }}
+                                        id="name"/>
+                                    <div v-if="$page.props.errors.name" class="text-red-500">
+                                        {{ $page.props.errors.name }}
                                     </div>
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Symbol: <span class="text-red-500">*</span></div>
+                                <div>Email: <span class="text-red-500">*</span></div>
                                 <div>
-                                    <input type="text" v-model="this.tmpObject.currency_symbol"
+                                    <input type="email" v-model="this.tmpObject.email"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="currency_symbol"/>
-                                    <div v-if="$page.props.errors.currency_symbol" class="text-red-500">
-                                        {{ $page.props.errors.currency_symbol }}
+                                        id="email"/>
+                                    <div v-if="$page.props.errors.email" class="text-red-500">
+                                        {{ $page.props.errors.email }}
                                     </div>
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Skratka: <span class="text-red-500">*</span></div>
+                                <div>Rola: <span class="text-red-500">*</span></div>
                                 <div>
-                                    <input type="text" v-model="this.tmpObject.shortcut"
-                                        class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="shortcut"/>
-                                    <div v-if="$page.props.errors.shortcut" class="text-red-500">
-                                        {{ $page.props.errors.shortcut }}
+                                    <select id="role_id" v-model="this.tmpObject.role_id" 
+                                        class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
+                                        <option v-for="(role, index) in this.roles" :key="index" :value="role.id">{{ role.role_title }}</option>
+                                    </select>
+                                    <div v-if="$page.props.errors.role_id" class="text-red-500">
+                                        {{ $page.props.errors.role_id }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-row">
+                                <div>Divízia: <span class="text-red-500">*</span></div>
+                                <div>
+                                    <select id="division_id" v-model="this.tmpObject.division_id" 
+                                        class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
+                                        <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option>
+                                    </select>
+                                    <div v-if="$page.props.errors.division_id" class="text-red-500">
+                                        {{ $page.props.errors.division_id }}
                                     </div>
                                 </div>
                             </div>
@@ -69,23 +82,34 @@
     import AdminMenu from '@/Components/AdminMenu.vue';
 
     export default {
-        name: 'AdminCurrencyStore',
+        name: 'AdminUserStore',
         components: {
             AppLayout,
             AdminMenu,
         },
+        props: {
+            roles:{
+                type: Object,
+                default: () => { }
+            }, 
+            divisions:{
+                type: Object,
+                default: () => { }
+            }, 
+        },
         data() {
             return {
                 tmpObject: {
-                    currency_title: '',
-                    currency_symbol: '',
-                    shortcut: '',
+                    name: '',
+                    email: '',
+                    role_id: '',
+                    division_id: '',
                 },
             }
         },
         methods: {
             add(){
-                Inertia.post(route("dashboard-store-currency"), this.tmpObject);
+                Inertia.post(route("dashboard-store-user"), this.tmpObject);
             },
         },
     }

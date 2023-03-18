@@ -35,7 +35,7 @@
                         <input type="hidden" name="id" v-model="this.userDetail[0].id" />
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Meno: </div>
+                                <div>Meno: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.userDetail[0].name" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Email: </div>
+                                <div>Email: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="email" v-model="this.userDetail[0].email" :disabled="inputEnable"
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
@@ -59,7 +59,7 @@
                         </div>
                         <div class="card bg-gray-100">
                             <div class="card-row">
-                                <div>Rola: </div>
+                                <div>Rola: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="role_id" v-model="this.userDetail[0].role_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Divízia: </div>
+                                <div>Divízia: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="division_id" v-model="this.userDetail[0].division_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
