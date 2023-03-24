@@ -1,40 +1,40 @@
 <template>
     <AppLayout>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
                     <AdminMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
-                    </div>
                     <div class="page-heading">
-                        <div class="heading-container">
-                            <div class="heading-right-margin">
+                        <div class="flex items-center">
+                            <div class="mr-3">
                                 <h1>Upraviť záznam (Typ stretnutia)</h1>
                             </div>
-                            <div v-if="inputEnable" class="heading-right-margin">
-                                <div class="pr-2">
+                            <div v-if="inputEnable">
+                                <div>
                                     <Icon name="update" width="20" @click="setInputs"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="heading-container">
-                            <div v-if="!inputEnable" class="heading-right-margin heading-left-margin ">
-                                <button @click.prevent="update">Uložiť</button>
-                            </div>
-                            <div v-if="!inputEnable">
-                                <button @click.prevent="reset">Zrušiť</button>
-                            </div>
+                    <div class="flex mb-3">
+                        <div v-if="!inputEnable" class="mr-3">
+                            <button @click.prevent="update" class="buttons">Uložiť</button>
+                        </div>
+                        <div v-if="!inputEnable">
+                             <button @click.prevent="reset" class="buttons-red">Zrušiť</button>
                         </div>
                     </div>
-                    <div class="cards">
+                    <div class="admin-cards">
                         <input type="hidden" name="id" v-model="this.meetingType[0].id" />
-                        <div class="card bg-gray-100">
-                            <div class="card-row">
+                        <div class="admin-card bg-transparent">
+                            <div class="admin-card-row">
                                 <div>Názov: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.meetingType[0].meeting_type_title" :disabled="inputEnable"
@@ -111,51 +111,11 @@
 </script>
 
 <style scoped>
-.heading-container {
-    display:flex; 
-    align-items: center; 
-    padding-left: 0.5rem;
-}
+    input:disabled {
+        background-color: #e9ecef;
+    }
 
-.heading-right-margin {
-    margin-right: 10px;
-}
-
-.heading-left-margin {
-    margin-left: 10px;
-}
-
-.card {
-    padding: 0.5rem;
-    border: none;
-}
-
-.card-row {
-    margin-bottom: 15px;
-}
-
-.cards {
-    max-width: 1200px;
-    margin: 0 10px;
-    display: grid;
-    grid-gap: 1rem;
-}
-
-input:disabled {
-    background-color: #e9ecef;
-}
-
-textarea:disabled {
-    background-color: #e9ecef;
-}
-
-/* Screen larger than 600px? 2 column */
-@media (min-width: 600px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Screen larger than 900px? 3 columns */
-@media (min-width: 900px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-}
+    textarea:disabled {
+        background-color: #e9ecef;
+    }
 </style>

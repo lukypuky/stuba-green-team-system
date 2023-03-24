@@ -1,21 +1,28 @@
 <template>
     <AppLayout>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
                     <OrderMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+                    <div class="page-heading flex items-center">
+                        <div class="mr-3">
+                            <h1>Prehľad všetkých objednávok</h1>
+                        </div>
+                        <div>
+                            <InfoIcon width="20"/>
+                        </div>
                     </div>
-                    <div class="page-heading">
-                        <h1>Prehľad všetkých objednávok</h1>
-                    </div>
-                    <div class="m-2">
-                        <button @click="openModal">Pridať objednávku</button>
+                    <div class="mb-3">
+                        <button @click="openModal" class="buttons">Pridať objednávku</button>
                     </div>
                     <div>
                         <OrderModal v-if="this.showModal" @closeModal="closeModal" @saveOrder="saveOrder" :form="this.newOrder" :currencies="this.currencies" :orderPriorities="this.orderPriorities" 
@@ -23,33 +30,33 @@
 
                         <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId"/>
                     </div>
-                    <div class="overflow-x-scroll rounded-lg border border-gray-200 shadow-md">
-                        <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                            <thead class="bg-gray-300">
+                    <div class="overflow-x-scroll rounded-lg shadow">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b-2 border-gray-200">
                                 <tr>
-                                    <th scope="col" class="p-3 font-medium text-gray-900">Akcie</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900">Schválené</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Objednávkové číslo</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Presný názov</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Stručný popis</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Kde je to určené</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Množstvo</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Cena za kus</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Celková cena</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Zadal</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Obchod</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Link</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Priorita</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Stav</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Poznámka</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Dátum zadania</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Dátum úpravy</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Dátum dodania</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Akcie</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Schválené</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Objednávkové číslo</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Presný názov</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Stručný popis</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Kde je to určené</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Množstvo</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Cena za kus</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Celková cena</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Zadal</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Obchod</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Link</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Priorita</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Stav</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Poznámka</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum zadania</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum úpravy</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum dodania</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                                <tr class="hover:bg-gray-50" v-for="(order, index) in this.orders" :key="index">
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Akcie-->
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="bg-white" v-for="(order, index) in this.orders.data" :key="index">
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Akcie-->
                                         <div class="flex">
                                             <div class="pr-2">
                                                 <Icon name="update" width="20" @click="updateOrder(order)"/>
@@ -59,60 +66,63 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Schválené-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Schválené-->
                                         <ApprovalIcon :type="order.approval"/>
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Objednávkové číslo-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Objednávkové číslo-->
                                         {{ order.order_number }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Presný názov-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Presný názov-->
                                         {{ order.order_title }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Stručný popis-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Stručný popis-->
                                         {{ order.description }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Kde je to určené-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Kde je to určené-->
                                         {{ order.formula_part_specify_title }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Množstvo-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Množstvo-->
                                         {{ order.quantity }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Cena za kus-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Cena za kus-->
                                         {{ order.price_per_piece }} {{ order.currency_symbol }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Celková cena-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Celková cena-->
                                         {{ order.price_total }} {{ order.currency_symbol }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Zadal-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Zadal-->
                                         {{ order.name }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Obchod-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Obchod-->
                                         {{ order.shop }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Link-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Link-->
                                         <a :href="order.link">{{ order.link }}</a>
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Priorita-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Priorita-->
                                         {{ order.order_priority_title }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Stav-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Stav-->
                                         {{ order.order_status_title }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Poznámka-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Poznámka-->
                                         {{ order.order_comment }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Dátum zadania-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Dátum zadania-->
                                         {{ order.created_at }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Dátum úpravy-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Dátum úpravy-->
                                         {{ order.updated_at }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300"> <!--Dátum dodania-->
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Dátum dodania-->
                                         {{ order.delivery_date }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        <Pagination :links="this.orders.links"/>
                     </div>
                 </div>
             </div>
@@ -126,8 +136,10 @@
     import OrderModal from '@/Modals/OrderModal.vue';
     import DeleteModal from '@/Modals/DeleteModal.vue';
     import Icon from '@/Components/Icon.vue';
+    import InfoIcon from '@/Components/InfoIcon.vue';
     import { Inertia } from '@inertiajs/inertia';
     import ApprovalIcon from '@/Components/AttendanceIcons.vue';
+    import Pagination from '@/Components/Pagination.vue';
 
     export default {
         name: 'DashboardMyOrders',
@@ -138,6 +150,8 @@
             DeleteModal, 
             ApprovalIcon,
             Icon,
+            InfoIcon,
+            Pagination,
         },
         props: {
             orders: {

@@ -9,6 +9,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
@@ -26,7 +27,6 @@ use App\Models\User;
 //vendor/laravel/routes/routes.php
 
 Route::get('/', function () {
-    // return Inertia::render('Auth/Login');
     return redirect('login');
 });
 
@@ -35,9 +35,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->name('dashboard');
 
     Route::get('/dashboard-admin-pouzivatelia', [AdminController::class, 'getUsers'])->name('dashboard-get-users');
     Route::get('/dashboard-admin-detail-pouzivatela/{id}', [AdminController::class, 'getUserDetail'])->name('dashboard-get-user-detail');
@@ -123,7 +123,7 @@ Route::middleware([
     Route::post('/dashboard-objednavky-update', [OrderController::class, 'updateOrder'])->name('dashboard-update-order');
     Route::post('/dashboard-objednavky-delete', [OrderController::class, 'deleteOrder'])->name('dashboard-delete-order');
 
-    Route::get('/dashboard-vykaz', [ReportController::class, 'getReports'])->name('dashboard-report');
+    Route::get('/dashboard', [ReportController::class, 'getReports'])->name('dashboard');
     Route::post('/dashboard-vykaz-pridanie', [ReportController::class, 'storeReport'])->name('dashboard-store-report');
     Route::post('/dashboard-vykaz-update', [ReportController::class, 'updateReport'])->name('dashboard-update-report');
     Route::post('/dashboard-vykaz-delete', [ReportController::class, 'deleteReport'])->name('dashboard-delete-report');

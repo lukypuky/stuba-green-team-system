@@ -79,11 +79,11 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Používateľské údaje
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Upravte svoje meno, alebo emailovú adresu.
         </template>
 
         <template #form>
@@ -118,7 +118,7 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Meno" />
                 <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" autocomplete="name" />
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
@@ -148,11 +148,11 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Uložené
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Uložiť
             </PrimaryButton>
         </template>
     </FormSection>

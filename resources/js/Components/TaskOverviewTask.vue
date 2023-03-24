@@ -1,10 +1,10 @@
 <template>
     <div class="task">
         <a :href="route('dashboard-task-detail', taskId)">
-            <div class="task-heading">{{ title }}</div>
-            <div class="task-priority task-low-priority" v-if="taskPriority == 1" >Priorita: Nízka</div>
-            <div class="task-priority task-medium-priority" v-else-if="taskPriority == 2" >Priorita: Stredná</div>
-            <div class="task-priority task-high-priority" v-else-if="taskPriority == 3" >Priorita: Vysoká</div>
+            <div class="font-bold">{{ title }}</div>
+            <div class="mt-2 task-low-priority" v-if="taskPriority == 1" >Priorita: Nízka</div>
+            <div class="mt-2 task-medium-priority" v-else-if="taskPriority == 2" >Priorita: Stredná</div>
+            <div class="mt-2 task-high-priority" v-else-if="taskPriority == 3" >Priorita: Vysoká</div>
         </a>
     </div>
 </template>
@@ -27,22 +27,18 @@
         border-radius: 10px;
     }
 
-    .task-heading{
+    .task-low-priority{
+        color: var(--sgt-color);
         font-weight: bold;
     }
-
-    .task-priority{
-        margin-top: 5px;
-    }
-    .task-low-priority{
-        color: green;
-    }
     .task-medium-priority{
-        color: rgb(187, 187, 12);
+        color: rgb(206, 206, 19);
+        font-weight: bold;
     }
 
     .task-high-priority{
         color: red;
+        font-weight: bold;
     }
 
     a {
@@ -52,6 +48,6 @@
 
     a:hover{
         text-decoration: none;
-        color: var(--stuba-sgt-green-color);
+        color: var(--sgt-color);
     }
 </style>

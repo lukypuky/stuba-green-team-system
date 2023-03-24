@@ -17,7 +17,7 @@ const logout = () => {
 
 <template>
     <div id="app">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-200">
             <nav class="navbar-color border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,32 +25,32 @@ const logout = () => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                <ApplicationMark class="block h-9 w-auto" />
-                                </Link>
+                                <a :href="route('dashboard')" class="w-32">
+                                    <img src="https://sgteam.eu/wp-content/uploads/logo.png" alt="STUBA Green Team Logo">
+                                </a>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:flex">
+                                <!-- <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Info panel
-                                </NavLink>
-                                <NavLink :href="route('dashboard-my-orders')"
-                                    :active="route().current('dashboard-my-orders')">
-                                    Nákup
-                                </NavLink>
-                                <NavLink :href="route('dashboard-report')"
-                                    :active="route().current('dashboard-report')">
+                                </NavLink> -->
+                                <NavLink :href="route('dashboard')"
+                                    :class="this.reportsTasksPages.includes(route().current()) ? 'active' : ''">
                                     Výkazy/úlohy
                                 </NavLink>
+                                <NavLink :href="route('dashboard-my-orders')"
+                                    :class="this.orderPages.includes(route().current()) ? 'active' : ''">
+                                    Nákup
+                                </NavLink>
                                 <NavLink :href="route('dashboard-get-users')"
-                                    :active="route().current('dashboard-get-users')">
+                                    :class="this.adminPages.includes(route().current()) ? 'active' : ''">
                                     Admin panel
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="hidden md:flex md:items-center md:ml-6">
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
                                 <Dropdown align="right" width="48">
@@ -79,7 +79,7 @@ const logout = () => {
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Správa účtu
                                         </div>
 
                                         <DropdownLink :href="route('profile.show')">
@@ -100,7 +100,7 @@ const logout = () => {
                         </div>
 
                         <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center sm:hidden">
+                        <div class="-mr-2 flex items-center md:hidden">
                             <button
                                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
                                 @click="showingNavigationDropdown = !showingNavigationDropdown">
@@ -121,34 +121,38 @@ const logout = () => {
 
                 <!-- Responsive Navigation Menu -->
                 <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
-                    class="sm:hidden">
+                    class="md:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <!-- <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Info panel
+                        </ResponsiveNavLink> -->
+                        <ResponsiveNavLink :href="route('dashboard')"
+                            :class="this.reportsTasksPages.includes(route().current()) ? 'activeResponsive' : ''">
+                            Výkazy/úlohy
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('dashboard-my-orders')"
-                            :active="route().current('dashboard-my-orders')">
+                            :class="this.orderPages.includes(route().current()) ? 'activeResponsive' : ''">
                             Nákup
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('dashboard-report')"
-                            :active="route().current('dashboard-report')">
-                            Výkazy/úlohy
+                        <ResponsiveNavLink :href="route('dashboard-get-users')"
+                            :class="this.adminPages.includes(route().current()) ? 'activeResponsive' : ''">
+                            Admin panel
                         </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="flex items-center px-4">
+                        <div class="flex items-center pl-4">
                             <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
                                 <img class="h-10 w-10 rounded-full object-cover"
                                     :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
                             </div>
 
                             <div>
-                                <div class="font-medium text-base text-gray-800">
+                                <div class="font-medium text-base name">
                                     {{ $page.props.user.name }}
                                 </div>
-                                <div class="font-medium text-sm text-gray-500">
+                                <div class="font-medium text-sm name">
                                     {{ $page.props.user.email }}
                                 </div>
                             </div>
@@ -170,14 +174,6 @@ const logout = () => {
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-            <!-- <header v-if="$slots.header" class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header> -->
-
-            <!-- Page Content -->
             <main>
                 <slot />
             </main>
@@ -187,6 +183,56 @@ const logout = () => {
 
 <script>
     export default {
+        data(){
+            return{
+                reportsTasksPages: [
+                    'dashboard',
+                    'dashboard-tasks',
+                    'dashboard-task-detail',
+                    'dashboard-all-tasks',
+                    'dashboard-attendance',
+                ],
+                orderPages: [
+                    'dashboard-my-orders',
+                    'dashboard-all-orders',
+                ],
+                adminPages: [
+                    'dashboard-store-user-page',
+                    'dashboard-get-user-detail',
+                    'dashboard-get-users',
+                    'dashboard-get-task-type-store-page',
+                    'dashboard-task-type-detail',
+                    'dashboard-get-task-types',
+                    'dashboard-get-task-status-store-page',
+                    'dashboard-task-status-detail',
+                    'dashboard-get-task-statuses',
+                    'dashboard-get-task-priority-store-page',
+                    'dashboard-task-priority-detail',
+                    'dashboard-get-task-priorities',
+                    'dashboard-get-order-status-store-page',
+                    'dashboard-order-status-detail',
+                    'dashboard-get-order-statuses',
+                    'dashboard-get-order-priority-store-page',
+                    'dashboard-order-priority-detail',
+                    'dashboard-get-order-priorities',
+                    'dashboard-get-meeting-type-store-page',
+                    'dashboard-meeting-type-detail',
+                    'dashboard-get-meeting-types',
+                    'dashboard-get-formula-parts',
+                    'dashboard-formula-part-detail',
+                    'dashboard-get-formula-part-store-page',
+                    'dashboard-get-division-store-page',
+                    'dashboard-division-detail',
+                    'dashboard-get-divisions',
+                    'dashboard-get-currency-store-page',
+                    'dashboard-currency-detail',
+                    'dashboard-get-currencies',
+                    'dashboard-get-area-store-page',
+                    'dashboard-area-detail',
+                    'dashboard-get-areas',
+                ],
+            }
+        },
         beforeMount(){
             if(this.$page.props.user.first_login_pass_changed == false){
                 alert('Zmeňte si heslo!');
@@ -194,3 +240,24 @@ const logout = () => {
         }
     }
 </script>
+
+<style scoped>
+    .active {
+        border-bottom-width: 2px;
+        border-color: none;
+        color: var(--sgt-color);
+    }
+
+    .activeResponsive {
+        --tw-bg-opacity: 1;
+        background-color:  var(--sgt-color-opacity);
+        --tw-border-opacity: 1;
+        border-color: var(--sgt-color);
+        border-left-width: 4px;
+        color: #454545;
+    }
+
+    .name {
+        color: var(--sgt-color);
+    }
+</style>

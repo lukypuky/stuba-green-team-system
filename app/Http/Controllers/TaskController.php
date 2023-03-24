@@ -97,7 +97,7 @@ class TaskController extends Controller
             ->join('users', 'tasks.user_id_assigned', '=', 'users.id')
             ->orderBy('tasks.id', 'desc')
             ->select(['tasks.id' ,'tasks.task_title', 'task_statuses.task_status_title', 'users.name', 'tasks.created_at'])
-            ->paginate(5);
+            ->paginate(7);
 
         return Inertia::render('DashboardAllTasks', [
             'tasks' =>  $tasks,
@@ -110,7 +110,7 @@ class TaskController extends Controller
         ->join('users', 'tasks.user_id_assigned', '=', 'users.id')
         ->orderBy('tasks.id', 'desc')
         ->select(['tasks.id' ,'tasks.task_title', 'task_statuses.task_status_title', 'users.name', 'tasks.created_at'])
-        ->paginate(5);
+        ->paginate(7);
 
         return $searchedTasks;
     }

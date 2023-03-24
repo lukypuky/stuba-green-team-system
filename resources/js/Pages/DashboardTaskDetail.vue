@@ -1,49 +1,46 @@
 <template>
     <AppLayout>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
                     <ReportMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert"
-                        v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
-                    </div>
                     <div class="page-heading">
-                        <div class="task-heading-container">
-                            <div class="task-heading-right-margin">
+                        <div class="flex items-center">
+                            <div class="mr-3">
                                 <h1>{{ this.task[0].task_title }}</h1>
                             </div>
-                            <div v-if="inputEnable" class="task-heading-right-margin">
-                                <div class="flex">
-                                    <div class="pr-2">
-                                        <Icon name="update" width="20" @click.prevent="setInputs"/>
-                                    </div>
-                                    <div class="pl-2">
-                                        <Icon name="delete" width="20" @click.prevent="deleteTaskModal(this.task[0].id)"/>
-                                    </div>
+                            <div v-if="inputEnable" class="flex">
+                                <div class="mr-3">
+                                    <Icon name="update" width="20" @click="setInputs"/>
+                                </div>
+                                <div>
+                                    <Icon name="delete" width="20" @click.prevent="deleteTaskModal(this.task[0].id)"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="task-heading-container">
-                            <div v-if="!inputEnable" class="task-heading-right-margin task-heading-left-margin ">
-                                <button @click="updateTask">Uložiť</button>
-                            </div>
-                            <div v-if="!inputEnable">
-                                <button @click="resetTask">Zrušiť</button>
-                            </div>
-
-                            <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId"/>
+                    <div class="flex mb-3">
+                        <div v-if="!inputEnable" class="mr-3">
+                            <button @click="updateTask" class="buttons">Uložiť</button>
                         </div>
+                        <div v-if="!inputEnable">
+                            <button @click="resetTask" class="buttons-red">Zrušiť</button>
+                        </div>
+
+                        <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId"/>
                     </div>
                     <div class="cards">
                         <input type="hidden" name="id" v-model="this.task.id" />
-                        <div class="card bg-gray-100">
+                        <div class="card bg-transparent">
                             <div class="card-row">
-                                <div>Typ: </div>
+                                <div>Typ: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="type_id" v-model="this.task[0].type_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -52,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Priorita: </div>
+                                <div>Priorita: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="priority_id" v-model="this.task[0].task_priority_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -61,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Divízia: </div>
+                                <div>Divízia: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="division_id" v-model="this.task[0].division_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -70,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Oblasť: </div>
+                                <div>Oblasť: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="area_id" v-model="this.task[0].area_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -79,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="card-row">
-                                <div>Status: </div>
+                                <div>Status: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="status_id" v-model="this.task[0].status_id" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -97,9 +94,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card bg-gray-100 ">
+                        <div class="card bg-transparent">
                             <div class="card-row">
-                                <div>Priradené: </div>
+                                <div>Priradené: <span class="text-red-500">*</span></div>
                                 <div>
                                     <select id="user_id_assigned" v-model="this.task[0].user_id_assigned" :disabled="inputEnable"
                                         class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
@@ -142,7 +139,7 @@
                         </div>
                         </div>
                     <div class="commnets-cards">
-                        <div class="card bg-gray-100">
+                        <div class="card bg-transparent">
                             <div class="card-row">
                                 <div>Komentáre: </div>
                                 <form action="">
@@ -328,54 +325,38 @@ import moment from 'moment';
 </script>
 
 <style scoped>
+    .card {
+        /* padding: 0.5rem; */
+        border: none;
+    }
 
-.task-heading-container {
-    display:flex; 
-    align-items: center; 
-    padding-left: 0.5rem;
-}
+    .card-row {
+        margin-bottom: 15px;
+    }
 
-.task-heading-right-margin {
-    margin-right: 10px;
-}
+    .cards, .commnets-cards {
+        max-width: 1200px;
+        display: grid;
+        grid-gap: 1rem;
+    }
 
-.task-heading-left-margin {
-    margin-left: 10px;
-}
+    input:disabled {
+        background-color: #e9ecef;
+    }
 
-.card {
-    padding: 0.5rem;
-    border: none;
-}
+    textarea:disabled {
+        background-color: #e9ecef;
+    }
 
-.card-row {
-    margin-bottom: 15px;
-}
+    /* Screen larger than 600px? 2 column */
+    @media (min-width: 600px) {
+        .cards { grid-template-columns: repeat(2, 1fr); }
+        .commnets-cards { grid-template-columns: repeat(1, 1fr); }
+    }
 
-.cards, .commnets-cards {
-    max-width: 1200px;
-    margin: 0 10px;
-    display: grid;
-    grid-gap: 1rem;
-}
-
-input:disabled {
-    background-color: #e9ecef;
-}
-
-textarea:disabled {
-    background-color: #e9ecef;
-}
-
-/* Screen larger than 600px? 2 column */
-@media (min-width: 600px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-    .commnets-cards { grid-template-columns: repeat(1, 1fr); }
-}
-
-/* Screen larger than 900px? 3 columns */
-@media (min-width: 900px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-    .commnets-cards { grid-template-columns: repeat(1, 1fr); }
-}
+    /* Screen larger than 900px? 3 columns */
+    @media (min-width: 900px) {
+        .cards { grid-template-columns: repeat(2, 1fr); }
+        .commnets-cards { grid-template-columns: repeat(1, 1fr); }
+    }
 </style>

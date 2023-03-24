@@ -1,12 +1,17 @@
 <template>
-  <select id="meetingType" style="width: 250px;" @change="changeMeetingType" class="mt-1 block form-select py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-    <option v-for="(meetingType, index) in this.meetingTypes" :key="index" :value="meetingType.id">{{ meetingType.meeting_type_title }}</option> 
-  </select>
+  <div class="mb-1 mr-3">
+    <select id="meetingType" @change="changeMeetingType" class="w-64 block form-select py-2 px-3 bg-white rounded-md shadow-sm transition duration-150 ease-in-out leading-6 custom-select" required>
+      <option v-for="(meetingType, index) in this.meetingTypes" :key="index" :value="meetingType.id">{{ meetingType.meeting_type_title }}</option> 
+    </select>
+  </div>
 
-  <select id="divisionType" v-if="this.divisionSelect" style="width: 300px;" @change="changeDivision" class="mt-1 block form-select py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-    <option value="0">Zvoľte divíziu</option>
-    <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option> 
-  </select>                       
+  <div class="mr-3">
+    <select id="divisionType" v-if="this.divisionSelect" @change="changeDivision" class="w-64 block form-select py-2 px-3 bg-white rounded-md shadow-sm transition duration-150 ease-in-out leading-6 custom-select" required>
+      <option value="0">Zvoľte divíziu</option>
+      <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option> 
+    </select>  
+  </div>
+                     
 </template>
 
 <script>
@@ -63,4 +68,21 @@
     }
   }
 </script>
+
+<style>
+  .custom-select {
+    --tw-ring-color: #454545;
+    --tw-ring-shadow: #454545;
+  }
+
+  option:hover {
+    background-color: var(--sgt-color);
+  }
+
+  .custom-select:focus {
+    --tw-ring-color: #454545;
+    --tw-ring-shadow: #454545;
+    border-color: var(--sgt-color);
+  }
+</style>
   

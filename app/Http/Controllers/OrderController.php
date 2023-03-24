@@ -27,7 +27,7 @@ class OrderController extends Controller
             'currencies.currency_symbol', 'users.name', 'orders.shop', 'orders.link', 'order_priorities.order_priority_title', 'orders.order_comment', 
             'orders.delivery_date', 'order_statuses.order_status_title', 'formula_part_specifies.formula_part_specify_title', 'orders.approval', 'orders.created_at', 'orders.updated_at',
             'orders.formula_part_specify_id', 'orders.currency_id', 'orders.order_priority_id', 'orders.order_status_id'])
-        ->get();
+        ->paginate(7);
         
         $currencies = Currency::all();
         $orderPriorities = OrderPriority::all();
@@ -54,7 +54,7 @@ class OrderController extends Controller
             'currencies.currency_symbol', 'users.name', 'orders.shop', 'orders.link', 'order_priorities.order_priority_title', 'orders.order_comment', 
             'orders.delivery_date', 'order_statuses.order_status_title', 'formula_part_specifies.formula_part_specify_title', 'orders.approval', 'orders.created_at', 'orders.updated_at',
             'orders.formula_part_specify_id', 'orders.currency_id', 'orders.order_priority_id', 'orders.order_status_id'])
-        ->get();
+        ->paginate(7);
 
         $currencies = Currency::all();
         $orderPriorities = OrderPriority::all();
@@ -86,7 +86,7 @@ class OrderController extends Controller
             'order_priority_id' => $request->order_priority_id,
             'order_status_id' => $request->order_status_id,
             'order_comment' => $request->order_comment,
-            'approval' => 3,
+            'approval' => 2,
         ]);
 
         return redirect()->back()->with('success_object_save', 'uspesny order save');

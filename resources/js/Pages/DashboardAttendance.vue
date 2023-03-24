@@ -1,49 +1,58 @@
 <template>
     <AppLayout>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
                     <ReportMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+                    <div class="page-heading flex items-center">
+                        <div class="mr-3">
+                            <h1>Dochádzka členov</h1>
+                        </div>
+                        <div>
+                            <InfoIcon width="20"/>
+                        </div>
                     </div>
-
-                    <div class="page-heading">
-                        <h1>Dochádzka členov</h1>
-                    </div>
-                    <div style="display: flex;">
+                    <div class="sm:flex mb-3">
                         <div>
                             <AttendanceSelect :meetingTypes="this.meetingTypes" :divisions="this.divisions" @getMeetingTypeAttendance="getMeetingTypeAttendance"
                             @showAddAttendanceButton="showAddAttendanceButton"/>
                         </div>
-                        <div class="text-right">
-                            <button @click="openModal" v-if="this.showButton">Pridať dochádzku</button> <br>
-                            <button @click="openUpdateModal" v-if="this.showButton">Upraviť dochádzku</button>
-                            <!-- <Icon name="update" width="20" @click="updateAttendance(attendance, this.newMeetingDates)"/> -->
+                        <div class="text-right flex">
+                            <div class="mr-3">
+                                <button class="buttons" @click="openModal" v-if="this.showButton">Pridať dochádzku</button>
+                            </div>
+                            <div>
+                                <button class="buttons" @click="openUpdateModal" v-if="this.showButton">Upraviť dochádzku</button>
+                            </div>
                         </div>
                     </div>
                     <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-md">
-                        <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                            <thead class="bg-gray-300">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b-2 border-gray-200">
                                 <tr>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Meno</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">{{ meetingDate.meeting_date }}</th>
-                                    <th scope="col" class="p-3 font-medium text-gray-900 whitespace-nowrap">Body</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Meno</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">{{ meetingDate.meeting_date }}</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Body</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                                <tr class="hover:bg-gray-50" v-for="(attendance, index) in this.newAttendances" :key="index">
-                                    <td class="p-3 border-b-2 border-gray-300">
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="bg-white" v-for="(attendance, index) in this.newAttendances" :key="index">
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         {{ attendance.username }}
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">
                                         <AttendanceIcons :type="attendance[meetingDate.meeting_date]"/>
                                     </td>
-                                    <td class="p-3 border-b-2 border-gray-300" >
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap" >
                                         {{ attendance.body }}
                                     </td>
                                 </tr>
@@ -64,6 +73,7 @@
     import AttendanceModal from '@/Modals/AttendanceModal.vue';
     import AttendanceUpdateModal from '@/Modals/AttendanceUpdateModal.vue';
     import AttendanceIcons from '@/Components/AttendanceIcons.vue';
+    import InfoIcon from '@/Components/InfoIcon.vue';
     import AttendanceSelect from '@/Components/AttendanceSelect.vue';
     import { Inertia } from '@inertiajs/inertia';
     import Icon from '@/Components/Icon.vue';
@@ -79,6 +89,7 @@
             AttendanceIcons,
             AttendanceSelect,
             Icon,
+            InfoIcon,
             Inertia,
         },
         props: {

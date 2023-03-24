@@ -7,22 +7,14 @@
                 </div>
                 <div class="col-span-12 sm:col-span-10">
                     <div class="page-heading">
-                        <div class="heading-container">
-                            <div class="heading-right-margin">
-                                <h1>Pridať záznam (Priorita objednávky)</h1>
-                            </div>
-                        </div>
+                        <h1>Pridať záznam (Priorita objednávky)</h1>
                     </div>
-                    <div>
-                        <div class="heading-container">
-                            <div class="heading-right-margin heading-left-margin ">
-                                <button @click.prevent="add">Uložiť</button>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <button @click.prevent="add" class="buttons">Uložiť</button>
                     </div>
-                    <div class="cards">
-                        <div class="card bg-gray-100">
-                            <div class="card-row">
+                    <div class="admin-cards">
+                        <div class="admin-card bg-transparent">
+                            <div class="admin-card-row">
                                 <div>Názov: <span class="text-red-500">*</span></div>
                                 <div>
                                     <input type="text" v-model="this.tmpObject.order_priority_title"
@@ -68,51 +60,11 @@
 </script>
 
 <style scoped>
-.heading-container {
-    display:flex; 
-    align-items: center; 
-    padding-left: 0.5rem;
-}
+    input:disabled {
+        background-color: #e9ecef;
+    }
 
-.heading-right-margin {
-    margin-right: 10px;
-}
-
-.heading-left-margin {
-    margin-left: 10px;
-}
-
-.card {
-    padding: 0.5rem;
-    border: none;
-}
-
-.card-row {
-    margin-bottom: 15px;
-}
-
-.cards {
-    max-width: 1200px;
-    margin: 0 10px;
-    display: grid;
-    grid-gap: 1rem;
-}
-
-input:disabled {
-    background-color: #e9ecef;
-}
-
-textarea:disabled {
-    background-color: #e9ecef;
-}
-
-/* Screen larger than 600px? 2 column */
-@media (min-width: 600px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Screen larger than 900px? 3 columns */
-@media (min-width: 900px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-}
+    textarea:disabled {
+        background-color: #e9ecef;
+    }
 </style>

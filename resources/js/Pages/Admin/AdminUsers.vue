@@ -1,54 +1,53 @@
 <template>
     <AppLayout>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
+                <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
                     <AdminMenu/>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert" v-if="showAlert">
-                        <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
-                        <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
-                    </div>
                     <div class="page-heading">
                         <h1>Používatelia</h1>
                     </div>
-                    <div class="m-2">
-                        <Link :href="route('dashboard-store-user-page')">Pridať používateľa</Link>
+                    <div class="mb-3">
+                        <div class="leading-10">
+                            <Link :href="route('dashboard-store-user-page')" class="buttons">Pridať záznam</Link>
+                        </div>
                     </div>
-                    <div>
-                        <table class="min-w-full border-collapse block md:table">
-                            <thead class="block md:table-header-group">
-                                <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Akcie</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Meno a priezvisko</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Email</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Členstvo</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Adminské práva</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Rola</th>
-                                    <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Divízia</th>
+                    <div class="overflow-auto rounded-lg shadow hidden md:block">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b-2 border-gray-200">
+                                <tr>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Akcie</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Meno a priezvisko</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Email</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Členstvo</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Adminské práva</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Rola</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Divízia</th>
                                 </tr>
                             </thead>
-                            <tbody class="block md:table-row-group">
-                                <tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row"
-                                    v-for="(user, index) in this.users.data" :key="index">
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Akcie</span>
-                                        <div class="flex">
-                                            <div class="pr-2">
-                                                <Icon name="update" width="20" @click.prevent="getDetail(user.id)"/>
-                                            </div>
-                                        </div>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="bg-white" v-for="(user, index) in this.users.data" :key="index">
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                        <Icon name="update" width="20" @click.prevent="getDetail(user.id)"/>
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Meno a priezvisko</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         {{ user.name }}
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         {{ user.email }}
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Členstvo</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         <ActiveIcon :type="user.active"/>
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Adminské práva</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         <div v-if="user.is_admin == 1">
                                             Áno
                                         </div>
@@ -56,15 +55,80 @@
                                             Nie
                                         </div>
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Rola</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         {{ user.role_title }}
                                     </td>
-                                    <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Divízia</span>
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         {{ user.division_title }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:hidden mb-2 text-sm" v-for="(user, index) in this.users.data" :key="index">
+                        <div class="bg-white space-y-4 p-4 rounded-lg shadow">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Akcie
+                                </div>
+                                <div>
+                                    <Icon name="update" width="20" @click.prevent="getDetail(user.id)"/>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Meno a priezvisko
+                                </div>
+                                <div class="break-words">
+                                    {{ user.name }}
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Email
+                                </div>
+                                <div class="break-words">
+                                    {{ user.email }}
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                 <div>
+                                    Členstvo
+                                </div>
+                                <div>
+                                    <ActiveIcon :type="user.active"/>
+                                 </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Adminské práva
+                                 </div>
+                                <div>
+                                    <div v-if="user.is_admin == 1">
+                                        Áno
+                                    </div>
+                                    <div v-else>
+                                        Nie
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Rola
+                                </div>
+                                 <div class="break-words">
+                                    {{ user.role_title }}
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    Divízia
+                                </div>
+                                <div class="break-words">
+                                    {{ user.division_title }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <Pagination :links="this.users.links"/>

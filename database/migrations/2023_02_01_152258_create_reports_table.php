@@ -22,23 +22,11 @@ return new class extends Migration
                 $table->foreign('user_id')->references('id')->on('users');
                 $table->unsignedBigInteger('task_id')->nullable();
                 $table->foreign('task_id')->references('id')->on('tasks');
-                $table->char('color',10)->default('#4ca548');
+                $table->char('color',10)->default('#5bc157');
                 $table->char('textColor',10)->default('#000000');
                 $table->dateTime('start_time')->nullable();
                 $table->dateTime('end_time')->nullable();
                 $table->timestamps();
-
-                // $table->id('report_id');
-                // $table->char('reason',100);
-                // $table->dateTime('start_time');
-                // $table->dateTime('end_time');
-                // $table->unsignedSmallInteger('session');
-                // $table->char('color',10)->default('#4ca548');
-                // $table->char('textColor',10)->default('#000000');
-                // $table->unsignedBigInteger('booked_by');
-                // $table->unsignedBigInteger('user_id');
-                // $table->foreign('user_id')->references('id')->on('users');
-                // $table->timestamps();
             });
         }
     }

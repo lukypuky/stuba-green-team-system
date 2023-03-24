@@ -30,18 +30,14 @@ const submit = () => {
     <Head title="Reset Password" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
-                <TextInput
+                <input
                     id="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full rounded-md"
                     required
                     autofocus
                 />
@@ -49,12 +45,12 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
+                <InputLabel for="password" value="Heslo" />
+                <input
                     id="password"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full rounded-md"
                     required
                     autocomplete="new-password"
                 />
@@ -62,12 +58,12 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
+                <InputLabel for="password_confirmation" value="Potvrdenie hesla" />
+                <input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full rounded-md"
                     required
                     autocomplete="new-password"
                 />
@@ -75,9 +71,9 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reset Password
-                </PrimaryButton>
+                <button class="buttons" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Zmeniť heslo
+                </button>
             </div>
         </form>
     </AuthenticationCard>

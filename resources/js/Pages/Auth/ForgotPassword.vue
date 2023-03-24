@@ -24,12 +24,8 @@ const submit = () => {
     <Head title="Forgot Password" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+            Zabudol si heslo ? Žiaden problém. Stačí ak zadáš svoju emailovú adresu a my ti pošleme email s odkazom na obnovenie hesla, ktorý ti umožní zmeniť si heslo.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -39,11 +35,11 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
-                <TextInput
+                <input
                     id="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full rounded-md"
                     required
                     autofocus
                 />
@@ -51,9 +47,9 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
-                </PrimaryButton>
+                <button class="buttons" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Poslať link
+                </button>
             </div>
         </form>
     </AuthenticationCard>

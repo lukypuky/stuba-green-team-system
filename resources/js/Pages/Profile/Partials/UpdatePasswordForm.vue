@@ -40,16 +40,16 @@ const updatePassword = () => {
 <template>
     <FormSection @submitted="updatePassword">
         <template #title>
-            Update Password
+            Zmena hesla
         </template>
 
         <template #description>
-            Ensure your account is using a long, random password to stay secure.
+            Uistite sa, že váš účet používa dlhé, náhodné heslo, aby ste zostali v bezpečí.
         </template>
 
         <template #form>
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="current_password" value="Current Password" />
+                <InputLabel for="current_password" value="Aktuálne heslo" />
                 <TextInput
                     id="current_password"
                     ref="currentPasswordInput"
@@ -62,7 +62,7 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password" value="New Password" />
+                <InputLabel for="password" value="Nové heslo" />
                 <TextInput
                     id="password"
                     ref="passwordInput"
@@ -75,7 +75,7 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" value="Potvrdenie hesla" />
                 <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
@@ -89,11 +89,11 @@ const updatePassword = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Uložené
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Uložiť
             </PrimaryButton>
         </template>
     </FormSection>

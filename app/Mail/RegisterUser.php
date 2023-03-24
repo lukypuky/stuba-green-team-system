@@ -44,7 +44,7 @@ class RegisterUser extends Mailable
     public function content()
     {
         return new Content(
-            view: 'Emails.RegisterMail',
+            view: 'Emails.registerMail',
             with: [
                 'password' => $this->pass,
                 'email' => $this->email,

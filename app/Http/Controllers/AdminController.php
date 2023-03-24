@@ -38,7 +38,7 @@ class AdminController extends Controller
         ->join('divisions', 'users.division_id', '=', 'divisions.id')
         ->orderBy('users.active', 'desc')
         ->select(['users.id', 'users.name', 'users.email', 'users.is_admin', 'users.active', 'roles.role_title', 'divisions.division_title'])
-        ->paginate(10);
+        ->paginate(7);
 
         return Inertia::render('Admin/AdminUsers', [
             'users' =>  $users,
@@ -68,12 +68,12 @@ class AdminController extends Controller
             'active' => $request->active,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny user update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     //////////////////////////////////////////////////TASK TYPE
     public function getTaskTypes(){
-        $taskTypes = DB::table('task_types')->paginate(10);
+        $taskTypes = DB::table('task_types')->paginate(7);
 
         return Inertia::render('Admin/AdminTaskTypes', [
             'taskTypes' =>  $taskTypes,
@@ -93,13 +93,13 @@ class AdminController extends Controller
             'task_type_title' => $request->task_type_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny task type update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteTaskType(Request $request){
         TaskType::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny task type delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getTaskTypeStorePage(){
@@ -111,12 +111,12 @@ class AdminController extends Controller
             'task_type_title' => $request->task_type_title,
         ]);
 
-        return redirect()->route('dashboard-get-task-types')->with('success_object_save', 'uspesny task type save');
+        return redirect()->route('dashboard-get-task-types')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////TASK STATUS
     public function getTaskStatuses(){
-        $taskStatuses = DB::table('task_statuses')->paginate(10);
+        $taskStatuses = DB::table('task_statuses')->paginate(7);
 
         return Inertia::render('Admin/AdminTaskStatuses', [
             'taskStatuses' =>  $taskStatuses,
@@ -136,13 +136,13 @@ class AdminController extends Controller
             'task_status_title' => $request->task_status_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny task status update');
+        return redirect()->back()->with('success_object_update_save', 'Uložené');
     }
 
     public function deleteTaskStatus(Request $request){
         TaskStatus::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny task status delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getTaskStatusStorePage(){
@@ -154,12 +154,12 @@ class AdminController extends Controller
             'task_status_title' => $request->task_status_title,
         ]);
 
-        return redirect()->route('dashboard-get-task-statuses')->with('success_object_save', 'uspesny task status save');
+        return redirect()->route('dashboard-get-task-statuses')->with('success_object_save', 'Uložené');
     }
     
     //////////////////////////////////////////////////TASK PRIORITY
     public function getTaskPriorities(){
-        $taskPriorities = DB::table('task_priorities')->paginate(10);
+        $taskPriorities = DB::table('task_priorities')->paginate(7);
 
         return Inertia::render('Admin/AdminTaskPriorities', [
             'taskPriorities' =>  $taskPriorities,
@@ -179,13 +179,13 @@ class AdminController extends Controller
             'task_priority_title' => $request->task_priority_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny task priority update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteTaskPriority(Request $request){
         TaskPriority::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny task priority delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getTaskPriorityStorePage(){
@@ -197,12 +197,12 @@ class AdminController extends Controller
             'task_priority_title' => $request->task_priority_title,
         ]);
 
-        return redirect()->route('dashboard-get-task-priorities')->with('success_object_save', 'uspesny task priority save');
+        return redirect()->route('dashboard-get-task-priorities')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////ORDER STATUS
     public function getOrderStatuses(){
-        $orderStatuses = DB::table('order_statuses')->paginate(10);
+        $orderStatuses = DB::table('order_statuses')->paginate(7);
 
         return Inertia::render('Admin/AdminOrderStatuses', [
             'orderStatuses' =>  $orderStatuses,
@@ -222,13 +222,13 @@ class AdminController extends Controller
             'order_status_title' => $request->order_status_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny task status update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteOrderStatus(Request $request){
         OrderStatus::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny task status delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getOrderStatusStorePage(){
@@ -240,12 +240,12 @@ class AdminController extends Controller
             'order_status_title' => $request->order_status_title,
         ]);
 
-        return redirect()->route('dashboard-get-order-statuses')->with('success_object_save', 'uspesny task status save');
+        return redirect()->route('dashboard-get-order-statuses')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////ORDER PRIORITY
     public function getOrderPriorities(){
-        $orderPriorities= DB::table('order_priorities')->paginate(10);
+        $orderPriorities= DB::table('order_priorities')->paginate(7);
 
         return Inertia::render('Admin/AdminOrderPriorities', [
             'orderPriorities' =>  $orderPriorities,
@@ -265,13 +265,13 @@ class AdminController extends Controller
             'order_priority_title' => $request->order_priority_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny order priority update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteOrderPriority(Request $request){
         OrderPriority::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny order priority delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getOrderPriorityStorePage(){
@@ -283,12 +283,12 @@ class AdminController extends Controller
             'order_priority_title' => $request->order_priority_title,
         ]);
 
-        return redirect()->route('dashboard-get-order-priorities')->with('success_object_save', 'uspesny order priority save');
+        return redirect()->route('dashboard-get-order-priorities')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////MEETING TYPE
     public function getMeetingTypes(){
-        $meetingTypes= DB::table('meeting_types')->paginate(10);
+        $meetingTypes= DB::table('meeting_types')->paginate(7);
 
         return Inertia::render('Admin/AdminMeetingTypes', [
             'meetingTypes' =>  $meetingTypes,
@@ -308,13 +308,13 @@ class AdminController extends Controller
             'meeting_type_title' => $request->meeting_type_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny meeting type update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteMeetingType(Request $request){
         MeetingType::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny meeting type delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getMeetingTypeStorePage(){
@@ -326,12 +326,12 @@ class AdminController extends Controller
             'meeting_type_title' => $request->meeting_type_title,
         ]);
 
-        return redirect()->route('dashboard-get-meeting-types')->with('success_object_save', 'uspesny meeting type save');
+        return redirect()->route('dashboard-get-meeting-types')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////FORMULA PART
     public function getFormulaParts(){
-        $formulaParts= DB::table('formula_part_specifies')->paginate(10);
+        $formulaParts= DB::table('formula_part_specifies')->paginate(7);
 
         return Inertia::render('Admin/AdminFormulaParts', [
             'formulaParts' =>  $formulaParts,
@@ -351,13 +351,13 @@ class AdminController extends Controller
             'formula_part_specify_title' => $request->formula_part_specify_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny formula part update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteFormulaPart(Request $request){
         FormulaPartSpecify::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny formula part delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getFormulaPartStorePage(){
@@ -369,12 +369,12 @@ class AdminController extends Controller
             'formula_part_specify_title' => $request->formula_part_specify_title,
         ]);
 
-        return redirect()->route('dashboard-get-formula-parts')->with('success_object_save', 'uspesny formula part save');
+        return redirect()->route('dashboard-get-formula-parts')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////DIVISION
     public function getDivisions(){
-        $divisions= DB::table('divisions')->paginate(10);
+        $divisions= DB::table('divisions')->paginate(7);
 
         return Inertia::render('Admin/AdminDivisions', [
             'divisions' =>  $divisions,
@@ -395,13 +395,13 @@ class AdminController extends Controller
             'shortcut' => $request->shortcut,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny division update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteDivision(Request $request){
         Division::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny division delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getDivisionStorePage(){
@@ -414,12 +414,12 @@ class AdminController extends Controller
             'shortcut' => $request->shortcut,
         ]);
 
-        return redirect()->route('dashboard-get-divisions')->with('success_object_save', 'uspesny division save');
+        return redirect()->route('dashboard-get-divisions')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////CURRENCY
     public function getCurrencies(){
-        $currencies= DB::table('currencies')->paginate(10);
+        $currencies= DB::table('currencies')->paginate(7);
 
         return Inertia::render('Admin/AdminCurrencies', [
             'currencies' =>  $currencies,
@@ -441,13 +441,13 @@ class AdminController extends Controller
             'shortcut' => $request->shortcut,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny currency update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteCurrency(Request $request){
         Currency::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny currency delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getCurrencyStorePage(){
@@ -461,12 +461,12 @@ class AdminController extends Controller
             'shortcut' => $request->shortcut,
         ]);
 
-        return redirect()->route('dashboard-get-currencies')->with('success_object_save', 'uspesny currency save');
+        return redirect()->route('dashboard-get-currencies')->with('success_object_save', 'Uložené');
     }
 
     //////////////////////////////////////////////////AREA
     public function getAreas(){
-        $areas = DB::table('areas')->paginate(10);
+        $areas = DB::table('areas')->paginate(7);
 
         return Inertia::render('Admin/AdminAreas', [
             'areas' =>  $areas,
@@ -486,13 +486,13 @@ class AdminController extends Controller
             'area_title' => $request->area_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny area update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteArea(Request $request){
         Area::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny area delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 
     public function getAreaStorePage(){
@@ -504,6 +504,6 @@ class AdminController extends Controller
             'area_title' => $request->area_title,
         ]);
 
-        return redirect()->route('dashboard-get-areas')->with('success_object_save', 'uspesny area save');
+        return redirect()->route('dashboard-get-areas')->with('success_object_save', 'Uložené');
     }
 }

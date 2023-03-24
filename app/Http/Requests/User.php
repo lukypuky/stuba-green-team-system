@@ -25,7 +25,7 @@ class User extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'role_id' => 'required',
             'division_id' => 'required',
         ];
@@ -36,7 +36,6 @@ class User extends FormRequest
             'name.required' => 'Toto pole je povinné',
             'email.required' => 'Toto pole je povinné',
             'email.email' => 'Zlý formát emailovej adresy',
-            'email.unique' => 'Používateľ so zadanou adresou už existuje',
             'role_id.required' => 'Toto pole je povinné',
             'division_id.required' => 'Toto pole je povinné!',
         ];

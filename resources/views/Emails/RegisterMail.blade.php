@@ -1,12 +1,21 @@
-<div>
-    Ahoj,<br><br>
-    bol ti vytvorený účet v systéme STUBA Green Team.<br>
+<!DOCTYPE html>
+<html lang="en-US">
 
-    <div style="font-weight: bold;">
-        Prihlasovacie údaje:
-    </div>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
     <div>
-        Email: {{ $email }} <br>
-        Heslo: {{ $password }}
+        Ahoj,<br><br>
+        bol ti vytvorený účet v systéme STUBA Green Team.<br>
+
+        <div style="font-weight: bold;">
+            Prihlasovacie údaje:
+        </div>
+        <div>
+            Email: {{ $email }} <br>
+            Heslo: {{ $password }}
+        </div>
     </div>
-</div>
+</body>

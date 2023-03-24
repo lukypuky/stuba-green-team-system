@@ -5,8 +5,8 @@
                 <h1>Prehľad priradených úloh</h1>
             </div>
 
-            <div class="m-2">
-                <button @click="openModal">Pridať úlohu</button>
+            <div class="mb-3">
+                <button @click="openModal" class="buttons">Pridať úlohu</button>
             </div>
 
             <div>
@@ -16,7 +16,7 @@
 
             <div class="cards">
                 <div class="card task-overview-card">
-                    <div class="task-container-heading">
+                    <div class="text-center font-bold mb-2">
                         Nezačaté
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="card task-overview-card">
-                    <div class="task-container-heading">
+                    <div class="text-center font-bold mb-2">
                         Rozpracované
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card task-overview-card">
-                    <div class="task-container-heading">
+                    <div class="text-center font-bold mb-2">
                         Dokončené
                     </div>
                     <div v-for="(task, index) in tasks" :key="index">
@@ -135,16 +135,9 @@
 </script>
 
 <style scoped>
-.task-container-heading {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.task-overview-card {
-    background-color: var(--stuba-sgt-green-color); 
-    border: 1px solid black; 
-    border-radius: 10px; padding: 
-    15px 25px;
-}
+    .task-overview-card {
+        background-color: var(--sgt-color); 
+        border: 1px solid black; 
+        border-radius: 10px; padding: 15px 25px;
+    }
 </style>
