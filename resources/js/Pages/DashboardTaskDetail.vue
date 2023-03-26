@@ -31,7 +31,7 @@
                             <button @click="updateTask" class="buttons">Uložiť</button>
                         </div>
                         <div v-if="!inputEnable">
-                            <button @click="resetTask" class="buttons-red">Zrušiť</button>
+                            <button @click="resetTask" class="buttons-gray">Zrušiť</button>
                         </div>
 
                         <DeleteModal v-if="this.showDeleteModal" @closeDeleteModal="closeDeleteModal" @deleteObject="deleteObject" :deletedObjectId="deletedObjectId"/>

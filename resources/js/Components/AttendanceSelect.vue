@@ -1,15 +1,15 @@
 <template>
-  <div class="mb-1 mr-3">
-    <select id="meetingType" @change="changeMeetingType" class="w-64 block form-select py-2 px-3 bg-white rounded-md shadow-sm transition duration-150 ease-in-out leading-6 custom-select" required>
-      <option v-for="(meetingType, index) in this.meetingTypes" :key="index" :value="meetingType.id">{{ meetingType.meeting_type_title }}</option> 
+  <div class="select-margin">
+    <select class="select select-bordered w-full max-w-xs custom-select select-margin leading-6" id="meetingType" @change="changeMeetingType">
+      <option v-for="(meetingType, index) in this.meetingTypes" :key="index" :value="meetingType.id">{{ meetingType.meeting_type_title }}</option>
     </select>
   </div>
 
-  <div class="mr-3">
-    <select id="divisionType" v-if="this.divisionSelect" @change="changeDivision" class="w-64 block form-select py-2 px-3 bg-white rounded-md shadow-sm transition duration-150 ease-in-out leading-6 custom-select" required>
-      <option value="0">Zvoľte divíziu</option>
+  <div class="select-margin">
+    <select class="select select-bordered w-full max-w-xs custom-select select-margin leading-6" id="divisionType" v-if="this.divisionSelect" @change="changeDivision">
+      <option disabled selected value="0">Zvoľte dátum</option>
       <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option> 
-    </select>  
+    </select>
   </div>
                      
 </template>
@@ -83,6 +83,18 @@
     --tw-ring-color: #454545;
     --tw-ring-shadow: #454545;
     border-color: var(--sgt-color);
+  }
+
+  .select-margin {
+    margin-right: 12px;
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .select-margin {
+      margin-right: 0;
+      margin-bottom: 4px;
+    }
   }
 </style>
   

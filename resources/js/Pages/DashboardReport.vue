@@ -10,11 +10,29 @@
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
-                    <ReportMenu/>
+                    <div class="hidden md:block text-sm">
+                        <ReportMenu />
+                    </div>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
                     <div class="page-heading">
-                        <h1>Výkazy</h1>
+                        <div class="flex justify-between">
+                            <div>
+                                <h1>Výkazy</h1>
+                            </div>
+                            <div class="md:hidden">
+                                <div class="dropdown pl-3">
+                                    <label tabindex="0" class="m-1">                                        
+                                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                         </svg>
+                                    </label>
+                                    <ul tabindex="0" class="dropdown-content menu p-3 shadow bg-white rounded-box w-52 text-sm right-4">
+                                        <ReportMenu />
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <Calendar @dateClick="dateClick" @reportClick="reportClick" :reports="this.newReports"/>

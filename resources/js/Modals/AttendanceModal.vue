@@ -20,7 +20,7 @@
                                 <label for="meeting_date"
                                     class="block text-gray-700 text-sm font-bold mb-2">Dátum stretnutia <span class="text-red-500">*</span></label>
                                 <input type="date"
-                                    class="shadow appearance-none border rounded w-full mb-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="select-bordered w-full max-w-xs custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
                                     id="meeting_date" required/>
                                 <div v-if="$page.props.errors.meeting_date" class="text-red-500">
                                     {{ $page.props.errors.meeting_date }}
@@ -34,25 +34,24 @@
                                     Je potrebné zvoliť účasť pre každého člena
                                 </div>
                             </div>
-                            <div class="overflow-y-auto rounded-lg border border-gray-200 shadow-md max-h-96">
-                                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                                    <thead class="bg-gray-300">
+                            <div class="overflow-y-auto border rounded-lg rounded-lg shadow max-h-96 hidden md:block">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50 border-b-2 border-gray-200">
                                         <tr>
-                                            <th scope="col" class="p-3 font-medium text-gray-900">Meno</th>
-                                            <th scope="col" class="p-3 font-medium text-gray-900">Účasť</th>
+                                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Meno</th>
+                                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Účasť</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                                        <tr class="hover:bg-gray-50" v-for="(user, index) in this.users" :key="index">
-                                            <td class="p-2 border-b-2 border-gray-300">
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr class="bg-white" v-for="(user, index) in this.users" :key="index">
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                 <div class='px-2'>
                                                     {{ user.name }}
                                                 </div>
                                             </td>
-                                            <td class="p-2 border-b-2 border-gray-300">
-                                                <select :id="user.id" @change="setAttendance"
-                                                    class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                                    <option value="0">Zvoľte účasť</option>
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                <select class="select select-bordered w-full max-w-xs custom-select" :id="user.id" @change="setAttendance">
+                                                    <option disabled selected value="0">Zvoľte účasť</option>
                                                     <option v-for="(attendanceStatus, index) in this.attendanceStatuses" :key="index" :value="attendanceStatus.id">{{ attendanceStatus.attendance_status_title }}</option>
                                                 </select>
                                             </td>
@@ -60,13 +59,26 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="overflow-y-auto max-h-96 md:hidden mb-2 text-sm" v-for="(user, index) in this.users" :key="index">
+                                <div class="bg-white rounded-md mb-3">
+                                        <div>
+                                            {{ user.name }}
+                                        </div>
+                                    <div>
+                                        <select class="select select-bordered w-full max-w-xs custom-select" :id="user.id" @change="setAttendance">
+                                            <option disabled selected value="0">Zvoľte účasť</option>
+                                            <option v-for="(attendanceStatus, index) in this.attendanceStatuses" :key="index" :value="attendanceStatus.id">{{ attendanceStatus.attendance_status_title }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button @click.prevent="storeAttendance()" type="button"
-                            class="inline-flex justify-center w-full border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline">Pridať</button>
+                            class="inline-flex justify-center w-full rounded-md px-4 py-2 m-2 transition duration-500 ease select-none buttons">Pridať</button>
                         <button @click.prevent="closeModal" type="button"
-                            class="inline-flex justify-center w-full border border-gray-200 bg-gray-200 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">Zrušiť</button>
+                            class="inline-flex justify-center w-full rounded-md px-4 py-2 m-2 transition duration-500 ease select-none buttons-gray">Zrušiť</button>
                     </div>
                 </form>
             </div>
@@ -154,5 +166,14 @@ export default {
 </script>
 
 <style scoped>
+  .custom-select {
+    --tw-ring-color: #454545;
+    --tw-ring-shadow: #454545;
+  }
 
+  .custom-select:focus {
+    --tw-ring-color: #454545;
+    --tw-ring-shadow: #454545;
+    border-color: var(--sgt-color);
+  }
 </style>

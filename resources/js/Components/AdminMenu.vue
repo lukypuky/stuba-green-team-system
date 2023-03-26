@@ -1,38 +1,39 @@
 <template>
     <div>
-        <Link :href="route('dashboard-get-users')" :class="this.users.includes(route().current()) ? 'active' : ''" class="menu-item">Používatelia</Link>
+        <div>
+            <Link :href="route('dashboard-get-users')" :class="this.users.includes(route().current()) ? 'active' : ''" class="menu-item">Používatelia</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-task-types')" :class="this.taskTypes.includes(route().current()) ? 'active' : ''" class="menu-item">Typy úloh</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-task-statuses')" :class="this.taskStatuses.includes(route().current()) ? 'active' : ''" class="menu-item">Stavy úloh</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-task-priorities')" :class="this.taskPriorities.includes(route().current()) ? 'active' : ''" class="menu-item">Priority úloh</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-order-statuses')" :class="this.orderStatuses.includes(route().current()) ? 'active' : ''" class="menu-item">Stavy objednávok</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-order-priorities')" :class="this.orderPriorities.includes(route().current()) ? 'active' : ''" class="menu-item">Priority objednávok</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-meeting-types')" :class="this.meetingTypes.includes(route().current()) ? 'active' : ''" class="menu-item">Typy stretnutí</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-formula-parts')" :class="this.formulaParts.includes(route().current()) ? 'active' : ''" class="menu-item">Časti formuly</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-divisions')" :class="this.divisions.includes(route().current()) ? 'active' : ''" class="menu-item">Divízie</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-currencies')" :class="this.currencies.includes(route().current()) ? 'active' : ''" class="menu-item">Meny</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-get-areas')" :class="this.areas.includes(route().current()) ? 'active' : ''" class="menu-item">Oblasti</Link>
+        </div>
     </div>
-    <div>
-        <Link :href="route('dashboard-get-task-types')" :class="this.taskTypes.includes(route().current()) ? 'active' : ''" class="menu-item">Typy úloh</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-task-statuses')" :class="this.taskStatuses.includes(route().current()) ? 'active' : ''" class="menu-item">Stavy úloh</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-task-priorities')" :class="this.taskPriorities.includes(route().current()) ? 'active' : ''" class="menu-item">Priority úloh</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-order-statuses')" :class="this.orderStatuses.includes(route().current()) ? 'active' : ''" class="menu-item">Stavy objednávok</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-order-priorities')" :class="this.orderPriorities.includes(route().current()) ? 'active' : ''" class="menu-item">Priority objednávok</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-meeting-types')" :class="this.meetingTypes.includes(route().current()) ? 'active' : ''" class="menu-item">Typy stretnutí</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-formula-parts')" :class="this.formulaParts.includes(route().current()) ? 'active' : ''" class="menu-item">Časti formuly</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-divisions')" :class="this.divisions.includes(route().current()) ? 'active' : ''" class="menu-item">Divízie</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-currencies')" :class="this.currencies.includes(route().current()) ? 'active' : ''" class="menu-item">Meny</Link>
-    </div>
-    <div>
-        <Link :href="route('dashboard-get-areas')" :class="this.areas.includes(route().current()) ? 'active' : ''" class="menu-item">Oblasti</Link>
-    </div>
-
 </template>
 
 <script>

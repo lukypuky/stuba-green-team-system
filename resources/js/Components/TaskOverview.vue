@@ -2,7 +2,23 @@
     <div>
         <div>
             <div class="page-heading">
-                <h1>Prehľad priradených úloh</h1>
+                <div class="flex justify-between">
+                    <div>
+                        <h1>Prehľad priradených úloh</h1>
+                    </div>
+                    <div class="md:hidden">
+                        <div class="dropdown pl-3">
+                            <label tabindex="0" class="m-1">                                        
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </label>
+                            <ul tabindex="0" class="dropdown-content menu p-3 shadow bg-white rounded-box w-52 text-sm right-4">
+                                <ReportMenu />
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="mb-3">
@@ -48,6 +64,7 @@
     import TaskOverviewTask from './TaskOverviewTask.vue';
     import TaskModal from '@/Modals/TaskModal.vue';
     import { Inertia } from '@inertiajs/inertia';
+    import ReportMenu from '@/Components/ReportMenu.vue';
     // import axios from 'axios';
 
     export default {
@@ -55,6 +72,7 @@
         components: {
             TaskOverviewTask,
             TaskModal,
+            ReportMenu,
         },
         props: {
             tasks:{

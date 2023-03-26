@@ -159,7 +159,8 @@ const logout = () => {
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
+                            <ResponsiveNavLink :href="route('profile.show')" 
+                                :class="this.profile.includes(route().current()) ? 'activeResponsive' : ''">
                                 Profil
                             </ResponsiveNavLink>
 
@@ -231,6 +232,9 @@ const logout = () => {
                     'dashboard-area-detail',
                     'dashboard-get-areas',
                 ],
+                profile: [
+                    'profile.show',
+                ]
             }
         },
         beforeMount(){
