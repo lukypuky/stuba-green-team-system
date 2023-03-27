@@ -37,8 +37,8 @@ class RegisterController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        // event(new Registered($user));
+        event(new Registered($user));
         Mail::to('lukash.baca@gmail.com')->send(new RegisterUser($password, $request->email));
-        return redirect()->route('dashboard-get-users')->with('success_object_save', 'succes user save');
+        return redirect()->back()->with('success_object_save', 'Nový používateľ bol vytvorený');
     }
 }

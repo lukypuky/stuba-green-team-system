@@ -73,7 +73,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link v-if="canResetPassword" :href="route('password.request')" class="resetPass">
-                    Zabudli ste heslo?
+                    Zabudol si heslo?
                 </Link>
 
                 <button class="ml-4 buttons" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

@@ -20,7 +20,7 @@
                                 <label for="meeting_date"
                                     class="block text-gray-700 text-sm font-bold mb-2">Dátum stretnutia <span class="text-red-500">*</span></label>
                                 <input type="date"
-                                    class="select-bordered w-full max-w-xs custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
+                                    class="select-bordered w-full custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
                                     id="meeting_date" required/>
                                 <div v-if="$page.props.errors.meeting_date" class="text-red-500">
                                     {{ $page.props.errors.meeting_date }}

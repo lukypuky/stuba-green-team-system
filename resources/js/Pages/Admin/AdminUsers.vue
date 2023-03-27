@@ -2,7 +2,6 @@
     <AppLayout>
         <div class="relative w-full">
             <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
-                <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
                 <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
             </div>
         </div>
@@ -162,7 +161,7 @@
     import { Inertia } from '@inertiajs/inertia';
     import AdminMenu from '@/Components/AdminMenu.vue';
     import Icon from '@/Components/Icon.vue';
-    import ActiveIcon from '@/Components/AttendanceIcons.vue';
+    import ActiveIcon from '@/Components/MembershipIcons.vue';
     import Pagination from '@/Components/Pagination.vue';
     import { Link } from '@inertiajs/inertia-vue3';
 
@@ -190,13 +189,7 @@
         },
         computed: {
             showAlert() {
-                if (this.$page.props.flash.success_object_save !== null) {
-                    setTimeout(() => {
-                        this.$page.props.flash.success_object_save = null
-                    }, 3000);
-                    return true;
-                }
-                else if(this.$page.props.flash.success_object_delete !== null) {
+                if(this.$page.props.flash.success_object_delete !== null) {
                     setTimeout(() => {
                         this.$page.props.flash.success_object_delete = null
                     }, 3000);

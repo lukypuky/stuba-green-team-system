@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="sk">
 
 <head>
     <meta charset="utf-8">
@@ -8,31 +8,26 @@
 <body>
     <div style="background-color: #eaeaea; text-align: -webkit-center; padding: 35px 0;">
         <div style="padding: 20px; background-color: white; border-radius: 25px; width: 576px;">
-            {{-- <div style="padding: 5px;">
-                <img src="{{ $message->embed(storage_path() . '/app/img/icon-PositiveID.png') }}"
-                    style="width: 70px; height: auto;" alt="positive-logo">
-            </div> --}}
-
-            <hr style="height: 4px; background-color: #fb5404; opacity: 1; margin: 20px 0px; border:none">
+            <hr style="height: 4px; background-color: #5bc157; opacity: 1; margin: 20px 0px; border:none">
 
             <div style="text-align: left">
-                Dobrý deň!
+                Ahoj!
             </div> <br>
 
             <div style="text-align: left">
                 <div>
-                    Pre obnovenie Vášho hesla kliknite na tlačidlo nižšie.
+                    Pre obnovenie svojho hesla klikni na tlačidlo nižšie.
                 </div>
 
                 <div style="margin-top: 15px; margin-bottom: 15px; text-align: -webkit-center;">
                     <a href="{{ $actionUrl }}"
-                        style="  color: #fff; background-color: #fb5404; text-align: center; text-decoration: none; border: none; padding: 8px 16px; font-size: 1rem; 
+                        style="  color: #fff; background-color: #5bc157; text-align: center; text-decoration: none; border: none; padding: 8px 16px; font-size: 1rem; 
                         border-radius: 5px;">{{ $actionText }}</a>
                 </div>
 
                 <div>
                     Platnosť linku na obnovenie hesla je 60 minút. <br>
-                    Ak ste nepožiadali o obnovenie hesla, nie sú potrebné žiadne ďalšie kroky.
+                    Ak si nepožiadal/a o obnovenie hesla, nie sú potrebné žiadne ďalšie kroky.
                 </div> <br>
 
                 <div>
@@ -41,11 +36,11 @@
                 </div>
             </div>
 
-            <hr style="height: 4px; background-color: #fb5404; opacity: 1; margin: 20px 0px; border:none">
+            <hr style="height: 4px; background-color: #5bc157; opacity: 1; margin: 20px 0px; border:none">
 
             <div style="text-align: left">
                 <strong>
-                    Ak máte problémy s kliknutím na tlačidlo, skopírujte a vložte webovú adresu
+                    Ak máš problémy s kliknutím na tlačidlo, skopíruj a vlož webovú adresu
                     <em>{{ $actionUrl }}</em> do svojho prehliadača.
                 </strong>
             </div>

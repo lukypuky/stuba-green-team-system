@@ -15,16 +15,13 @@
                     <div class="bg-white px-4 pt-4 pb-4 sm:p-6 sm:pb-4">
                         <div>
                             <span class="text-gray-700">
-                                Naozaj si želáte odstrániť tento záznam ? <br/>
-                                Po stlačení tlačidla "Áno" sa záznam natrvalo odstráni a nebude ho možné vrátiť späť.
+                                Zmeň si prosím svoje prvotné heslo.
                             </span>
                         </div>
                     </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button @click.prevent="deleteObject" type="button"
-                        class="inline-flex justify-center w-full rounded-md px-4 py-2 m-2 transition duration-500 ease select-none buttons-red">Áno</button>
-                    <button @click.prevent="closeDeleteModal" type="button"
-                        class="inline-flex justify-center w-full rounded-md px-4 py-2 m-2 transition duration-500 ease select-none buttons-gray">Nie</button>
+                    <button @click.prevent="closeChangePasswordAlertModal" type="button"
+                        class="inline-flex justify-center w-full rounded-md px-4 py-2 m-2 transition duration-500 ease select-none buttons">Okay</button>
                 </div>
             </div>
         </div>
@@ -33,25 +30,11 @@
 
 <script>
     export default {
-        name: "DeleteModal",
-        props: {
-            deletedObjectId: {
-                type: String,
-                default: () => ''
-            },
-        },
+        name: "ChangePasswordAlertModal",
         methods: {
-            closeDeleteModal() {
-                this.$emit('closeDeleteModal');
+            closeChangePasswordAlertModal() {
+                this.$emit('closeChangePasswordAlertModal');
             },
-            deleteObject() {
-                if(!this.deletedObjectId == ''){
-                    this.$emit('deleteObject', this.deletedObjectId);
-                }
-                else{
-                    this.$emit('deleteObject');
-                }
-            }
         },
     };
 </script>

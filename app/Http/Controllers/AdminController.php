@@ -97,7 +97,11 @@ class AdminController extends Controller
     }
 
     public function deleteTaskType(Request $request){
-        TaskType::where('id', $request->id)->delete();
+        try {
+            TaskType::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -140,7 +144,11 @@ class AdminController extends Controller
     }
 
     public function deleteTaskStatus(Request $request){
-        TaskStatus::where('id', $request->id)->delete();
+        try {
+            TaskStatus::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -183,7 +191,11 @@ class AdminController extends Controller
     }
 
     public function deleteTaskPriority(Request $request){
-        TaskPriority::where('id', $request->id)->delete();
+        try {
+            TaskPriority::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -226,7 +238,11 @@ class AdminController extends Controller
     }
 
     public function deleteOrderStatus(Request $request){
-        OrderStatus::where('id', $request->id)->delete();
+        try {
+            OrderStatus::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -269,7 +285,11 @@ class AdminController extends Controller
     }
 
     public function deleteOrderPriority(Request $request){
-        OrderPriority::where('id', $request->id)->delete();
+        try {
+            OrderPriority::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -312,7 +332,11 @@ class AdminController extends Controller
     }
 
     public function deleteMeetingType(Request $request){
-        MeetingType::where('id', $request->id)->delete();
+        try {
+            MeetingType::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -355,7 +379,11 @@ class AdminController extends Controller
     }
 
     public function deleteFormulaPart(Request $request){
-        FormulaPartSpecify::where('id', $request->id)->delete();
+        try {
+            FormulaPartSpecify::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -399,7 +427,11 @@ class AdminController extends Controller
     }
 
     public function deleteDivision(Request $request){
-        Division::where('id', $request->id)->delete();
+        try {
+            Division::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -445,7 +477,11 @@ class AdminController extends Controller
     }
 
     public function deleteCurrency(Request $request){
-        Currency::where('id', $request->id)->delete();
+        try {
+            Currency::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
@@ -490,7 +526,11 @@ class AdminController extends Controller
     }
 
     public function deleteArea(Request $request){
-        Area::where('id', $request->id)->delete();
+        try {
+            Area::where('id', $request->id)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
 
         return redirect()->back()->with('success_object_delete', 'Odstránené');
     }

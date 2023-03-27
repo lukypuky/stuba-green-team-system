@@ -47,7 +47,7 @@ class ReportController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->route('dashboard')->with('success_object_save', 'uspesne report pridanie');
+        return redirect()->route('dashboard')->with('success_object_save', 'Uložené');
     }
 
     public function updateReport(ReportRequest $request){
@@ -60,12 +60,12 @@ class ReportController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny report update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteReport(Request $request){
         Report::where('id', $request->id)->delete();
 
-        return redirect()->route('dashboard')->with('success_object_delete', 'uspesny delete');
+        return redirect()->route('dashboard')->with('success_object_delete', 'Odstránené');
     }
 }

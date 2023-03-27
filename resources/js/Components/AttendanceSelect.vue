@@ -11,7 +11,13 @@
       <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option> 
     </select>
   </div>
-                     
+           
+  <div>
+    <div class="select-margin">
+        <input type="month" @change="changeMeetingDate" v-model="this.newDate" class="select-bordered w-full max-w-xs custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
+          id="meeting_month" required/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -33,7 +39,9 @@
         meetingType: {
           meetingTypeId: '',
           divisionId: null,
+          meetingDate: null,
         },
+        newDate: null,
       }
     },
     emits: {
@@ -41,6 +49,10 @@
       showAddAttendanceButton: null,
     },
     methods:{
+      changeMeetingDate(){
+        this.meetingType['meetingDate'] = this.newDate;
+        this.$emit('getMeetingTypeAttendance', this.meetingType);
+      },
       changeMeetingType(param){
         if(param.target.value == 2){
           this.divisionSelect = true;

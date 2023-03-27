@@ -161,7 +161,7 @@ return [
         ],
         'email' => [
             'unique' => 'Tento email už niekto používa.',
-            'regex' => 'Formát e-mailu je neplatný.'
+            'regex' => 'Formát emailu je neplatný.'
         ],
         'password' => [
             'required' => 'Toto pole je povinné',

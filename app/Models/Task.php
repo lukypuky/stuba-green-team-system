@@ -23,4 +23,14 @@ class Task extends Model
         'attachment',
         'hours',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:d.m.Y H:m',
+        'updated_at' => 'datetime:d.m.Y H:m',
+    ];
 }

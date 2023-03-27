@@ -9,7 +9,7 @@
         <div>
             <Link :href="route('dashboard-all-tasks')" :class="route().current('dashboard-all-tasks') ? 'active' : ''" class="menu-item">Prehľad všetkých úloh</Link> <!--ADMIN-->
         </div>
-        <div>
+        <div v-if="this.roles.includes($page.props.user.role_id) || $page.props.user.is_admin == 1">
             <Link :href="route('dashboard-attendance')" :class="route().current('dashboard-attendance') ? 'active' : ''" class="menu-item">Dochádzka členov</Link> <!--ADMIN-->
         </div>
     </div>
@@ -23,11 +23,15 @@ export default {
     components: {
         Link,
     },
-    // data() {
-    //     return {
-    //         showingMenu: false,
-    //     }
-    // },
+    data() {
+        return {
+            roles: [
+                0,
+                1,
+                2,
+            ]
+        }
+    },
 }
 </script>
 

@@ -220,6 +220,14 @@ body {
     border-bottom-left-radius: 0.375rem;
 }
 
+.message-uunsuccess {
+    background-color: var(--sgt-red-color);
+    border-bottom: 1px solid red;
+    border-left: 1px solid red;
+    color: #454545;
+    border-bottom-left-radius: 0.375rem;
+}
+
 .fc .fc-col-header-cell-cushion {
     color: var(--sgt-color);
 }

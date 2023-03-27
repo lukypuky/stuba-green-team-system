@@ -5,6 +5,11 @@
                 <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
             </div>
         </div>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message-uunsuccess" v-if="showUnsuccessfulAlert">
+                <p class="text-sm">{{ $page.props.flash.unsuccess_object_delete }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
@@ -115,7 +120,7 @@
                             <div class="card-row">
                                 <div>Dátum vytvorenia: </div>
                                 <div>
-                                    <input type="text" v-model="createdAtDate" disabled
+                                    <input type="text" v-model="this.task[0].created_at" disabled
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         id="created_at" placeholder="Dátum vytvorenia"/>
                                 </div>
@@ -123,7 +128,7 @@
                             <div class="card-row">
                                 <div>Dátum úpravy: </div>
                                 <div>
-                                    <input type="text" v-model="updatedAtDate" disabled
+                                    <input type="text" v-model="this.task[0].updated_at" disabled
                                         class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         id="updated_at" placeholder="Dátum úpravy"/>
                                 </div>
@@ -177,7 +182,6 @@ import { Inertia } from '@inertiajs/inertia';
 import Icon from '@/Components/Icon.vue';
 import ReportMenu from '@/Components/ReportMenu.vue';
 import DeleteModal from '@/Modals/DeleteModal.vue';
-import moment from 'moment';
 
     export default {
         name: 'DashboardTaskDetail',
@@ -234,8 +238,6 @@ import moment from 'moment';
                     deadline: this.task[0].deadline,
                 },
                 taskDetail: this.task[0],
-                createdAtDate: moment(this.task[0].created_at).format('DD.MM.YYYY HH:MM'),
-                updatedAtDate: moment(this.task[0].updated_at).format('DD.MM.YYYY HH:MM'),
                 inputEnable: true,
                 showDeleteModal: false,
                 deletedObjectId: '',
@@ -320,6 +322,16 @@ import moment from 'moment';
 
                 return false;
             },
+            showUnsuccessfulAlert() {
+                if(this.$page.props.flash.unsuccess_object_delete !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.unsuccess_object_delete = null
+                    }, 3000);
+                    return true;
+                }
+
+                return false;
+            }
         },
     }
 </script>

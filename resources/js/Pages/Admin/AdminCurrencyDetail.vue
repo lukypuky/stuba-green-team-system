@@ -5,6 +5,11 @@
                 <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
             </div>
         </div>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message-uunsuccess" v-if="showUnsuccessfulAlert">
+                <p class="text-sm">{{ $page.props.flash.unsuccess_object_delete }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
@@ -144,6 +149,16 @@
 
                 return false;
             },
+            showUnsuccessfulAlert() {
+                if(this.$page.props.flash.unsuccess_object_delete !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.unsuccess_object_delete = null
+                    }, 3000);
+                    return true;
+                }
+
+                return false;
+            }
         },
     }
 </script>

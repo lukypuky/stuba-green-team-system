@@ -39,13 +39,22 @@
                             <AttendanceSelect :meetingTypes="this.meetingTypes" :divisions="this.divisions" @getMeetingTypeAttendance="getMeetingTypeAttendance"
                             @showAddAttendanceButton="showAddAttendanceButton"/>
                         </div>
-                        <div class="text-right flex">
+                        <div class="text-right flex mb-2">
                             <div class="mr-3">
                                 <button class="buttons" @click="openModal" v-if="this.showButton">Pridať dochádzku</button>
                             </div>
-                            <div>
+                            <div class="menu-margin">
                                 <button class="buttons" @click="openUpdateModal" v-if="this.showButton">Upraviť dochádzku</button>
                             </div>
+                        </div>
+                        <div class="text-right lg:flex mb-2">
+                            <!-- <div class="menu-margin">
+                                <input type="month" @change="getMeetingTypeAttendance" v-model="this.newDate" class="select-bordered w-full max-w-xs custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
+                                id="meeting_month" required/>
+                            </div> -->
+                            <!-- <div>
+                                <button class="buttons w-full" @click="changeMonth">Zmeniť dátum</button>
+                            </div> -->
                         </div>
                     </div>
                     <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-md">
@@ -168,6 +177,7 @@
                 newAttendances: {},
                 newMeetingDates: {},
                 newUsers: {},
+                // newDate: null,
             }
         },
         beforeMount() {
@@ -178,8 +188,6 @@
         },
         methods: {
             getMeetingTypeAttendance(param){
-                this.meetingType = param;
-
                 axios.post(route('dashboard-change-meeting-type', param))
                 .then((res) => {
                     this.newAttendances = res.data.attendances;
@@ -201,6 +209,9 @@
             showAddAttendanceButton(param){
                 this.showButton = param;
             },
+            // changeMonth(){
+            //     console.log(this.newDate);
+            // },
             storeAttendance(param){
                 Inertia.post(route("dashboard-store-attendance"), param, {
                     onSuccess: page => {
@@ -219,7 +230,6 @@
                     onSuccess: page => {
                         if (Object.entries(page.props.errors).length === 0) {
                             this.newAttendances = page.props.attendances;
-
                             this.closeModal();
                         }
                     }
@@ -229,10 +239,22 @@
                 this.newMeetingDates = param.meetingDates;
                 this.newAttendances = param.attendances;
             },
-        }
+        },
+        // beforeMount() {
+        //     console.log('aaa');
+        //     console.log(this.attendances);
+        // }
     }
 </script>
 
 <style  scoped>
+    .menu-margin {
+        margin-right: 0.75rem;
+    }
 
+    @media (max-width: 768px) {
+        .menu-margin {
+            margin-right: 0;
+        }
+    }
 </style>

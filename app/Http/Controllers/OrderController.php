@@ -89,7 +89,7 @@ class OrderController extends Controller
             'approval' => 2,
         ]);
 
-        return redirect()->back()->with('success_object_save', 'uspesny order save');
+        return redirect()->back()->with('success_object_save', 'Uložené');
     }
 
     public function updateOrder(OrderRequest $request){
@@ -111,12 +111,12 @@ class OrderController extends Controller
             'approval' => $request->approval,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny order update save');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteOrder(Request $request){
         Order::where('id', $request->id)->delete();
 
-        return redirect()->back()->with('success_object_delete', 'uspesny order delete');
+        return redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 }

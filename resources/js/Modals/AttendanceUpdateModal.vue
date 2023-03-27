@@ -19,7 +19,7 @@
                                 <label for="meeting_date"
                                     class="block text-gray-700 text-sm font-bold mb-2">Dátum schôdze <span class="text-red-500">*</span></label>
                                 <select id="meeting_date" @change="showUsers"
-                                    class="select select-bordered w-full max-w-xs custom-select" required>
+                                    class="select select-bordered w-full custom-select" required>
                                     <option disabled selected value="0">Zvoľte dátum</option>
                                     <option v-for="(meetingDate, index) in this.meetingDates" :key="index" :value="meetingDate.id">{{ meetingDate.meeting_date }}</option>
                                 </select>

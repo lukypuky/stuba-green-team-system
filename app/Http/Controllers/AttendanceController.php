@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\Meeting as MeetingRequest;
+use \DateTime;
 
 class AttendanceController extends Controller
 {
@@ -24,7 +25,8 @@ class AttendanceController extends Controller
         $divisions = Division::all();
         $meetingTypes = MeetingType::all();
         $attendanceStatuses = AttendanceStatus::all();
-        $meetings = $this->getMeetingsQuery(1, null);
+        $meetingDate = Carbon::now()->year.'-'.Carbon::now()->month;
+        $meetings = $this->getMeetingsQuery(1, null, $meetingDate);
 
         foreach($meetings as $key => $meeting){
             array_push($meetingIds, $meeting->id);
@@ -46,8 +48,9 @@ class AttendanceController extends Controller
                         $row['username'] = $attendance->name;
                         $row['userId'] = $attendance->id;
                     }
-
-                    $row[$attendance->meeting_date] = $attendance->attendance_status_id;
+                    $tmp = $attendance->meeting_date;
+                    $date = strtotime($tmp);
+                    $row[ date('d.m.Y', $date)] = $attendance->attendance_status_id;
                     
                     if($attendance->attendance_status_id == 1){
                         $count++;
@@ -74,8 +77,19 @@ class AttendanceController extends Controller
         ]);
     }
 
-    public function getMeetingsQuery($meetingType, $divisionId){
-        $meetings = Meeting::whereMonth('meetings.meeting_date', Carbon::now()->month)
+    public function getMeetingsQuery($meetingType, $divisionId, $meetingDate){
+        if(is_null($meetingDate)){
+            $year = Carbon::now()->year;
+            $month = Carbon::now()->month;
+        }
+        else{
+            $tmpDate = explode('-', $meetingDate);
+            $year = $tmpDate[0];
+            $month = $tmpDate[1];
+        }
+
+        $meetings = Meeting::whereMonth('meetings.meeting_date', $month)
+            ->whereYear('meetings.meeting_date', $year)
             ->where('meetings.meeting_type_id', $meetingType)
             ->where('meetings.division_id', $divisionId) 
             ->join('meeting_types', 'meetings.meeting_type_id', '=', 'meeting_types.id')
@@ -89,8 +103,9 @@ class AttendanceController extends Controller
     public function changeMeetingType(Request $request){
         $meetingIds = array();
         $rows = array();
+        $meetingTypeId = $request->meetingTypeId;
 
-        if($request->meetingTypeId == 3){
+        if($meetingTypeId == 3){
             $users = User::select('id','name')->where('active', 1)->where('role_id', 1)->orWhere('role_id', 2)->get();
         }
         elseif(!is_null($request->divisionId)){
@@ -102,7 +117,11 @@ class AttendanceController extends Controller
 
         $divisions = Division::all();
         $meetingTypes = MeetingType::all();
-        $meetings = $this->getMeetingsQuery($request->meetingTypeId, $request->divisionId);
+
+        if(is_null($meetingTypeId)){
+            $meetingTypeId = 1;
+        }
+        $meetings = $this->getMeetingsQuery($meetingTypeId, $request->divisionId, $request->meetingDate);
 
         foreach($meetings as $key => $meeting){
             array_push($meetingIds, $meeting->id);
@@ -125,7 +144,9 @@ class AttendanceController extends Controller
                         $row['userId'] = $attendance->id;
                     }
 
-                    $row[$attendance->meeting_date] = $attendance->attendance_status_id;
+                    $tmp = $attendance->meeting_date;
+                    $date = strtotime($tmp);
+                    $row[ date('d.m.Y', $date)] = $attendance->attendance_status_id;
                     
                     if($attendance->attendance_status_id == 1){
                         $count++;
@@ -168,7 +189,7 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_object_save', 'uspesna dochadzka save');
+        return redirect()->back()->with('success_object_save', 'Uložené');
     }
 
     public function updateAttendance(Request $request){
@@ -178,13 +199,13 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny dochadzka update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function deleteAttendance(Request $request){
         MeetingUser::where('meeting_id', $request->meeting_id)->delete();
         Meeting::where('id', $request->meeting_id)->delete();
         
-        redirect()->back()->with('success_object_delete', 'uspesny attendance update');
+        redirect()->back()->with('success_object_delete', 'Odstránené');
     }
 }

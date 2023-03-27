@@ -48,7 +48,7 @@
                             <thead class="bg-gray-50 border-b-2 border-gray-200">
                                 <tr>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Akcie</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Schválené</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Schválennie</th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Objednávkové číslo</th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Presný názov</th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Stručný popis</th>
@@ -150,7 +150,7 @@
     import DeleteModal from '@/Modals/DeleteModal.vue';
     import Icon from '@/Components/Icon.vue';
     import { Inertia } from '@inertiajs/inertia';
-    import ApprovalIcon from '@/Components/AttendanceIcons.vue';
+    import ApprovalIcon from '@/Components/OrderIcons.vue';
     import Pagination from '@/Components/Pagination.vue';
 
     export default {

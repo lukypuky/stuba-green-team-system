@@ -47,7 +47,7 @@ class TaskController extends Controller
             // 'attachment',
         ]);
 
-        return redirect()->back()->with('success_object_save', 'uspesny task save');
+        return redirect()->back()->with('success_object_save', 'Uložené');
     }
 
     public function getTaskDetail($id){
@@ -89,7 +89,7 @@ class TaskController extends Controller
             'deadline' => $request->deadline,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'uspesny task update');
+        return redirect()->back()->with('success_object_update_save', 'Upravené');
     }
 
     public function getAllTasks(){
@@ -116,10 +116,14 @@ class TaskController extends Controller
     }
 
     public function deleteTask(Request $request){
-        Comment::where('task_id', $request->id)->delete();
-        Task::where('id', $request->id)->delete();
-        
-        return redirect()->route('dashboard-tasks')->with('success_object_delete', 'uspesny task delete');
+        try {
+            Task::where('id', $request->id)->delete();
+            Comment::where('task_id', null)->delete();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
+        }
+
+        return redirect()->route('dashboard-tasks')->with('success_object_delete', 'Odstránené');
     }
 
     public function storeComment(Request $request){

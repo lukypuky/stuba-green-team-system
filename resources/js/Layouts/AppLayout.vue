@@ -44,7 +44,7 @@ const logout = () => {
                                     Nákup
                                 </NavLink>
                                 <NavLink :href="route('dashboard-get-users')"
-                                    :class="this.adminPages.includes(route().current()) ? 'active' : ''">
+                                    :class="this.adminPages.includes(route().current()) ? 'active' : ''" v-if="this.roles.includes($page.props.user.role_id) || $page.props.user.is_admin == 1">
                                     Admin panel
                                 </NavLink>
                             </div>
@@ -177,15 +177,28 @@ const logout = () => {
 
             <main>
                 <slot />
+
+                <ChangePasswordAlertModal v-if="this.showChangePasswordAlertModal" @closeChangePasswordAlertModal="closeChangePasswordAlertModal"/>
             </main>
         </div>
     </div>
 </template>
 
 <script>
+    import ChangePasswordAlertModal from '@/Modals/ChangePasswordAlertModal.vue';
+
     export default {
+        components: {
+            ChangePasswordAlertModal,
+        },
+        methods: {
+            closeChangePasswordAlertModal(){
+                this.showChangePasswordAlertModal = false;
+            }
+        },
         data(){
             return{
+                showChangePasswordAlertModal: false,
                 reportsTasksPages: [
                     'dashboard',
                     'dashboard-tasks',
@@ -234,12 +247,17 @@ const logout = () => {
                 ],
                 profile: [
                     'profile.show',
-                ]
+                ],
+                roles: [
+                    0,
+                    1,
+                    2,
+                ],
             }
         },
         beforeMount(){
             if(this.$page.props.user.first_login_pass_changed == false){
-                alert('Zmeňte si heslo!');
+                this.showChangePasswordAlertModal = true;
             }
         }
     }

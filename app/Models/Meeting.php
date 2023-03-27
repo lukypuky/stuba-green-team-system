@@ -14,4 +14,13 @@ class Meeting extends Model
         'meeting_type_id',
         'division_id',
     ];
+
+        /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'meeting_date' => 'datetime:d.m.Y',
+    ];
 }
