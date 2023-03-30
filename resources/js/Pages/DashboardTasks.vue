@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <TaskOverview :tasks="tasks" :taskTypes="taskTypes" :taskPriorities="taskPriorities" :divisions="divisions" 
+                    <TaskOverview :tasks="this.tasks" :users="this.users" :taskTypes="this.taskTypes" :taskPriorities="this.taskPriorities" :divisions="this.divisions" 
                     :areas="areas"/>
                 </div>
             </div>
@@ -42,6 +42,10 @@ import ReportMenu from '@/Components/ReportMenu.vue';
         },
         props: {
             tasks:{
+                type: Object,
+                default: () => { }
+            }, 
+            users:{
                 type: Object,
                 default: () => { }
             }, 

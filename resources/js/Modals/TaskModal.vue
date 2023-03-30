@@ -21,7 +21,7 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">Typ <span class="text-red-500">*</span></label>
                                 <select id="type_id" v-model="form.type_id"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option v-for="(taskType, index) in taskTypes" :key="index" :value="taskType.id">{{ taskType.task_type_title }}</option>
+                                    <option v-for="(taskType, index) in this.taskTypes" :key="index" :value="taskType.id">{{ taskType.task_type_title }}</option>
                                 </select>
                                 <div v-if="$page.props.errors.type_id" class="text-red-500">
                                     {{ $page.props.errors.type_id }}
@@ -51,7 +51,7 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">Priorita <span class="text-red-500">*</span></label>
                                 <select id="task_priority_id" v-model="form.task_priority_id"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option v-for="(taskPriority, index) in taskPriorities" :key="index" :value="taskPriority.id">{{ taskPriority.task_priority_title }}</option>
+                                    <option v-for="(taskPriority, index) in this.taskPriorities" :key="index" :value="taskPriority.id">{{ taskPriority.task_priority_title }}</option>
                                 </select>
                                 <div v-if="$page.props.errors.priority_id" class="text-red-500">
                                     {{ $page.props.errors.priority_id }}
@@ -62,7 +62,7 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">Divízia <span class="text-red-500">*</span></label>
                                 <select id="division_id" v-model="form.division_id"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option v-for="(division, index) in divisions" :key="index" :value="division.id">{{ division.division_title }}</option>
+                                    <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option>
                                 </select>
                                 <div v-if="$page.props.errors.division_id" class="text-red-500">
                                     {{ $page.props.errors.division_id }}
@@ -73,20 +73,23 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">Oblasť <span class="text-red-500">*</span></label>
                                 <select id="area_id" v-model="form.area_id"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option v-for="(area, index) in areas" :key="index" :value="area.id">{{ area.area_title }}</option>
+                                    <option v-for="(area, index) in this.areas" :key="index" :value="area.id">{{ area.area_title }}</option>
                                 </select>
                                 <div v-if="$page.props.errors.area_id" class="text-red-500">
                                     {{ $page.props.errors.area_id }}
                                 </div>
                             </div>
-                            <!-- <div class="col-span-6 sm:col-span-3 mb-3">
-                                <label for="task_user_id"
+                            <div class="col-span-6 sm:col-span-3 mb-3">
+                                <label for="user_id_assigned"
                                     class="block text-gray-700 text-sm font-bold mb-2">Priradiť <span class="text-red-500">*</span></label>
-                                <select id="task_user_id"
+                                <select id="user_id_assigned" v-model="form.user_id_assigned"
                                     class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                    <option value="1">Daco</option>
+                                    <option v-for="(user, index) in this.users" :key="index" :value="user.id">{{ user.name }}</option>
                                 </select>
-                            </div> -->
+                                <div v-if="$page.props.errors.user_id_assigned" class="text-red-500">
+                                    {{ $page.props.errors.user_id_assigned }}
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="deadline"
                                     class="block text-gray-700 text-sm font-bold mb-2">Deadline</label>
@@ -121,6 +124,10 @@ export default {
             type: Object,
             default: () => { }
         }, 
+        users:{
+            type: Object,
+            default: () => { }
+        },
         taskPriorities:{
             type: Object,
             default: () => { }
@@ -141,12 +148,6 @@ export default {
         storeTask(form) {
             this.$emit('saveTask', form);
         },
-        // updateReport(form) {
-
-        // },
-        // deleteReport(form) {
-
-        // }
     },
     
 };

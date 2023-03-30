@@ -11,14 +11,17 @@ use App\Models\Division;
 use App\Models\TaskStatus;
 use App\Models\Area;
 use App\Models\User;
+use App\Models\Report;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Task as TaskRequest;
+use \DateTime;
 
 class TaskController extends Controller
 {
     public function getModalTaskData(){
         $tasks = Task::where('user_id_assigned', Auth::user()->id)->get(); 
+        $users = User::select('id', 'name')->where('active', '1')->get();
         $taskTypes = TaskType::all();
         $taskPriorities = TaskPriority::all();
         $divisions = Division::all();
@@ -26,6 +29,7 @@ class TaskController extends Controller
 
         return Inertia::render('DashboardTasks', [
             'tasks' =>  $tasks,
+            'users' => $users,
             'taskTypes' =>  $taskTypes,
             'taskPriorities' =>  $taskPriorities,
             'divisions' =>  $divisions,
@@ -38,7 +42,7 @@ class TaskController extends Controller
             'task_title' => $request->task_title,
             'description' => $request->description,
             'user_id_created' => Auth::user()->id,
-            'user_id_assigned' => Auth::user()->id,
+            'user_id_assigned' => $request->user_id_assigned,
             'type_id' => $request->type_id,
             'task_priority_id' => $request->task_priority_id,
             'division_id' => $request->division_id,
@@ -51,7 +55,7 @@ class TaskController extends Controller
     }
 
     public function getTaskDetail($id){
-        $users = User::select('id', 'name')->get();
+        $users = User::select('id', 'name')->where('active', '1')->get();
         $task = Task::where('tasks.id', $id)->get();
         $taskTypes = TaskType::all();
         $taskPriorities = TaskPriority::all();
@@ -64,8 +68,24 @@ class TaskController extends Controller
         ->orderBy('comments.id', 'asc')
         ->select(['comments.id', 'users.name', 'comments.comment_body', 'comments.created_at'])
         ->get();
+
+        $records = Report::select('start_time', 'end_time')->where('task_id', $id)->get();
+        $hour = 0;
+        $mins = 0;
+
+        foreach($records as $record){
+            $start_time = new DateTime($record->start_time);//start time
+            $end_time = new DateTime($record->end_time);//end time
+            $result = $start_time->diff($end_time);
+
+            $hour += $result->h;
+            $mins += $result->i;
+        }
+        
+        $resultTime = $hour.'h '.$mins.'min';
         
         return Inertia::render('DashboardTaskDetail', [
+            'interval' => $resultTime,
             'users' => $users,
             'task' =>  $task,
             'taskTypes' =>  $taskTypes,

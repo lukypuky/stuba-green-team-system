@@ -13,22 +13,36 @@
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
-                    <ReportMenu/>
+                    <div class="hidden md:block text-sm">
+                        <ReportMenu/>
+                    </div>
                 </div>
                 <div class="col-span-12 sm:col-span-10">
-                    <div class="page-heading">
-                        <div class="flex items-center">
-                            <div class="mr-3">
+                    <div class="page-heading mb-0">
+                        <div class="flex justify-between mb-3">
+                            <div>
                                 <h1>{{ this.task[0].task_title }}</h1>
                             </div>
-                            <div v-if="inputEnable" class="flex">
-                                <div class="mr-3">
-                                    <Icon name="update" width="20" @click="setInputs"/>
-                                </div>
-                                <div>
-                                    <Icon name="delete" width="20" @click.prevent="deleteTaskModal(this.task[0].id)"/>
+                            <div class="md:hidden">
+                                <div class="dropdown pl-3">
+                                    <label tabindex="0" class="m-1">                                        
+                                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                         </svg>
+                                    </label>
+                                    <ul tabindex="0" class="dropdown-content menu p-3 shadow bg-white rounded-box w-52 text-sm right-4">
+                                        <ReportMenu/>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div v-if="inputEnable" class="flex">
+                        <div class="mr-3">
+                            <Icon name="update" width="20" @click="setInputs"/>
+                        </div>
+                        <div>
+                            <Icon name="delete" width="20" @click.prevent="deleteTaskModal(this.task[0].id)"/>
                         </div>
                     </div>
                     <div class="flex mb-3">
@@ -141,6 +155,12 @@
                                         id="deadline" placeholder="Deadline"/>
                                 </div>
                             </div>
+                            <div class="card-row">
+                                <div>Čas strávený na úlohe: </div>
+                                <div class="flex justify-center items-center text-4xl time-color">
+                                    {{ this.interval }}
+                                </div>
+                            </div>
                         </div>
                         </div>
                     <div class="commnets-cards">
@@ -192,6 +212,10 @@ import DeleteModal from '@/Modals/DeleteModal.vue';
             DeleteModal, 
         },
         props: {
+            interval:{
+                type: String,
+                default: ''
+            }, 
             users:{
                 type: Object,
                 default: () => { }
@@ -337,8 +361,11 @@ import DeleteModal from '@/Modals/DeleteModal.vue';
 </script>
 
 <style scoped>
+    .time-color {
+        color: var(--sgt-color);
+    }
+
     .card {
-        /* padding: 0.5rem; */
         border: none;
     }
 

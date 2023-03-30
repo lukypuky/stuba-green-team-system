@@ -47,22 +47,16 @@
                                 <button class="buttons" @click="openUpdateModal" v-if="this.showButton">Upraviť dochádzku</button>
                             </div>
                         </div>
-                        <div class="text-right lg:flex mb-2">
-                            <!-- <div class="menu-margin">
-                                <input type="month" @change="getMeetingTypeAttendance" v-model="this.newDate" class="select-bordered w-full max-w-xs custom-select shadow appearance-none rounded-md mb-2 py-2 px-3"
-                                id="meeting_month" required/>
-                            </div> -->
-                            <!-- <div>
-                                <button class="buttons w-full" @click="changeMonth">Zmeniť dátum</button>
-                            </div> -->
-                        </div>
                     </div>
                     <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-md">
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b-2 border-gray-200">
                                 <tr>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left">Meno</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left" v-for="(meetingDate, index) in this.newMeetingDates" :key="index">{{ meetingDate.meeting_date }}</th>
+                                    <th class="p-3 text-sm font-semibold tracking-wide text-left"
+                                        v-for="(meetingDate, index) in this.newMeetingDates" :key="index">
+                                        {{ meetingDate.meeting_date }}
+                                    </th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left">Body</th>
                                 </tr>
                             </thead>
@@ -177,7 +171,6 @@
                 newAttendances: {},
                 newMeetingDates: {},
                 newUsers: {},
-                // newDate: null,
             }
         },
         beforeMount() {
@@ -209,9 +202,6 @@
             showAddAttendanceButton(param){
                 this.showButton = param;
             },
-            // changeMonth(){
-            //     console.log(this.newDate);
-            // },
             storeAttendance(param){
                 Inertia.post(route("dashboard-store-attendance"), param, {
                     onSuccess: page => {
@@ -240,10 +230,6 @@
                 this.newAttendances = param.attendances;
             },
         },
-        // beforeMount() {
-        //     console.log('aaa');
-        //     console.log(this.attendances);
-        // }
     }
 </script>
 

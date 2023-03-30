@@ -26,8 +26,8 @@
             </div>
 
             <div>
-                <TaskModal v-if="showModal" @closeModal="closeModal" @saveTask="saveTask" :form="this.newTask" :taskTypes="taskTypes" :taskPriorities="taskPriorities" 
-                :divisions="this.divisions" :areas="this.areas"/>
+                <TaskModal v-if="showModal" @closeModal="closeModal" @saveTask="saveTask" :form="this.newTask" :taskTypes="this.taskTypes" 
+                :taskPriorities="this.taskPriorities" :divisions="this.divisions" :areas="this.areas" :users="this.users"/>
             </div>
 
             <div class="cards">
@@ -79,6 +79,10 @@
                 type: Object,
                 default: () => { }
             }, 
+            users:{
+                type: Object,
+                default: () => { }
+            }, 
             taskTypes:{
                 type: Object,
                 default: () => { }
@@ -104,7 +108,7 @@
                     type_id: '',
                     task_title: '',
                     description: '',
-                    // user_id_assigned: '',
+                    user_id_assigned: '',
                     task_priority_id: '',
                     division_id: '',
                     area_id: '',
@@ -126,7 +130,7 @@
                     type_id: '',
                     task_title: '',
                     description: '',
-                    // user_id_assigned: '',
+                    user_id_assigned: '',
                     task_priority_id: '',
                     division_id: '',
                     area_id: '',

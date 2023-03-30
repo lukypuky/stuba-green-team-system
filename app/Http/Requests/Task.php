@@ -29,6 +29,7 @@ class Task extends FormRequest
             'task_priority_id' => 'required',
             'division_id' => 'required',
             'area_id' => 'required',
+            'user_id_assigned' => 'required',
         ];
     }
 
@@ -39,6 +40,7 @@ class Task extends FormRequest
             'task_priority_id.required' => 'Toto pole je povinné',
             'division_id.required' => 'Toto pole je povinné!',
             'area_id.required' => 'Toto pole je povinné',
+            'user_id_assigned.required' => 'Toto pole je povinné',
         ];
     }
 }

@@ -40,7 +40,8 @@ body {
     }
 }
 
-[type='text']:focus, [type='email']:focus, [type='password']:focus {
+[type='text']:focus, [type='email']:focus, [type='password']:focus, 
+[type='month']:focus, [type='date']:focus {
     --tw-ring-color: #454545;
     --tw-ring-shadow: #454545;
     border-color: var(--sgt-color);

@@ -205,6 +205,7 @@ const logout = () => {
                     'dashboard-task-detail',
                     'dashboard-all-tasks',
                     'dashboard-attendance',
+                    'dashboard-get-all-reports'
                 ],
                 orderPages: [
                     'dashboard-my-orders',

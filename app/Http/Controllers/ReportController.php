@@ -7,7 +7,10 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
 use App\Models\Task;
+use App\Models\User;
 use App\Http\Requests\Report as ReportRequest;
+use Carbon\Carbon;
+use \DateTime;
 
 class ReportController extends Controller
 {
@@ -67,5 +70,129 @@ class ReportController extends Controller
         Report::where('id', $request->id)->delete();
 
         return redirect()->route('dashboard')->with('success_object_delete', 'Odstránené');
+    }
+
+    public function getAllReports(){
+        $userIds = array();
+        $rows = array();
+        $reportDates = array();
+
+        $users = User::select('id','name')->where('active', 1)->get();
+        foreach($users as $key => $user){
+            array_push($userIds, $user->id);
+        }
+
+        $reports = Report::whereIn('user_id', $userIds)
+            ->whereMonth('start_time', Carbon::now()->month)
+            ->whereYear('start_time', Carbon::now()->year)
+            ->orderBy('start_time', 'asc')
+            ->get();
+
+        foreach($users as $user){
+            $row = array();
+            $hour = 0;
+            $mins = 0;
+
+            if(!isset($row['username'])){
+                $row['username'] = $user->name;
+                $row['userId'] = $user->id;
+            }
+
+            foreach($reports as $report){
+                $reportDate = ['date' => date('d.m.Y', strtotime($report->start_time))];
+                array_push($reportDates, $reportDate);
+
+                if($user->id == $report->user_id){
+                    $start_time = new DateTime($report->start_time);//start time
+                    $end_time = new DateTime($report->end_time);//end time
+                    $result = $start_time->diff($end_time);
+            
+                    $hour += $result->h;
+                    $mins += $result->i;
+                    
+                    $row[date('d.m.Y', strtotime($report->start_time))] = $result->h.'h '.$result->i.'min';
+                }
+            }
+
+            if(!empty($row)){
+                $row['finalTime'] = $hour.'h '.$mins.'min';
+                array_push($rows, $row);
+            }
+        }
+
+        $result = array_unique($reportDates, SORT_REGULAR);
+        
+        return Inertia::render('DashboardReports', [
+            'reportDates' => $result,
+            'reportTimes' => $rows,
+        ]);
+    }
+
+    public function changeReportsMonth(Request $request){
+        $userIds = array();
+        $rows = array();
+        $reportDates = array();
+
+        $users = User::select('id','name')->where('active', 1)->get();
+        foreach($users as $key => $user){
+            array_push($userIds, $user->id);
+        }
+
+        if(is_null($request->reportDate)){
+            $year = Carbon::now()->year;
+            $month = Carbon::now()->month;
+        }
+        else{
+            $tmpDate = explode('-', $request->reportDate);
+            $year = $tmpDate[0];
+            $month = $tmpDate[1];
+        }
+
+        $reports = Report::whereIn('user_id', $userIds)
+        ->whereMonth('start_time', $month)
+        ->whereYear('start_time', $year)
+        ->orderBy('start_time', 'asc')
+        ->get();
+
+        foreach($users as $user){
+            $row = array();
+            $hour = 0;
+            $mins = 0;
+
+            if(!isset($row['username'])){
+                $row['username'] = $user->name;
+                $row['userId'] = $user->id;
+            }
+
+            foreach($reports as $report){
+                $reportDate = ['date' => date('d.m.Y', strtotime($report->start_time))];
+                array_push($reportDates, $reportDate);
+
+                if($user->id == $report->user_id){
+                    $start_time = new DateTime($report->start_time);//start time
+                    $end_time = new DateTime($report->end_time);//end time
+                    $result = $start_time->diff($end_time);
+            
+                    $hour += $result->h;
+                    $mins += $result->i;
+                    
+                    $row[date('d.m.Y', strtotime($report->start_time))] = $result->h.'h '.$result->i.'min';
+                }
+            }
+
+            if(!empty($row)){
+                $row['finalTime'] = $hour.'h '.$mins.'min';
+                array_push($rows, $row);
+            }
+        }
+
+        $result = array_unique($reportDates, SORT_REGULAR);
+
+        $data = [
+            'reportDates' => $result,
+            'reportTimes' => $rows,
+        ];
+
+        return $data;
     }
 }

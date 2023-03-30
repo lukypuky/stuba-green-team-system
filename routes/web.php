@@ -128,6 +128,9 @@ Route::middleware([
     Route::post('/dashboard-vykaz-update', [ReportController::class, 'updateReport'])->name('dashboard-update-report');
     Route::post('/dashboard-vykaz-delete', [ReportController::class, 'deleteReport'])->name('dashboard-delete-report');
 
+    Route::get('/dashboard-prehlad-vykazov', [ReportController::class, 'getAllReports'])->name('dashboard-get-all-reports');
+    Route::post('/dashboard-prehlad-vykazov', [ReportController::class, 'changeReportsMonth'])->name('dashboard-change-reports-month');
+
     Route::get('/dashboard-moje-ulohy', [TaskController::class, 'getModalTaskData'])->name('dashboard-tasks');
     Route::post('/dashboard-moje-ulohy', [TaskController::class, 'storeNewTask'])->name('dashboard-store-task');
     Route::get('/dashboard-ulohy/{id}', [TaskController::class, 'getTaskDetail'])->name('dashboard-task-detail');
