@@ -3,8 +3,11 @@
         <div>
             <Link :href="route('dashboard-my-orders')" :class="route().current('dashboard-my-orders') ? 'active' : ''" class="menu-item">Moje objednávky</Link>
         </div>
-        <div v-if="this.roles.includes($page.props.user.role_id) || $page.props.user.is_admin == 1">
+        <div v-if="this.rolesIds.includes($page.props.user.role_id)">
             <Link :href="route('dashboard-all-orders')" :class="route().current('dashboard-all-orders') ? 'active' : ''" class="menu-item">Všetky objednávky</Link>
+        </div>
+        <div>
+            <Link :href="route('dashboard-van-reservations')" :class="route().current('dashboard-van-reservations') ? 'active' : ''" class="menu-item">Rezervácie dodávky</Link>
         </div>
     </div>
 </template>
@@ -19,7 +22,7 @@
         },
         data() {
             return {
-                roles: [
+                rolesIds: [
                     0,
                     1,
                     2,

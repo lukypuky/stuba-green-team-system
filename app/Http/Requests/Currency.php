@@ -32,9 +32,9 @@ class Currency extends FormRequest
 
     public function messages(){
         return [
-            'currency_title.required' => 'Toto pole je povinné',
-            'currency_symbol.required' => 'Toto pole je povinné',
-            'shortcut.required' => 'Toto pole je povinné',
+            'currency_title.required' => 'Toto pole je povinné.',
+            'currency_symbol.required' => 'Toto pole je povinné.',
+            'shortcut.required' => 'Toto pole je povinné.',
         ];
     }
 }

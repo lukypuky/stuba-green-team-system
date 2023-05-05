@@ -33,11 +33,11 @@ class Report extends FormRequest
 
     public function messages(){
         return [
-            'task_id.required' => 'Toto pole je povinné',
-            'report_title.required' => 'Toto pole je povinné',
-            'start_time.required' => 'Toto pole je povinné',
-            'end_time.required' => 'Toto pole je povinné!',
-            'end_time.after' => 'Zadaný čas musí byť po začiatočnom čase',
+            'task_id.required' => 'Toto pole je povinné.',
+            'report_title.required' => 'Toto pole je povinné.',
+            'start_time.required' => 'Toto pole je povinné.',
+            'end_time.required' => 'Toto pole je povinné.',
+            'end_time.after' => 'Zadaný čas musí byť po začiatočnom čase.',
         ];
     }
 }

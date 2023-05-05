@@ -33,11 +33,11 @@ class User extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'Toto pole je povinné',
-            'email.required' => 'Toto pole je povinné',
-            'email.email' => 'Zlý formát emailovej adresy',
-            'role_id.required' => 'Toto pole je povinné',
-            'division_id.required' => 'Toto pole je povinné!',
+            'name.required' => 'Toto pole je povinné.',
+            'email.required' => 'Toto pole je povinné.',
+            'email.email' => 'Zlý formát emailovej adresy.',
+            'role_id.required' => 'Toto pole je povinné.',
+            'division_id.required' => 'Toto pole je povinné.',
         ];
     }
 }

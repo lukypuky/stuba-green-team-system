@@ -44,7 +44,7 @@ const updatePassword = () => {
         </template>
 
         <template #description>
-            Uistite sa, že váš účet používa dlhé, náhodné heslo, aby ste zostali v bezpečí.
+            Uisti sa, že Tvoj účet používa dlhé, náhodné heslo, aby si zostal v bezpečí.
         </template>
 
         <template #form>
@@ -89,12 +89,15 @@ const updatePassword = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Uložené
+                Uložené.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <!-- <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Uložiť
-            </PrimaryButton>
+            </PrimaryButton> -->
+            <button class="buttons" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Uložiť
+            </button>
         </template>
     </FormSection>
 </template>

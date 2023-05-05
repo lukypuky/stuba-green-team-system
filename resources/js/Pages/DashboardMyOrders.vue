@@ -34,8 +34,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <button @click="openModal" class="buttons">Pridať objednávku</button>
+                    <div class="lg:flex mb-3">
+                        <div class="mr-3 custom-margin">
+                            <button @click="openModal" class="buttons">Pridať objednávku</button>
+                        </div>
+                        <div class="mr-3 custom-margin">
+                            <input type="text" class="rounded-md" v-model="this.findOrder.findOrderString"
+                            placeholder="Vyhľadať objednávku">
+                        </div>
+                        <div>
+                            <button class="buttons" id="searchOrdersButton" @click="searchOrder">Hľadať</button>
+                        </div>
                     </div>
                     <div>
                         <OrderModal v-if="this.showModal" @closeModal="closeModal" @saveOrder="saveOrder" :form="this.newOrder" :currencies="this.currencies" :orderPriorities="this.orderPriorities" 
@@ -64,11 +73,11 @@
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Poznámka</th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum zadania</th>
                                     <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum úpravy</th>
-                                    <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum dodania</th>
+                                    <!-- <th class="p-3 text-sm font-semibold tracking-wide text-left whitespace-nowrap">Dátum dodania</th> -->
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <tr class="bg-white" v-for="(order, index) in this.orders.data" :key="index">
+                                <tr class="bg-white" v-for="(order, index) in this.newOrders.data" :key="index">
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Akcie-->
                                         <div class="flex">
                                             <div class="pr-2">
@@ -127,15 +136,15 @@
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Dátum úpravy-->
                                         {{ order.updated_at }}
                                     </td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> <!--Dátum dodania-->
+                                    <!-- <td class="p-3 text-sm text-gray-700 whitespace-nowrap"> Dátum dodania
                                         {{ order.delivery_date }}
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div>
-                        <Pagination :links="this.orders.links"/>
+                        <Pagination :links="this.newOrders.links"/>
                     </div>
                 </div>
             </div>
@@ -152,6 +161,7 @@
     import { Inertia } from '@inertiajs/inertia';
     import ApprovalIcon from '@/Components/OrderIcons.vue';
     import Pagination from '@/Components/Pagination.vue';
+    import axios from 'axios';
 
     export default {
         name: 'DashboardMyOrders',
@@ -192,6 +202,7 @@
                 deletedObjectId: '',
                 showModal: false,
                 updateOrderFlag :false,
+                newOrders: {},
                 newOrder: {
                     id: '',
                     order_number: '',
@@ -209,7 +220,9 @@
                     order_comment: '',
                     delivery_date: '',
                     approval: '',
-                }
+                    created_by_user_id: '',
+                },
+                findOrder: {findOrderString: '', screen: 1},
             }
         },
         methods: {
@@ -229,6 +242,7 @@
                     Inertia.post(route("dashboard-update-order"), param, {
                         onSuccess: page => {
                             if (Object.entries(page.props.errors).length === 0) {
+                                this.newOrders = page.props.orders;
                                 this.closeModal();
                             }
                         }
@@ -238,6 +252,7 @@
                     Inertia.post(route("dashboard-store-order"), param, {
                         onSuccess: page => {
                             if (Object.entries(page.props.errors).length === 0) {
+                                this.newOrders = page.props.orders;
                                 this.closeModal();
                             }
                         }
@@ -246,20 +261,25 @@
             },
             deleteOrderModal(orderId){
                 this.showDeleteModal = true;
-                this.deletedObjectId = orderId;
+                this.deletedObjectId = orderId.toString();
             },
             deleteObject(param){
                 var request = {id: param};
 
-                Inertia.post(route("dashboard-delete-order"), request);
+                Inertia.post(route("dashboard-delete-order"), request, {
+                    onSuccess: page => {
+                        if (Object.entries(page.props.errors).length === 0) {
+                            this.newOrders = page.props.orders;
+                            this.closeDeleteModal();
+                            this.closeModal();
+                        }
+                    }
+                });
 
                 Inertia.on("error", event => {
                     event.preventDefault();
                     console.log('error pri delete order', event.message);
                 });
-
-                this.closeDeleteModal();
-                this.closeModal();
             },
             resetModal(){
                 this.newOrder = {
@@ -279,6 +299,7 @@
                     order_comment: '',
                     delivery_date: '',
                     approval: '',
+                    created_by_user_id: '',
                 }
             },
             updateOrder(order){
@@ -298,9 +319,16 @@
                 this.newOrder.order_comment = order.order_comment;
                 this.newOrder.delivery_date = order.delivery_date;
                 this.newOrder.approval = order.approval;
+                this.newOrder.created_by_user_id = order.created_by_user_id;
 
                 this.updateOrderFlag = true;
                 this.showModal = true;
+            },
+            searchOrder(){
+                axios.post(route('dashboard-search-orders', this.findOrder))
+                .then((res) => {
+                    this.newOrders = res.data;
+                });
             },
         },
         computed: {
@@ -326,6 +354,9 @@
 
                 return false;
             },
+        },
+        beforeMount() {
+            this.newOrders = this.orders;
         },
     }
 </script>

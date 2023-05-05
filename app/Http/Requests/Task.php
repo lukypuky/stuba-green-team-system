@@ -35,12 +35,12 @@ class Task extends FormRequest
 
     public function messages(){
         return [
-            'type_id.required' => 'Toto pole je povinné',
-            'task_title.required' => 'Toto pole je povinné',
-            'task_priority_id.required' => 'Toto pole je povinné',
-            'division_id.required' => 'Toto pole je povinné!',
-            'area_id.required' => 'Toto pole je povinné',
-            'user_id_assigned.required' => 'Toto pole je povinné',
+            'type_id.required' => 'Toto pole je povinné.',
+            'task_title.required' => 'Toto pole je povinné.',
+            'task_priority_id.required' => 'Toto pole je povinné.',
+            'division_id.required' => 'Toto pole je povinné.',
+            'area_id.required' => 'Toto pole je povinné.',
+            'user_id_assigned.required' => 'Toto pole je povinné.',
         ];
     }
 }

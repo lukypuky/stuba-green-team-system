@@ -30,7 +30,7 @@ class Meeting extends FormRequest
 
     public function messages(){
         return [
-            'meeting_date.required' => 'Toto pole je povinné',
+            'meeting_date.required' => 'Toto pole je povinné.',
         ];
     }
 }

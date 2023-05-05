@@ -32,7 +32,7 @@
 
                 <div>
                     <div>S pozdravom,</div>
-                    <div>{{ config('app.name') }}</div>
+                    <div>STUBA Green Team</div>
                 </div>
             </div>
 
@@ -40,8 +40,8 @@
 
             <div style="text-align: left">
                 <strong>
-                    Ak máš problémy s kliknutím na tlačidlo, skopíruj a vlož webovú adresu
-                    <em>{{ $actionUrl }}</em> do svojho prehliadača.
+                    Ak máš problémy s kliknutím na tlačidlo, skopíruj a vlož do svojho prehliadača webovú adresu
+                    <em style="color: #5bc157;">{{ $actionUrl }}</em>.
                 </strong>
             </div>
         </div>

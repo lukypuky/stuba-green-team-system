@@ -9,6 +9,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VanReservationController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -122,11 +123,13 @@ Route::middleware([
     Route::post('/dashboard-objednavky-pridanie', [OrderController::class, 'storeOrder'])->name('dashboard-store-order');
     Route::post('/dashboard-objednavky-update', [OrderController::class, 'updateOrder'])->name('dashboard-update-order');
     Route::post('/dashboard-objednavky-delete', [OrderController::class, 'deleteOrder'])->name('dashboard-delete-order');
+    Route::post('/dashboard-hladaj-objednavky', [OrderController::class, 'getSearchedOrders'])->name('dashboard-search-orders');
 
     Route::get('/dashboard', [ReportController::class, 'getReports'])->name('dashboard');
     Route::post('/dashboard-vykaz-pridanie', [ReportController::class, 'storeReport'])->name('dashboard-store-report');
     Route::post('/dashboard-vykaz-update', [ReportController::class, 'updateReport'])->name('dashboard-update-report');
     Route::post('/dashboard-vykaz-delete', [ReportController::class, 'deleteReport'])->name('dashboard-delete-report');
+    Route::post('/dashboard-vykaz-zmena-pouzivatela', [ReportController::class, 'changeReportUser'])->name('dashboard-change-report-user');
 
     Route::get('/dashboard-prehlad-vykazov', [ReportController::class, 'getAllReports'])->name('dashboard-get-all-reports');
     Route::post('/dashboard-prehlad-vykazov', [ReportController::class, 'changeReportsMonth'])->name('dashboard-change-reports-month');
@@ -145,4 +148,10 @@ Route::middleware([
     Route::post('/dashboard-dochadzka-pridanie', [AttendanceController::class, 'storeAttendance'])->name('dashboard-store-attendance');
     Route::post('/dashboard-dochadzka-update', [AttendanceController::class, 'updateAttendance'])->name('dashboard-update-attendance');
     Route::post('/dashboard-dochadzka-delete', [AttendanceController::class, 'deleteAttendance'])->name('dashboard-delete-attendance');
+
+    Route::get('/dashboard-rezervacie-dodavky', [VanReservationController::class, 'getVanReservations'])->name('dashboard-van-reservations');
+    Route::post('/dashboard-rezervacia-dodavky-pridanie', [VanReservationController::class, 'storeVanReservation'])->name('dashboard-store-van-reservation');
+    Route::post('/dashboard-rezervacia-dodavky-update', [VanReservationController::class, 'updateReservation'])->name('dashboard-update-van-reservation');
+    Route::post('/dashboard-rezervacia-dodavky-delete', [VanReservationController::class, 'deleteReservation'])->name('dashboard-delete-van-reservation');
+    Route::post('/dashboard-hladaj-rezervacie-dodavky', [VanReservationController::class, 'getSearchedVanReservations'])->name('dashboard-search-van-reservations');
 });

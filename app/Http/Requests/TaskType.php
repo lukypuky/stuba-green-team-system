@@ -30,7 +30,7 @@ class TaskType extends FormRequest
 
     public function messages(){
         return [
-            'task_type_title.required' => 'Toto pole je povinné',
+            'task_type_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

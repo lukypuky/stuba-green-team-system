@@ -18,7 +18,7 @@
                     <div class="page-heading">
                         <div class="flex justify-between">
                             <div>
-                                <h1>Výkazy</h1>
+                                <h1>Výkazy práce</h1>
                             </div>
                             <div class="md:hidden">
                                 <div class="dropdown pl-3">
@@ -35,6 +35,11 @@
                         </div>
                     </div>
 
+                    <div class="select-margin" v-if="this.rolesIds.includes($page.props.user.role_id)">
+                        <select class="select select-bordered w-full max-w-xs custom-select select-margin leading-6" id="userid" @change="changeReportUser">
+                        <option v-for="(user, index) in this.users" :key="index" :value="user.id">{{ user.name }}</option>
+                        </select>
+                    </div>
                     <Calendar @dateClick="dateClick" @reportClick="reportClick" :reports="this.newReports"/>
                 </div>
             </div>
@@ -51,7 +56,7 @@
     import ReportMenu from '@/Components/ReportMenu.vue';
     import moment from 'moment';
     import { Inertia } from '@inertiajs/inertia';
-    // import axios from 'axios';
+    import axios from 'axios';
 
     export default {
         name: 'DashboardReport',
@@ -72,6 +77,10 @@
                 default: () => { }
             },
             modalTasks: {
+                type: Object,
+                default: () => { }
+            },
+            users: {
                 type: Object,
                 default: () => { }
             },
@@ -113,7 +122,12 @@
                     date: '',
                     start_time: '',
                     end_time: '',
-                }
+                },
+                rolesIds: [
+                    0,
+                    1,
+                    2,
+                ],
             };
         },
         beforeMount() {
@@ -219,10 +233,46 @@
                     end_time: end_date,
                 }
             },
+            changeReportUser(param){
+                var newUser  = { 
+                    id: param.target.value,
+                };
+
+                axios.post(route('dashboard-change-report-user', newUser))
+                .then((res) => {
+                    this.newReports = res.data.reports;
+                    // console.log(res);
+                });
+            }
         },
     }
 </script>
 
 <style scoped>
-    
+    .custom-select {
+        --tw-ring-color: #454545;
+        --tw-ring-shadow: #454545;
+    }
+
+    option:hover {
+        background-color: var(--sgt-color);
+    }
+
+    .custom-select:focus {
+        --tw-ring-color: #454545;
+        --tw-ring-shadow: #454545;
+        border-color: var(--sgt-color);
+    }
+
+    .select-margin {
+        margin-right: 12px;
+        margin-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+        .select-margin {
+        margin-right: 0;
+        margin-bottom: 4px;
+        }
+    }
 </style>

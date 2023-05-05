@@ -51,7 +51,7 @@ class TaskController extends Controller
             // 'attachment',
         ]);
 
-        return redirect()->back()->with('success_object_save', 'Uložené');
+        return redirect()->back()->with('success_object_save', 'Uložené.');
     }
 
     public function getTaskDetail($id){
@@ -107,9 +107,10 @@ class TaskController extends Controller
             'status_id' => $request->status_id,
             'area_id' => $request->area_id,
             'deadline' => $request->deadline,
+            'task_title' => $request->task_title,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'Upravené');
+        return redirect()->back()->with('success_object_update_save', 'Upravené.');
     }
 
     public function getAllTasks(){
@@ -143,7 +144,7 @@ class TaskController extends Controller
             return redirect()->back()->with('unsuccess_object_delete', 'Záznam nie je možné odstrániť');
         }
 
-        return redirect()->route('dashboard-tasks')->with('success_object_delete', 'Odstránené');
+        return redirect()->route('dashboard-tasks')->with('success_object_delete', 'Odstránené.');
     }
 
     public function storeComment(Request $request){

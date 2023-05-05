@@ -21,7 +21,7 @@ class AttendanceController extends Controller
         $meetingIds = array();
         $rows = array();
 
-        $users = User::select('id','name')->where('active', 1)->get();
+        $users = User::select('id','name')->where('active', 1)->where('role_id', '!=', 0)->get();
         $divisions = Division::all();
         $meetingTypes = MeetingType::all();
         $attendanceStatuses = AttendanceStatus::all();
@@ -106,13 +106,13 @@ class AttendanceController extends Controller
         $meetingTypeId = $request->meetingTypeId;
 
         if($meetingTypeId == 3){
-            $users = User::select('id','name')->where('active', 1)->where('role_id', 1)->orWhere('role_id', 2)->get();
+            $users = User::select('id','name')->where('active', 1)->where('role_id', 1)->orWhere('role_id', 2)->where('role_id', '!=', 0)->get();
         }
         elseif(!is_null($request->divisionId)){
-            $users = User::select('id','name')->where('active', 1)->where('division_id', $request->divisionId)->get();
+            $users = User::select('id','name')->where('active', 1)->where('division_id', $request->divisionId)->where('role_id', '!=', 0)->get();
         }
         else{
-            $users = User::select('id','name')->where('active', 1)->get();
+            $users = User::select('id','name')->where('active', 1)->where('role_id', '!=', 0)->get();
         }
 
         $divisions = Division::all();
@@ -189,7 +189,7 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_object_save', 'Uložené');
+        return redirect()->route('dashboard-attendance')->with('success_object_save', 'Uložené.');
     }
 
     public function updateAttendance(Request $request){
@@ -199,13 +199,13 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success_object_update_save', 'Upravené');
+        return redirect()->route('dashboard-attendance')->with('success_object_update_save', 'Upravené.');
     }
 
     public function deleteAttendance(Request $request){
         MeetingUser::where('meeting_id', $request->meeting_id)->delete();
         Meeting::where('id', $request->meeting_id)->delete();
         
-        redirect()->back()->with('success_object_delete', 'Odstránené');
+        redirect()->route('dashboard-attendance')->with('success_object_delete', 'Odstránené.');
     }
 }

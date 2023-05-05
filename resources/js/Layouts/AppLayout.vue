@@ -44,7 +44,7 @@ const logout = () => {
                                     Nákup
                                 </NavLink>
                                 <NavLink :href="route('dashboard-get-users')"
-                                    :class="this.adminPages.includes(route().current()) ? 'active' : ''" v-if="this.roles.includes($page.props.user.role_id) || $page.props.user.is_admin == 1">
+                                    :class="this.adminPages.includes(route().current()) ? 'active' : ''" v-if="this.rolesIds.includes($page.props.user.role_id)">
                                     Admin panel
                                 </NavLink>
                             </div>
@@ -210,6 +210,7 @@ const logout = () => {
                 orderPages: [
                     'dashboard-my-orders',
                     'dashboard-all-orders',
+                    'dashboard-van-reservations',
                 ],
                 adminPages: [
                     'dashboard-store-user-page',
@@ -249,7 +250,7 @@ const logout = () => {
                 profile: [
                     'profile.show',
                 ],
-                roles: [
+                rolesIds: [
                     0,
                     1,
                     2,

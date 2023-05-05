@@ -30,7 +30,7 @@ class MeetingType extends FormRequest
 
     public function messages(){
         return [
-            'meeting_type_title.required' => 'Toto pole je povinné',
+            'meeting_type_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

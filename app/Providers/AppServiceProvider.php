@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
                 'success_object_update_save' => Session::get('success_object_update_save'),
                 'success_object_delete' => Session::get('success_object_delete'),
                 'unsuccess_object_delete' => Session::get('unsuccess_object_delete'),
+                'unsuccess_user_save' => Session::get('unsuccess_user_save'),
             ];
         });
 

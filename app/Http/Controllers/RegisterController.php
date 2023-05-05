@@ -27,6 +27,12 @@ class RegisterController extends Controller
     }
 
     public function storeUser(UserRequest $request){
+        $checkEmail = User::where('email', $request->email)->first();
+
+        if(!is_null($checkEmail)){
+            return redirect()->back()->with('unsuccess_user_save', 'Tento email už niekto používa.');
+        }
+
         $password = Str::random(10);
 
         $user = User::create([
@@ -39,6 +45,6 @@ class RegisterController extends Controller
 
         event(new Registered($user));
         Mail::to('lukash.baca@gmail.com')->send(new RegisterUser($password, $request->email));
-        return redirect()->back()->with('success_object_save', 'Nový používateľ bol vytvorený');
+        return redirect()->route('dashboard-get-users')->with('success_object_save', 'Nový používateľ bol vytvorený.');
     }
 }

@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'Nesprávne meno alebo heslo',
-    'password' => 'Zadané heslo je nesprávne',
-    'throttle' => 'Príliš veľa pokusov o prihlásenie. Skúste to o :seconds sekúnd',
+    'failed' => 'Nesprávne meno alebo heslo.',
+    'password' => 'Zadané heslo je nesprávne.',
+    'throttle' => 'Príliš veľa pokusov o prihlásenie. Skúste to o :seconds sekúnd.',
 
 ];

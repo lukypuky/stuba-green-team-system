@@ -9,6 +9,7 @@
                 role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <form>
                     <input type="hidden" name="id" v-model="form.id"/>
+                    <input type="hidden" name="created_by_user_id" v-model="form.created_by_user_id"/>
                     <div class="flex justify-between border-b border-gray-100 px-4 pt-4 font-bold">
                         <div>
                             <span class="text-gray-700" v-if="this.updateOrderFlag == false">Pridať novú objednávku</span>
@@ -154,22 +155,26 @@
                                     id="order_comment">
                                 </textarea>
                             </div>
-                            <div class="mb-3" v-if="updateOrderFlag">
+
+                            <!-- <div class="mb-3" v-if="updateOrderFlag">
                                 <label for="delivery_date"
                                     class="block text-gray-700 text-sm font-bold mb-2">Dátum dodania</label>
                                 <input type="date" v-model="form.delivery_date"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="delivery_date" />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3 mb-3" v-if="updateOrderFlag">
-                                <label for="approval"
-                                    class="block text-gray-700 text-sm font-bold mb-2">Schválenie</label>
-                                <select id="approval" v-model="form.approval"
-                                    class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                    <option value="1">Schválené</option>
-                                    <option value="2">Čaká na schálenie</option>
-                                    <option value="3">Neschálené</option>
-                                </select>
+                            </div> -->
+
+                            <div v-if="this.rolesIds.includes($page.props.user.role_id)">
+                                <div class="col-span-6 sm:col-span-3 mb-3" v-if="updateOrderFlag">
+                                    <label for="approval"
+                                        class="block text-gray-700 text-sm font-bold mb-2">Schválenie</label>
+                                    <select id="approval" v-model="form.approval"
+                                        class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                        <option value="1">Schválené</option>
+                                        <option value="2">Čaká na schálenie</option>
+                                        <option value="3">Neschálené</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,7 +195,7 @@
 <script>
 
 export default {
-    name: "TaskModal",
+    name: "OrderModal",
     props: {
         form: {
             type: Object,
@@ -216,6 +221,15 @@ export default {
             type: Object,
             default: () => { }
         }, 
+    },
+    data(){
+        return{
+            rolesIds: [
+                0,
+                1,
+                2,
+            ],
+        }
     },
     methods: {
         closeModal() {

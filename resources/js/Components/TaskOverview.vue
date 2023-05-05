@@ -4,7 +4,7 @@
             <div class="page-heading">
                 <div class="flex justify-between">
                     <div>
-                        <h1>Prehľad priradených úloh</h1>
+                        <h1>Prehľad mojich úloh</h1>
                     </div>
                     <div class="md:hidden">
                         <div class="dropdown pl-3">

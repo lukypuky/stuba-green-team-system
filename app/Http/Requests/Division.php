@@ -30,7 +30,7 @@ class Division extends FormRequest
 
     public function messages(){
         return [
-            'division_title.required' => 'Toto pole je povinné',
+            'division_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

@@ -25,7 +25,7 @@ const submit = () => {
 
     <AuthenticationCard>
         <div class="mb-4 text-sm text-gray-600">
-            Zabudol si heslo ? Žiaden problém. Stačí ak zadáš svoju emailovú adresu a my ti pošleme email s odkazom na obnovenie hesla, ktorý ti umožní zmeniť si heslo.
+            Zabudol si heslo ? Žiadny problém. Stačí, ak zadáš svoju emailovú adresu a my Ti pošleme email s odkazom na obnovenie hesla, ktorý Ti umožní zmeniť si heslo.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">

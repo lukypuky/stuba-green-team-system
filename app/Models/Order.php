@@ -36,5 +36,6 @@ class Order extends Model
     protected $casts = [
         'created_at' => 'datetime:d.m.Y H:m',
         'updated_at' => 'datetime:d.m.Y H:m',
+        // 'delivery_date' => 'datetime:d.m.Y',
     ];
 }

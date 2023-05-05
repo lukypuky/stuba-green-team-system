@@ -30,7 +30,7 @@ class OrderPriority extends FormRequest
 
     public function messages(){
         return [
-            'order_priority_title.required' => 'Toto pole je povinné',
+            'order_priority_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

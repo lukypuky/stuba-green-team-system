@@ -30,7 +30,7 @@ class TaskPriority extends FormRequest
 
     public function messages(){
         return [
-            'task_priority_title.required' => 'Toto pole je povinné',
+            'task_priority_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

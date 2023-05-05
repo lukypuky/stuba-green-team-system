@@ -23,7 +23,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'current_password' => ['required', 'string', 'current_password:web'],
             'password' => $this->passwordRules(),
         ], [
-            'current_password.current_password' => __('Zadané heslo sa nezhoduje s vaším aktuálnym heslom'),
+            'current_password.current_password' => __('Zadané heslo sa nezhoduje s tvojim aktuálnym heslom.'),
         ])->validateWithBag('updatePassword');
 
         $user->forceFill([

@@ -83,7 +83,7 @@ const clearPhotoFileInput = () => {
         </template>
 
         <template #description>
-            Upravte svoje meno, alebo emailovú adresu.
+            Uprav svoje meno, alebo emailovú adresu.
         </template>
 
         <template #form>
@@ -148,12 +148,15 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Uložené
+                Uložené.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <!-- <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Uložiť
-            </PrimaryButton>
+            </PrimaryButton> -->
+            <button class="buttons" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Uložiť
+            </button>
         </template>
     </FormSection>
 </template>

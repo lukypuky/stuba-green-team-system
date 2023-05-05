@@ -157,14 +157,14 @@ return [
             'rule-name' => 'custom-message',
         ],
         'name' => [
-            'required' => 'Toto pole je povinné',
+            'required' => 'Toto pole je povinné.',
         ],
         'email' => [
             'unique' => 'Tento email už niekto používa.',
             'regex' => 'Formát emailu je neplatný.'
         ],
         'password' => [
-            'required' => 'Toto pole je povinné',
+            'required' => 'Toto pole je povinné.',
             'confirmed' => 'Potvrdenie hesla sa nezhoduje so zadaným heslom.',
             'min' => 'Heslo by malo obsahovať aspoň 8 znakov.',
         ],

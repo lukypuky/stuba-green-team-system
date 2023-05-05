@@ -140,7 +140,7 @@
             },
             deleteOrderModal(orderId){
                 this.showDeleteModal = true;
-                this.deletedObjectId = orderId.id;
+                this.deletedObjectId = orderId.id.toString();
             },
             deleteObject(param){
                 var request = {id: param};

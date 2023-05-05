@@ -7,7 +7,7 @@
 
   <div class="select-margin">
     <select class="select select-bordered w-full max-w-xs custom-select select-margin leading-6" id="divisionType" v-if="this.divisionSelect" @change="changeDivision">
-      <option disabled selected value="0">Zvoľte dátum</option>
+      <option disabled selected value="0">Zvoľte divíziu</option>
       <option v-for="(division, index) in this.divisions" :key="index" :value="division.id">{{ division.division_title }}</option> 
     </select>
   </div>

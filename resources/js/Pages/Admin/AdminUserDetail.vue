@@ -5,6 +5,11 @@
                 <p class="text-sm">{{ $page.props.flash.success_object_update_save }}</p>
             </div>
         </div>
+        <div class="relative w-full">
+            <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message-uunsuccess" v-if="showUnsuccessfulAlert">
+                <p class="text-sm">{{ $page.props.flash.unsuccess_user_save }}</p>
+            </div>
+        </div>
         <div class="container page-container">
             <div class="mx-auto grid grid-cols-12 gap-4 p-1">
                 <div class="col-span-12 sm:col-span-2">
@@ -95,16 +100,6 @@
                                 </div>
                             </div>
                             <div class="admin-card-row">
-                                <div>Adminské práva: </div>
-                                <div>
-                                    <select id="role_id" v-model="this.userDetail[0].is_admin" :disabled="inputEnable"
-                                        class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" required>
-                                        <option value="0">Nie</option>
-                                        <option value="1">Áno</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="admin-card-row">
                                 <div>Členstvo: </div>
                                 <div>
                                     <select id="role_id" v-model="this.userDetail[0].active" :disabled="inputEnable"
@@ -112,6 +107,15 @@
                                         <option value="0">Nie</option>
                                         <option value="1">Áno</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="admin-card-row">
+                                <div>Adminské práva: </div>
+                                <div v-if="this.rolesIds.includes(userDetail[0].role_id)">
+                                    Áno
+                                </div>
+                                <div v-else>
+                                    Nie
                                 </div>
                             </div>
                         </div>
@@ -157,9 +161,13 @@
                     email: this.userDetail[0].email,
                     division_id: this.userDetail[0].division_id,
                     role_id: this.userDetail[0].role_id,
-                    is_admin: this.userDetail[0].is_admin,
                     active: this.userDetail[0].active,
                 },
+                rolesIds: [
+                    0,
+                    1,
+                    2,
+                ],
             }
         },
         methods: {
@@ -173,7 +181,6 @@
                 this.userDetail[0].email = this.tmpUser.email;
                 this.userDetail[0].division_id = this.tmpUser.division_id;
                 this.userDetail[0].role_id = this.tmpUser.role_id;
-                this.userDetail[0].is_admin = this.tmpUser.is_admin;
                 this.userDetail[0].active = this.tmpUser.active;
             },
             update(){
@@ -193,6 +200,16 @@
 
                 return false;
             },
+            showUnsuccessfulAlert() {
+                if(this.$page.props.flash.unsuccess_user_save !== null) {
+                    setTimeout(() => {
+                        this.$page.props.flash.unsuccess_user_save = null
+                    }, 3000);
+                    return true;
+                }
+
+                return false;
+            }
         },
     }
 </script>

@@ -30,7 +30,7 @@ class OrderStatus extends FormRequest
 
     public function messages(){
         return [
-            'order_status_title.required' => 'Toto pole je povinné',
+            'order_status_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

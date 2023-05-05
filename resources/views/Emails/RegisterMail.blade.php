@@ -16,8 +16,8 @@
 
             <div style="text-align: left">
                 <div>
-                    bol ti vytvorený účet v systéme STUBA Green Team.<br>
-                    Zároveň ťa prosíme, aby si si zmenit svoje heslo po prvom prihlásení<br><br>
+                    bol Ti vytvorený účet v systéme STUBA Green Team.<br>
+                    Zároveň ťa prosíme, aby si si zmenil svoje heslo po prvom prihlásení.<br><br>
                 </div>
                 <div>
                     <div style="font-weight: bold;">
@@ -31,7 +31,7 @@
 
                 <div>
                     <div>S pozdravom,</div>
-                    <div>{{ config('app.name') }}</div>
+                    <div>STUBA Green Team</div>
                 </div>
             </div>
 

@@ -178,9 +178,15 @@
             this.newMeetingDates = this.meetingDates;
             this.newUsers = this.users;
             this.meetingType.meetingTypeId = 1;
+
+            // console.log(this.attendances);
+            // console.log(this.meetingDates);
         },
         methods: {
             getMeetingTypeAttendance(param){
+                this.meetingType.meetingTypeId = param.meetingTypeId;
+                this.meetingType.divisionId = param.divisionId;
+
                 axios.post(route('dashboard-change-meeting-type', param))
                 .then((res) => {
                     this.newAttendances = res.data.attendances;

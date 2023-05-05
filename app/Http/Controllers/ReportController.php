@@ -15,6 +15,7 @@ use \DateTime;
 class ReportController extends Controller
 {
     public function getReports(){
+        $users = User::where('active', 1)->get();
         $reportsTmp = Report::where('user_id', Auth::user()->id)->get();
         $reports = array();
 
@@ -37,6 +38,7 @@ class ReportController extends Controller
         return Inertia::render('DashboardReport', [
             'reports' => $reports,
             'modalTasks' =>  $tasks,
+            'users' => $users,
         ]);
     }
 
@@ -50,7 +52,7 @@ class ReportController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->route('dashboard')->with('success_object_save', 'Uložené');
+        return redirect()->route('dashboard')->with('success_object_save', 'Uložené.');
     }
 
     public function updateReport(ReportRequest $request){
@@ -63,13 +65,13 @@ class ReportController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->back()->with('success_object_update_save', 'Upravené');
+        return redirect()->back()->with('success_object_update_save', 'Upravené.');
     }
 
     public function deleteReport(Request $request){
         Report::where('id', $request->id)->delete();
 
-        return redirect()->route('dashboard')->with('success_object_delete', 'Odstránené');
+        return redirect()->route('dashboard')->with('success_object_delete', 'Odstránené.');
     }
 
     public function getAllReports(){
@@ -191,6 +193,32 @@ class ReportController extends Controller
         $data = [
             'reportDates' => $result,
             'reportTimes' => $rows,
+        ];
+
+        return $data;
+    }
+
+    public function changeReportUser(Request $request){
+        $reportsTmp = Report::where('user_id', $request->id)->get();
+        $reports = array();
+
+        foreach($reportsTmp as $report){
+            $row = array();
+            $row['id'] = $report->id;
+            $row['title'] = $report->report_title;
+            $row['description'] = $report->description;
+            $row['user_id'] = $report->user_id;
+            $row['task_id'] = $report->task_id;
+            $row['start'] = $report->start_time;
+            $row['end'] = $report->end_time;
+            $row['color'] = $report->color;
+            $row['textColor'] = $report->textColor;
+
+            array_push($reports, $row);
+        }
+
+        $data = [
+            'reports' => $reports,
         ];
 
         return $data;

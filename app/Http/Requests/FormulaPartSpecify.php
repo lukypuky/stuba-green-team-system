@@ -30,7 +30,7 @@ class FormulaPartSpecify extends FormRequest
 
     public function messages(){
         return [
-            'formula_part_specify_title.required' => 'Toto pole je povinné',
+            'formula_part_specify_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

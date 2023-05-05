@@ -45,16 +45,16 @@ const closeModal = () => {
 <template>
     <ActionSection>
         <template #title>
-            Browser Sessions
+            Sessions prehliadačov
         </template>
 
         <template #description>
-            Spravujte a odhlasujte svoje aktívne relácie v iných prehliadačoch a zariadeniach
+            Spravuj a odhlasuj svoje aktívne sessions v iných prehliadačoch a zariadeniach
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                V prípade potreby sa môžete odhlásiť zo všetkých ostatných relácií prehliadača na všetkých svojich zariadeniach. Niektoré z vašich nedávnych relácií sú uvedené nižšie; tento zoznam však nemusí byť úplný. Ak máte pocit, že váš účet bol napadnutý, mali by ste si aktualizovať aj heslo            </div>
+                V prípade potreby sa môžeš odhlásiť zo všetkých ostatných sessions prehliadača na všetkých svojich zariadeniach. Niektoré z Tvojich nedávnych sessions sú uvedené nižšie; tento zoznam však nemusí byť úplný. Ak máš pocit, že Tvoj účet bol napadnutý, mal by si si aktualizovať aj heslo.</div>
 
             <!-- Other Browser Sessions -->
             <div v-if="sessions.length > 0" class="mt-5 space-y-6">
@@ -112,9 +112,13 @@ const closeModal = () => {
             </div>
 
             <div class="flex items-center mt-5">
-                <PrimaryButton @click="confirmLogout">
+                <!-- <PrimaryButton @click="confirmLogout">
                     Odhláste sa z iných prehliadačov
-                </PrimaryButton>
+                </PrimaryButton> -->
+
+                <button class="buttons" @click="confirmLogout">
+                    Odhlás sa z iných prehliadačov
+                </button>
 
                 <ActionMessage :on="form.recentlySuccessful" class="ml-3">
                     Odhlásený.
@@ -124,11 +128,11 @@ const closeModal = () => {
             <!-- Log Out Other Devices Confirmation Modal -->
             <DialogModal :show="confirmingLogout" @close="closeModal">
                 <template #title>
-                    Odhláste sa z iných prehliadačov
+                    Odhlás sa z iných prehliadačov
                 </template>
 
                 <template #content>
-                    Zadajte svoje heslo, aby ste potvrdili, že sa chcete odhlásiť z ostatných prehliadačov na všetkých svojich zariadeniach
+                    Zadaj svoje heslo, aby si potvrdil, že sa chceš odhlásiť z ostatných prehliadačov na všetkých svojich zariadeniach.
 
                     <div class="mt-4">
                         <TextInput
@@ -140,23 +144,31 @@ const closeModal = () => {
                             @keyup.enter="logoutOtherBrowserSessions"
                         />
 
-                        <InputError :message="'Nesprávne heslo'" class="mt-2" />
+                        <InputError :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <SecondaryButton @click="closeModal">
+                    <!-- <SecondaryButton @click="closeModal">
                         Zrušiť
-                    </SecondaryButton>
+                    </SecondaryButton> -->
+                    
+                    <button class="buttons-gray" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="closeModal">
+                        Zrušiť
+                    </button>
 
-                    <PrimaryButton
+                    <!-- <PrimaryButton
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="logoutOtherBrowserSessions"
                     >
                         Odhlásiť z ostatných prehliadačov
-                    </PrimaryButton>
+                    </PrimaryButton> -->
+
+                    <button class="buttons ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="logoutOtherBrowserSessions">
+                        Odhlásiť
+                    </button>
                 </template>
             </DialogModal>
         </template>

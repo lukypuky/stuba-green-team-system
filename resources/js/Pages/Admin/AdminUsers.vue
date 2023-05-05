@@ -2,7 +2,7 @@
     <AppLayout>
         <div class="relative w-full">
             <div class="absolute top-0 right-0 h-10 border-t border-b px-4 py-2 message" v-if="showAlert">
-                <p class="text-sm">{{ $page.props.flash.success_object_delete }}</p>
+                <p class="text-sm">{{ $page.props.flash.success_object_save }}</p>
             </div>
         </div>
         <div class="container page-container">
@@ -65,7 +65,7 @@
                                         <ActiveIcon :type="user.active"/>
                                     </td>
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                        <div v-if="user.is_admin == 1">
+                                        <div v-if="this.rolesIds.includes(user.role_id)">
                                             Áno
                                         </div>
                                         <div v-else>
@@ -121,7 +121,7 @@
                                     Adminské práva
                                  </div>
                                 <div>
-                                    <div v-if="user.is_admin == 1">
+                                    <div v-if="this.rolesIds.includes(user.role_id)">
                                         Áno
                                     </div>
                                     <div v-else>
@@ -181,6 +181,15 @@
                 default: () => { }
             },
         },
+        data(){
+            return {
+                rolesIds: [
+                    0,
+                    1,
+                    2,
+                ],
+            }
+        },
         methods: {
             getDetail(param){
                 var request = {id: param};
@@ -189,9 +198,9 @@
         },
         computed: {
             showAlert() {
-                if(this.$page.props.flash.success_object_delete !== null) {
+                if(this.$page.props.flash.success_object_save !== null) {
                     setTimeout(() => {
-                        this.$page.props.flash.success_object_delete = null
+                        this.$page.props.flash.success_object_save = null
                     }, 3000);
                     return true;
                 }

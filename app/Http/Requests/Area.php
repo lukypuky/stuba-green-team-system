@@ -30,7 +30,7 @@ class Area extends FormRequest
 
     public function messages(){
         return [
-            'area_title.required' => 'Toto pole je povinné',
+            'area_title.required' => 'Toto pole je povinné.',
         ];
     }
 }

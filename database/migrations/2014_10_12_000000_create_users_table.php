@@ -23,13 +23,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->boolean('is_admin')->default(false);
+            // $table->boolean('is_admin')->default(false);
             $table->boolean('first_login_pass_changed')->default(false);
             $table->boolean('active')->default(true);
-            $table->unsignedBigInteger('role_id'); 
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->unsignedBigInteger('division_id')->nullable(); 
-            $table->foreign('division_id')->references('id')->on('divisions');
             $table->timestamps();
         });
     }

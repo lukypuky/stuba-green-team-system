@@ -106,7 +106,7 @@
                 .then((res) => {
                     this.newReportDates = res.data.reportDates;
                     this.newReportTimes = res.data.reportTimes;
-                    console.log(res);
+                    // console.log(res);
                 });
             }
         },

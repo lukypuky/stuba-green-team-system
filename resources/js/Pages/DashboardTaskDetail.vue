@@ -21,7 +21,7 @@
                     <div class="page-heading mb-0">
                         <div class="flex justify-between mb-3">
                             <div>
-                                <h1>{{ this.task[0].task_title }}</h1>
+                                <h1>{{ task[0].task_title }}</h1>
                             </div>
                             <div class="md:hidden">
                                 <div class="dropdown pl-3">
@@ -58,6 +58,17 @@
                     <div class="cards">
                         <input type="hidden" name="id" v-model="this.task.id" />
                         <div class="card bg-transparent">
+                            <div class="card-row">
+                                <div>Názov: <span class="text-red-500">*</span></div>
+                                <div>
+                                    <input type="text" v-model="this.task[0].task_title" :disabled="inputEnable"
+                                        class="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="task_title" placeholder="Názov" required/>
+                                    <div v-if="$page.props.errors.task_title" class="text-red-500">
+                                        {{ $page.props.errors.task_title }}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-row">
                                 <div>Typ: <span class="text-red-500">*</span></div>
                                 <div>
@@ -251,7 +262,9 @@ import DeleteModal from '@/Modals/DeleteModal.vue';
         },
         data() {
             return {
+                taskTitle: this.task[0].task_title,
                 tmpTask: {
+                    task_title: this.task[0].task_title,
                     type_id: this.task[0].type_id,
                     task_priority_id: this.task[0].task_priority_id,
                     division_id: this.task[0].division_id,
@@ -282,6 +295,7 @@ import DeleteModal from '@/Modals/DeleteModal.vue';
             resetTask(){
                 this.inputEnable = true;
 
+                this.taskDetail.task_title = this.tmpTask.task_title;
                 this.taskDetail.type_id = this.tmpTask.type_id;
                 this.taskDetail.task_priority_id = this.tmpTask.task_priority_id;
                 this.taskDetail.division_id = this.tmpTask.division_id;
@@ -295,6 +309,8 @@ import DeleteModal from '@/Modals/DeleteModal.vue';
                 this.inputEnable = true;
 
                 Inertia.post(route("dashboard-update-task"), this.task[0]);
+
+                this.taskTitle = this.task[0].task_title;
 
                 Inertia.on("error", event => {
                     event.preventDefault();
