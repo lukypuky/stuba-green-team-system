@@ -10,7 +10,10 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VanReservationController;
+use App\Http\Controllers\CustomPasswordResetLinkController;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\RoutePath;
 
 use App\Models\User;
 
@@ -29,6 +32,16 @@ use App\Models\User;
 
 Route::get('/', function () {
     return redirect('login');
+});
+
+Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
+
+    // Password Reset...
+    if (Features::enabled(Features::resetPasswords())) {
+        Route::post(RoutePath::for('password.customEmail', '/forgot-password'), [CustomPasswordResetLinkController::class, 'store'])
+            ->middleware(['guest:'.config('fortify.guard')])
+            ->name('password.customEmail');
+    }
 });
 
 Route::middleware([
